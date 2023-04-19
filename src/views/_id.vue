@@ -8,11 +8,6 @@ export default {
     const isError = ref(false);
     const gallery = reactive({ data: {} });
 
-    const heart = ref(false);
-    const laugh = ref(false);
-    const angry = ref(false);
-    const wow = ref(false);
-    const sad = ref(false);
     const icon = reactive({
       0: { class: "fi-ss-heart", data: 21, isClicked: false, color: "pink" },
       1: {
@@ -44,51 +39,6 @@ export default {
         }
       });
     };
-
-    // const isClicked = (item) => {
-    // item.class === "fi-ss-heart"
-    //   ? ((heart.value = true),
-    //     (laugh.value = false),
-    //     (angry.value = false),
-    //     (wow.value = false),
-    //     (sad.value = false))
-    //   : false;
-    // item.class === "fi-tr-grin-squint-tears"
-    //   ? ((heart.value = false),
-    //     (laugh.value = true),
-    //     (angry.value = false),
-    //     (wow.value = false),
-    //     (sad.value = false))
-    //   : false;
-    // item.class === "fi-tr-angry"
-    //   ? ((heart.value = false),
-    //     (laugh.value = false),
-    //     (angry.value = true),
-    //     (wow.value = false),
-    //     (sad.value = false))
-    //   : false;
-    // item.class === "fi-tr-surprise"
-    //   ? ((heart.value = false),
-    //     (laugh.value = false),
-    //     (angry.value = false),
-    //     (wow.value = true),
-    //     (sad.value = false))
-    //   : false;
-    // item.class === "fi-ts-face-sad-sweat"
-    //   ? ((heart.value = false),
-    //     (laugh.value = false),
-    //     (angry.value = false),
-    //     (wow.value = false),
-    //     (sad.value = true))
-    //   : false;
-    // icon["0"].isclicked = heart.value;
-    // icon["1"].isclicked = laugh.value;
-    // icon["2"].isclicked = angry.value;
-    // icon["3"].isclicked = wow.value;
-    // icon["4"].isclicked = sad.value;
-    //將另外生成的各個表情的布林值導入各個icon的布林值，以此來產生資料流的連接。
-    //當某表情被按時，如果他的class是等於某個表情時，某個表情的布林值會產生true，並回傳至icon中的物件，以此來回傳到style來改變顏色。
-    // };
     let timer = null;
     console.log(icon);
     onMounted(() => {
@@ -120,7 +70,7 @@ export default {
     const back = () => {
       router.go(-1);
     };
-    return { gallery, isError, back, isClicked, icon, toggleEmotion };
+    return { gallery, isError, back, icon, toggleEmotion };
   },
 };
 </script>
@@ -151,11 +101,6 @@ export default {
               @click="toggleEmotion(item.class)"
               :style="{ color: item['isClicked'] ? item.color : '' }"
             ></i>
-            <!-- <i
-              :class="['fi', item['class']]"
-              @click="isClicked(item)"
-              :style="{ color: item.isclicked ? item.color : '' }"
-            ></i> -->
             <p>{{ item["data"] }}</p>
           </div>
         </div>

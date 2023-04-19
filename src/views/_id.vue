@@ -14,23 +14,81 @@ export default {
     const wow = ref(false);
     const sad = ref(false);
     const icon = reactive({
-      0: { class: "fi-ss-heart", data: 21 },
-      1: { class: "fi-tr-grin-squint-tears", data: 22 },
-      2: { class: "fi-tr-angry", data: 23 },
-      3: { class: "fi-tr-surprise", data: 24 },
-      4: { class: "fi-ts-face-sad-sweat", data: 25 },
+      0: { class: "fi-ss-heart", data: 21, isClicked: false, color: "pink" },
+      1: {
+        class: "fi-tr-grin-squint-tears",
+        data: 22,
+        isclicked: false,
+        color: "yellow",
+      },
+      2: { class: "fi-tr-angry", data: 23, isClicked: false, color: "red" },
+      3: {
+        class: "fi-tr-surprise",
+        data: 24,
+        isClicked: false,
+        color: "gray",
+      },
+      4: {
+        class: "fi-ts-face-sad-sweat",
+        data: 25,
+        isClicked: false,
+        color: "lightblue",
+      },
     });
-    const fn = (item) => {
-      console.log(item.class);
-      item.class === "fi-ss-heart"
-        ? ((heart.value = true),
-          (laugh.value = false),
-          (angry.value = false),
-          (wow.value = false),
-          (sad.value = false))
-        : false;
-      console.log(heart.value);
+    const toggleEmotion = (clickedClass) => {
+      Object.values(icon).forEach((icons) => {
+        if (icons.class === clickedClass) {
+          icons.isClicked = true;
+        } else {
+          icons.isClicked = false;
+        }
+      });
     };
+
+    // const isClicked = (item) => {
+    // item.class === "fi-ss-heart"
+    //   ? ((heart.value = true),
+    //     (laugh.value = false),
+    //     (angry.value = false),
+    //     (wow.value = false),
+    //     (sad.value = false))
+    //   : false;
+    // item.class === "fi-tr-grin-squint-tears"
+    //   ? ((heart.value = false),
+    //     (laugh.value = true),
+    //     (angry.value = false),
+    //     (wow.value = false),
+    //     (sad.value = false))
+    //   : false;
+    // item.class === "fi-tr-angry"
+    //   ? ((heart.value = false),
+    //     (laugh.value = false),
+    //     (angry.value = true),
+    //     (wow.value = false),
+    //     (sad.value = false))
+    //   : false;
+    // item.class === "fi-tr-surprise"
+    //   ? ((heart.value = false),
+    //     (laugh.value = false),
+    //     (angry.value = false),
+    //     (wow.value = true),
+    //     (sad.value = false))
+    //   : false;
+    // item.class === "fi-ts-face-sad-sweat"
+    //   ? ((heart.value = false),
+    //     (laugh.value = false),
+    //     (angry.value = false),
+    //     (wow.value = false),
+    //     (sad.value = true))
+    //   : false;
+    // icon["0"].isclicked = heart.value;
+    // icon["1"].isclicked = laugh.value;
+    // icon["2"].isclicked = angry.value;
+    // icon["3"].isclicked = wow.value;
+    // icon["4"].isclicked = sad.value;
+    //將另外生成的各個表情的布林值導入各個icon的布林值，以此來產生資料流的連接。
+    //當某表情被按時，如果他的class是等於某個表情時，某個表情的布林值會產生true，並回傳至icon中的物件，以此來回傳到style來改變顏色。
+    // };
     let timer = null;
     console.log(icon);
     onMounted(() => {
@@ -62,7 +120,7 @@ export default {
     const back = () => {
       router.go(-1);
     };
-    return { gallery, isError, back, fn, icon };
+    return { gallery, isError, back, isClicked, icon, toggleEmotion };
   },
 };
 </script>
@@ -88,7 +146,16 @@ export default {
             :key="item['class']"
             class="icon__container__box"
           >
-            <i :class="['fi', item['class']]" @click="fn(item)"></i>
+            <i
+              :class="['fi', item['class']]"
+              @click="toggleEmotion(item.class)"
+              :style="{ color: item['isClicked'] ? item.color : '' }"
+            ></i>
+            <!-- <i
+              :class="['fi', item['class']]"
+              @click="isClicked(item)"
+              :style="{ color: item.isclicked ? item.color : '' }"
+            ></i> -->
             <p>{{ item["data"] }}</p>
           </div>
         </div>
@@ -228,7 +295,7 @@ img {
   color: red;
 }
 .fi-tr-surprise:hover {
-  color: lightgray;
+  color: gray;
 }
 .fi-ts-face-sad-sweat:hover {
   color: lightblue;
@@ -276,5 +343,10 @@ img {
   border: 1px solid #fff;
   border-radius: 30px;
   margin: 5% 5% 5% 10%;
+}
+
+.active {
+  color: red;
+  fill: red;
 }
 </style>

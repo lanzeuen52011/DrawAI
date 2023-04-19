@@ -1,4 +1,8 @@
 <template>
+  <nav>
+    <router-link class="Home" to="/">Home</router-link> |
+    <router-link class="About" to="/about">About</router-link>
+  </nav>
   <router-view />
 </template>
 
@@ -23,9 +27,6 @@ body {
 .container {
   max-width: 1300px;
   margin: 0 auto;
-}
-.container__center {
-  align-items: center;
 }
 h1 {
   margin: 0;
@@ -68,7 +69,6 @@ li {
   justify-content: center;
   align-items: center;
 }
-
 //grid
 .grid {
   //grid用法
@@ -87,25 +87,5 @@ li {
 //a
 a {
   text-decoration: none;
-}
-
-//scrollbar
-::-webkit-scrollbar {
-  width: 7px;
-}
-::-webkit-scrollbar-button {
-  background: transparent;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-track-piece {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  background-color: rgba(0, 0, 0, 0.4);
-  border: 1px solid slategrey;
-}
-::-webkit-scrollbar-track {
-  box-shadow: transparent;
 }
 </style>

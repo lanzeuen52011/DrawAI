@@ -35,11 +35,13 @@ export default {
       <h2>現實風</h2>
       <ul :class="['list', 'gap']">
         <li :class="['list__item']" v-for="item in RealArr.data" :key="item.id">
-          <div>
-            <img :class="['item__picture']" :src="[item.url]" />
-            <p :class="['item__name']">{{ item.name }}</p>
-          </div>
-          <div :class="['back']"></div>
+          <router-link :to="`/${item._ragicId}`">
+            <div>
+              <img :class="['item__picture']" :src="[item.url]" />
+              <p :class="['item__name']">{{ item.name }}{{ item._ragicId }}</p>
+            </div>
+            <div :class="['back']"></div>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -47,11 +49,13 @@ export default {
       <h2>動漫風</h2>
       <ul :class="['list', 'gap']">
         <li :class="['list__item']" v-for="item in AniArr.data" :key="item.id">
-          <div>
-            <img :class="['item__picture']" :src="[item.url]" />
-            <p :class="['item__name']">{{ item.name }}</p>
-          </div>
-          <div :class="['back']"></div>
+          <router-link :to="`/${item._ragicId}`">
+            <div>
+              <img :class="['item__picture']" :src="[item.url]" />
+              <p :class="['item__name']">{{ item.name }}</p>
+            </div>
+            <div :class="['back']"></div>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -66,7 +70,7 @@ export default {
   //grid用法
   //   justify-self: center;
   //   align-self: center;
-  background: url("./image/drawailogo.png");
+  background: url("./drawailogo.png");
   background-repeat: no-repeat;
   background-position: center;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
@@ -77,7 +81,7 @@ export default {
 
 .list__item:hover .item__name {
   position: absolute;
-  top: 65%;
+  top: 75%;
   width: 100%; //置中
   color: white;
   z-index: 1000;

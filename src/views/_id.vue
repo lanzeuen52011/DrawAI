@@ -1,0 +1,280 @@
+<script>
+import { onMounted, onUnmounted, reactive, ref } from "vue";
+import { useRoute, useRouter } from "vue-router"; //這個是從網址上找出id的參數。
+export default {
+  setup() {
+    const route = useRoute();
+    const router = useRouter();
+    const isError = ref(false);
+    const gallery = reactive({ data: {} });
+
+    const heart = ref(false);
+    const laugh = ref(false);
+    const angry = ref(false);
+    const wow = ref(false);
+    const sad = ref(false);
+    const icon = reactive({
+      0: { class: "fi-ss-heart", data: 21 },
+      1: { class: "fi-tr-grin-squint-tears", data: 22 },
+      2: { class: "fi-tr-angry", data: 23 },
+      3: { class: "fi-tr-surprise", data: 24 },
+      4: { class: "fi-ts-face-sad-sweat", data: 25 },
+    });
+    const fn = (item) => {
+      console.log(item.class);
+      item.class === "fi-ss-heart"
+        ? ((heart.value = true),
+          (laugh.value = false),
+          (angry.value = false),
+          (wow.value = false),
+          (sad.value = false))
+        : false;
+      console.log(heart.value);
+    };
+    let timer = null;
+    console.log(icon);
+    onMounted(() => {
+      const id = route.params.id;
+      axios
+        .get(`https://ap9.ragic.com/lanziyun/convert2/1/${id}?api`)
+        .then((res) => {
+          gallery.data = res.data[id];
+          console.log(gallery);
+        })
+        .catch((error) => {
+          isError.value = true;
+          gallery.data["error_message"] = error.response.data.error_message;
+          timer = setTimeout(() => {
+            //此處的意思為，錯誤網址，然後經過三小後將客戶轉導回上一頁或者推向某個path，以下TODO:三選一即可。
+            router.go(-1); //直接回上一頁
+            // router.push({ path: "/gallery" }); //精確寫法，不影響事情的成敗，但會較為推薦此，因可以物件形式帶多項參數。把客戶推向"/gallery"
+            // router.push("/gallery"); //簡短寫法，不影響事情的成敗，把客戶推向"/gallery"
+          }, 3000);
+          console.log(error.response.data);
+        }); //只要訊息不是200，全都會被catch接住。
+    });
+
+    onUnmounted(() => {
+      //倒數計時結束前進行手動跳轉，而手動跳轉後，停止計時。
+      router.push({ path: "" });
+    });
+
+    const back = () => {
+      router.go(-1);
+    };
+    return { gallery, isError, back, fn, icon };
+  },
+};
+</script>
+<template>
+  <div class="id__container">
+    <div v-if="!isError" class="grid grid__2c container container-center">
+      <button class="button__back" @click="back">
+        <i class="bx bx-x"></i>
+      </button>
+      <img :src="gallery.data.url" alt="" />
+      <div class="picture__info">
+        <h1 class="picture__name">{{ gallery["data"].name }}</h1>
+        <p class="picture__discri">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
+          quaerat fugit laudantium beatae, dignissimos sunt modi qui enim
+          consequatur sequi est quibusdam praesentium nobis deleniti.
+          Praesentium qui eius minus!
+          Quisquamaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        </p>
+        <div class="icon__container">
+          <div
+            v-for="item in icon"
+            :key="item['class']"
+            class="icon__container__box"
+          >
+            <i :class="['fi', item['class']]" @click="fn(item)"></i>
+            <p>{{ item["data"] }}</p>
+          </div>
+        </div>
+        <div class="comment">
+          <h2 class="comment__name">Comment</h2>
+          <div class="comment__scroll">
+            <article class="comment__each">
+              <p class="comment__author">Matt Lan</p>
+              <p class="comment__paragraph">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Obcaecati quisquam dicta repellendus eum illo! Dicta et aperiam
+              </p>
+            </article>
+            <article class="comment__each">
+              <p class="comment__author">Matt Lan</p>
+              <p class="comment__paragraph">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Obcaecati quisquam dicta repellendus eum illo! Dicta et aperiam
+              </p>
+            </article>
+            <article class="comment__each">
+              <p class="comment__author">Matt Lan</p>
+              <p class="comment__paragraph">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Obcaecati quisquam dicta repellendus eum illo! Dicta et aperiam
+              </p>
+            </article>
+            <article class="comment__each">
+              <p class="comment__author">Matt Lan</p>
+              <p class="comment__paragraph">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Obcaecati quisquam dicta repellendus eum illo! Dicta et aperiam
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- error_message -->
+    <h1 v-if="isError">{{ gallery.data["error_message"] }}</h1>
+  </div>
+</template>
+<style lang="scss" scoped>
+//body contanier
+body .id__container {
+  background: #000;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.id__container .container {
+  background: #000;
+}
+
+.grid__2c {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+img {
+  height: 90vh;
+  width: 90vh;
+  object-fit: contain;
+}
+
+//backward button
+.button__back {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: none;
+  color: white;
+  cursor: pointer;
+  border: 0;
+  width: 50px;
+  height: 50px;
+}
+
+.bx-x {
+  content: "\ec8d";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #e9ecef;
+  transform: scale(5);
+  width: 10px;
+  height: 10px;
+  margin: 0;
+}
+
+//picture
+.picture__info {
+  background: #25262b;
+  display: flex;
+  grid-template-rows: 100px 360px;
+  flex-direction: column;
+}
+.picture__name {
+  color: #f7f7f7;
+  letter-spacing: 0.3rem;
+  padding: 20px;
+}
+.picture__discri {
+  color: #f7f7f7;
+  text-align: left;
+  letter-spacing: 0.2rem;
+  margin: 5% 10%;
+  height: 22.7vh;
+  overflow-y: overlay;
+  font-size: 1.6rem;
+  width: 30vw;
+  word-wrap: break-word;
+}
+
+//icon
+
+.icon__container {
+  display: flex;
+  margin: 1rem 4rem;
+  border: 1px solid #fff;
+  border-radius: 10px;
+}
+.icon__container__box {
+  display: flex;
+}
+.fi {
+  color: #fff;
+  padding: 1.3rem 2rem 1rem;
+  cursor: pointer;
+}
+.fi-ss-heart:hover {
+  color: pink;
+}
+.fi-tr-grin-squint-tears:hover {
+  color: yellow;
+}
+.fi-tr-angry:hover {
+  color: red;
+}
+.fi-tr-surprise:hover {
+  color: lightgray;
+}
+.fi-ts-face-sad-sweat:hover {
+  color: lightblue;
+}
+.icon__container p {
+  margin: 1rem;
+  color: #fff;
+  margin-left: 0;
+}
+
+//comment
+.comment {
+  height: 38vh;
+  max-width: 36vw;
+  overflow: hidden;
+}
+.comment__name {
+  margin: 2rem 0 0 3rem;
+  width: 100%;
+  padding: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+}
+.comment__scroll {
+  overflow-y: overlay;
+  height: 28vh;
+  max-width: 36vw;
+}
+.comment__author {
+  color: #f7f7f7;
+  letter-spacing: 0.3rem;
+  margin: 3% 7% 1%;
+  text-align: left;
+  font-size: 1.6rem;
+  border-bottom: 1px solid;
+  width: fit-content;
+}
+.comment__paragraph {
+  color: #f7f7f7;
+  text-align: left;
+  letter-spacing: 0.2rem;
+  margin: 1% 8% 3% 9%;
+  font-size: 1rem;
+}
+.comment__each {
+  border: 1px solid #fff;
+  border-radius: 30px;
+  margin: 5% 5% 5% 10%;
+}
+</style>

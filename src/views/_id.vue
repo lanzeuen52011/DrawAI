@@ -4,28 +4,35 @@ import { useRoute, useRouter } from "vue-router"; //這個是從網址上找出i
 export default {
   setup() {
     const route = useRoute();
+    const id = route.params.id;
     const router = useRouter();
     const isError = ref(false);
     const gallery = reactive({ data: {} });
-
+    const emojidata = reactive({ data: {} });
+    const emoji = reactive({ _subtable_1000050: emojidata.data });
     const icon = reactive({
-      0: { class: "fi-ss-heart", data: 21, isClicked: false, color: "pink" },
+      0: {
+        class: "fi-ss-heart",
+        data: "",
+        isClicked: false,
+        color: "pink",
+      },
       1: {
         class: "fi-tr-grin-squint-tears",
-        data: 22,
+        data: "",
         isclicked: false,
         color: "yellow",
       },
       2: { class: "fi-tr-angry", data: 23, isClicked: false, color: "red" },
       3: {
         class: "fi-tr-surprise",
-        data: 24,
+        data: "",
         isClicked: false,
         color: "gray",
       },
       4: {
         class: "fi-ts-face-sad-sweat",
-        data: 25,
+        data: "",
         isClicked: false,
         color: "lightblue",
       },
@@ -33,21 +40,55 @@ export default {
     const toggleEmotion = (clickedClass) => {
       Object.values(icon).forEach((icons) => {
         if (icons.class === clickedClass) {
-          icons.isClicked = true;
+          if (icons.isClicked === true) {
+            //如果點讚此表情，此表情曾被點讚，則讚數-1
+            icons.isClicked = !icons.isClicked;
+            icons.data--;
+          } else {
+            //按讚時，讚數+1
+            icons.isClicked = true;
+            icons.data++;
+          }
         } else {
-          icons.isClicked = false;
+          //管理其他沒被按讚的表情
+          if (icons.isClicked === true) {
+            //如果此表情曾被按讚過，但這次沒被按，則取消按讚，且讚數-1
+            icons.isClicked = !icons.isClicked;
+            icons.data--;
+          } else {
+            //此表情沒被按過，且此次也沒有被按到，則無動作。
+            icons.isClicked = false;
+          }
         }
       });
+      axios
+        .post(
+          `https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=MFd4YlZuOEZ0eWNTa2Z6ek1GUVdLYS9rVTFWMUt1S01BdHNlVW1XZWNJK2ZpRFdVN1RyKzlUSDlwdzdJUzlSd2hEVlJvLzlMZy9rPQ==`,
+          emoji
+        )
+        .then((response) => {
+          isReg.value = true;
+          console.log(response);
+        })
+        .catch((error) => {
+          HandError(error.response.data.error_message);
+        });
     };
     let timer = null;
     console.log(icon);
     onMounted(() => {
-      const id = route.params.id;
       axios
         .get(`https://ap9.ragic.com/lanziyun/convert2/1/${id}?api`)
         .then((res) => {
           gallery.data = res.data[id];
-          console.log(gallery);
+          emojidata.data = res.data[id]._subtable_1000050;
+          Object.values(emojidata.data).forEach((emoji) => {
+            icon["0"].data = emoji.heart;
+            icon["1"].data = emoji.laugh;
+            icon["2"].data = emoji.angry;
+            icon["3"].data = emoji.wow;
+            icon["4"].data = emoji.sad;
+          });
         })
         .catch((error) => {
           isError.value = true;
@@ -97,9 +138,12 @@ export default {
             class="icon__container__box"
           >
             <i
-              :class="['fi', item['class']]"
+              :class="[
+                'fi',
+                item['class'],
+                item['isClicked'] ? item.color : '',
+              ]"
               @click="toggleEmotion(item.class)"
-              :style="{ color: item['isClicked'] ? item.color : '' }"
             ></i>
             <p>{{ item["data"] }}</p>
           </div>
@@ -230,21 +274,60 @@ img {
   padding: 1.3rem 2rem 1rem;
   cursor: pointer;
 }
-.fi-ss-heart:hover {
+@keyframes isClicked {
+  0% {
+    scale: 0.6;
+  }
+
+  50% {
+    scale: 1.1;
+  }
+
+  100% {
+    scale: 1;
+  }
+}
+.pink,
+.yellow,
+.red,
+.gray,
+.lightblue {
+  animation-name: isClicked;
+  animation-duration: 0.3s;
+}
+.pink {
   color: pink;
 }
-.fi-tr-grin-squint-tears:hover {
+.yellow {
   color: yellow;
 }
-.fi-tr-angry:hover {
+.red {
   color: red;
 }
-.fi-tr-surprise:hover {
+.gray {
   color: gray;
 }
-.fi-ts-face-sad-sweat:hover {
+.lightblue {
   color: lightblue;
 }
+// .fi-ss-heart:hover {
+//   color: pink;
+// }
+
+// .fi-tr-grin-squint-tears:hover {
+//   color: yellow;
+// }
+
+// .fi-tr-angry:hover {
+//   color: red;
+// }
+
+// .fi-tr-surprise:hover {
+//   color: gray;
+// }
+// .fi-ts-face-sad-sweat:hover {
+//   color: lightblue;
+// }
 .icon__container p {
   margin: 1rem;
   color: #fff;

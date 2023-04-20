@@ -14,3 +14,11 @@ export const numPrice = (num) => {
   overArr.reverse();
   return overArr.join("");
 };
+export const formatNumber = (value) => {
+  if (!value) return "";
+  if (value < 1000) return value;
+  const exp = Math.floor(Math.log(value) / Math.log(1000));
+  const suffix = ["", "k", "M", "G", "T", "P"][exp];
+  const rounded = Math.round((value / Math.pow(1000, exp)) * 10) / 10;
+  return rounded + suffix;
+};

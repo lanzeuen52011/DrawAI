@@ -1,12 +1,11 @@
 <script>
-import { onMounted, reactive } from "vue";
-import { numPrice } from "@/lib/tools.js";
+import { onMounted, reactive, computed } from "vue";
 export default {
   setup() {
     const Arr = reactive({ data: [] });
     const AniArr = reactive({ data: [] });
     const RealArr = reactive({ data: [] });
-
+    const abc = () => {};
     onMounted(() => {
       axios
         .get(
@@ -15,96 +14,89 @@ export default {
         .then((res) => {
           Arr.data = res.data;
           Arr.data = Object.keys(Arr.data).map((key) => Arr.data[key]);
-          Arr.data.reverse();
-          // console.log(Arr.data["0"]._ragicId); //拿到伺服器的id，準備拿來說router的
+          //人氣由小到大排序
+          Arr.data.sort((a, b) => b.popular - a.popular);
+          console.log(Arr.data);
+          // Arr.data.reverse();
+          // // console.log(Arr.data["0"]._ragicId); //拿到伺服器的id，準備拿來說router的
 
-          //篩選出動漫畫風的圖片
-          AniArr.data = Arr.data.filter((item) => item.style === "anime");
-          // console.log("AniArr", AniArr.data);
-          //篩選出動現實風的圖片
-          RealArr.data = Arr.data.filter((item) => item.style === "realistic");
+          // //篩選出動漫畫風的圖片
+          // AniArr.data = Arr.data.filter((item) => item.style === "anime");
+          // // console.log("AniArr", AniArr.data);
+          // //篩選出動現實風的圖片
+          // RealArr.data = Arr.data.filter((item) => item.style === "realistic");
           // console.log("RealArr", RealArr.data);
-          // Object.values(RealArr.data).forEach((items) => {
-          //   Object.values(items._subtable_1000050).forEach((item) => {
-          //     // console.log(item);
-          //     Object.values(item).forEach((icon) => {
-          //       icon = numPrice(icon);
-          //       console.log(RealArr.data);
-          //     });
-          //   });
-          // });
         });
     });
 
-    return { Arr, AniArr, RealArr };
+    return { Arr, AniArr, RealArr, abc };
   },
 };
 </script>
 <template>
-  <div class="container" id="app">
+  <div class="container body" id="app">
+    <div class="search__container container">
+      <input
+        aria-label="Domain"
+        type="text"
+        class="search__input"
+        placeholder="搜尋你想找的大師之作"
+      />
+      <button @click="abc" class="search__button">
+        <svg class="search__icon">
+          <use xlink:href="@/image/sprite.svg#search"></use>
+        </svg>
+      </button>
+    </div>
     <div>
-      <h2>現實風</h2>
+      <h2>人氣最高</h2>
       <ul :class="['list', 'gap']">
-        <li :class="['list__item']" v-for="item in RealArr.data" :key="item.id">
+        <li :class="['list__item']" v-for="item in Arr.data" :key="item.id">
           <router-link :to="`/${item._ragicId}`">
-            <div style="width: 100%">
+            <div class="icon__gallery__container">
               <img :class="['item__picture']" :src="[item.url]" />
-              <p :class="['item__name']">{{ item.name }}{{ item._ragicId }}</p>
+              <p :class="['item__name']">{{ item.name }}</p>
               <div
                 class="like__number grid grid__c-auto"
                 v-for="number in item._subtable_1000050"
                 :key="number"
               >
-                <i class="fi icon__gallery fi-ss-heart icon__gallery-heart"></i>
-                <p class="number__heart number">
-                  {{ number["heart"] }}
-                </p>
                 <i
-                  class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh"
+                  class="fi icon__gallery fi-ss-heart icon__gallery-heart opacity"
                 ></i>
-                <p class="number__laugh number">
-                  {{ number["laugh"] }}
-                </p>
-                <i class="fi icon__gallery fi-sr-angry icon__gallery-angry"></i>
-                <p class="number__angry number">
-                  {{ number["angry"] }}
-                </p>
+                <p
+                  class="number__heart number opacity"
+                  v-formatNumber="number['heart']"
+                ></p>
                 <i
-                  class="fi icon__gallery fi-ss-surprise icon__gallery-wow"
+                  class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh opacity"
                 ></i>
-                <p class="number__wow number">
-                  {{ number["wow"] }}
-                </p>
+                <p
+                  class="number__laugh number opacity"
+                  v-formatNumber="number['laugh']"
+                ></p>
                 <i
-                  class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad"
+                  class="fi icon__gallery fi-sr-angry icon__gallery-angry opacity"
                 ></i>
-                <p class="number__sad number">
-                  {{ number["sad"] }}
-                </p>
+                <p
+                  class="number__angry number opacity"
+                  v-formatNumber="number['angry']"
+                ></p>
+                <i
+                  class="fi icon__gallery fi-ss-surprise icon__gallery-wow opacity"
+                ></i>
+                <p
+                  class="number__wow number opacity"
+                  v-formatNumber="number['wow']"
+                ></p>
+                <i
+                  class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad opacity"
+                ></i>
+                <p
+                  class="number__sad number opacity"
+                  v-formatNumber="number['sad']"
+                ></p>
               </div>
-            </div>
-            <div :class="['back']"></div>
-          </router-link>
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h2>動漫風</h2>
-      <ul :class="['list', 'gap']">
-        <li :class="['list__item']" v-for="item in AniArr.data" :key="item.id">
-          <router-link :to="`/${item._ragicId}`">
-            <div class="icon__gallery__container">
-              <img :class="['item__picture']" :src="[item.url]" />
-              <p :class="['item__name']">{{ item.name }}</p>
-              <i class="fi icon__gallery fi-ss-heart icon__gallery-heart"></i>
-              <i
-                class="fi icon__gallery fi-tr-grin-squint-tears icon__gallery-laugh"
-              ></i>
-              <i class="fi icon__gallery fi-tr-angry icon__gallery-angry"></i>
-              <i class="fi icon__gallery fi-tr-surprise icon__gallery-wow"></i>
-              <i
-                class="fi icon__gallery fi-ts-face-sad-sweat icon__gallery-sad"
-              ></i>
             </div>
             <div :class="['back']"></div>
           </router-link>
@@ -114,6 +106,37 @@ export default {
   </div>
 </template>
 <style lang="scss">
+.search__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5rem 0 3rem;
+}
+.search__input {
+  width: 33vw;
+  height: 6vh;
+  border-radius: 10px;
+  padding-left: 1rem;
+  font-size: 1.5rem;
+}
+.search__button {
+  width: 3.5rem;
+  height: 5.5rem;
+  padding: 4px;
+  background: none;
+  outline: 0;
+  border: 0;
+  opacity: 0.5;
+  margin: 0 1rem;
+}
+.search__icon {
+  width: 100%;
+  height: 100%;
+  fill: #fff;
+}
+.search__button:hover {
+  opacity: 1;
+}
 .list__item {
   width: 300px;
   height: 300px;
@@ -141,12 +164,16 @@ export default {
   // text-shadow: -1px -1px 0 #dddddd, 1px -1px 0 #dddddd, -1px 1px 0 #dddddd,
   //   1px 1px 0 #dddddd;
 }
+.icon__gallery__container {
+  width: 100%;
+}
 
 .like__number {
   position: absolute;
   top: 90%;
   z-index: 1000;
   width: inherit;
+  scale: 0.6;
 }
 .icon__gallery-heart {
   color: rgb(255, 170, 184);
@@ -163,9 +190,13 @@ export default {
 .icon__gallery-sad {
   color: rgb(202, 202, 202);
 }
+.icon__gallery {
+  justify-self: center;
+}
 .number {
   margin: 0;
   color: #fff;
+  justify-self: center;
 }
 
 .number__heart {
@@ -183,7 +214,12 @@ export default {
 .number__sad {
   right: 0%;
 }
-
+.opacity {
+  opacity: 0;
+}
+.list__item:hover .opacity {
+  opacity: 0.8;
+}
 .list__item:hover {
   scale: 1.05;
 }

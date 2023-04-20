@@ -3,8 +3,11 @@
     <router-link class="Home" to="/"
       ><img src="./Gallery/drawailogo.png" alt=""
     /></router-link>
-    |
-    <router-link class="About" to="/about">About</router-link>
+    <div class="flex flex-row">
+      <router-link class="About" to="/">總畫廊</router-link>
+      <router-link class="About" to="/style">風格導覽</router-link>
+      <router-link class="About" to="/about">About</router-link>
+    </div>
   </nav>
   <router-view />
 </template>
@@ -51,6 +54,11 @@ nav {
   background: #1a1b1e;
   display: flex;
   justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 12vh;
+  z-index: 2000;
   a {
     font-weight: bold;
     color: #c1c2c5;
@@ -96,5 +104,20 @@ li {
 //a
 a {
   text-decoration: none;
+}
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 5rem;
+}
+.flex a {
+  padding: 0 2rem;
+}
+.Home {
+  padding: 0 2rem;
+}
+.body {
+  margin-top: 20vh;
 }
 </style>

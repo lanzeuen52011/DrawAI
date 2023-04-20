@@ -89,7 +89,7 @@ export default {
         //將回傳的資料post回去給資料庫
         axios
           .post(
-            `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=MFd4YlZuOEZ0eWNTa2Z6ek1GUVdLYS9rVTFWMUt1S01BdHNlVW1XZWNJK2ZpRFdVN1RyKzlUSDlwdzdJUzlSd2hEVlJvLzlMZy9rPQ==`,
+            `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=OGZiV2psUTdxVkxKVTk3NXRmeUxtZFZzU1ZqcXJYaG4zZmdMMlRINFlJcDdzQU4yeWVyR2tjeW44d1FBekZ0dw==`,
             dataCollect.data
           )
           .then((res) => {

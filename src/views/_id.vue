@@ -9,7 +9,10 @@ export default {
     const isError = ref(false);
     const gallery = reactive({ data: {} });
     const emojidata = reactive({ data: {} });
-    const emoji = reactive({ _subtable_1000050: emojidata.data });
+    const dataprocess = reactive({ data: {} });
+    const dataCollect = reactive({ data: {} });
+
+    const corsURL = "https://cors-anywhere.herokuapp.com/"; // use cors-anywhere to fetch api data
     const icon = reactive({
       0: {
         class: "fi-ss-heart",
@@ -18,23 +21,23 @@ export default {
         color: "pink",
       },
       1: {
-        class: "fi-tr-grin-squint-tears",
-        data: "",
-        isclicked: false,
-        color: "yellow",
-      },
-      2: { class: "fi-tr-angry", data: 23, isClicked: false, color: "red" },
-      3: {
-        class: "fi-tr-surprise",
+        class: "fi-sr-grin-squint-tears",
         data: "",
         isClicked: false,
-        color: "gray",
+        color: "yellow",
       },
-      4: {
-        class: "fi-ts-face-sad-sweat",
+      2: { class: "fi-sr-angry", data: "", isClicked: false, color: "red" },
+      3: {
+        class: "fi-ss-surprise",
         data: "",
         isClicked: false,
         color: "lightblue",
+      },
+      4: {
+        class: "fi-ss-sad-tear",
+        data: "",
+        isClicked: false,
+        color: "gray",
       },
     });
     const toggleEmotion = (clickedClass) => {
@@ -60,22 +63,58 @@ export default {
             icons.isClicked = false;
           }
         }
+        localStorage.setItem(id + icons.class, JSON.stringify(icons.isClicked));
+        //localstorage,當表情被點擊時，將哪個表情被點選記入localstorage中。
       });
-      axios
-        .post(
-          `https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=MFd4YlZuOEZ0eWNTa2Z6ek1GUVdLYS9rVTFWMUt1S01BdHNlVW1XZWNJK2ZpRFdVN1RyKzlUSDlwdzdJUzlSd2hEVlJvLzlMZy9rPQ==`,
-          emoji
-        )
-        .then((response) => {
-          isReg.value = true;
-          console.log(response);
-        })
-        .catch((error) => {
-          HandError(error.response.data.error_message);
-        });
+      dataprocess.data = emojidata.data;
+      Object.values(dataprocess.data).forEach((emoji) => {
+        emoji["1000048"] = String(icon["0"].data);
+        emoji["1000049"] = String(icon["1"].data);
+        emoji["1000051"] = String(icon["2"].data);
+        emoji["1000052"] = String(icon["3"].data);
+        emoji["1000053"] = String(icon["4"].data);
+        delete emoji.heart;
+        delete emoji.laugh;
+        delete emoji.angry;
+        delete emoji.wow;
+        delete emoji.sad;
+      });
+      //將要回傳的資料於這裡蒐集
+      dataCollect.data = {
+        _subtable_1000050: dataprocess.data,
+        _index_: gallery.data._index_,
+        _seq: gallery.data._seq,
+      };
+      delete (
+        //將回傳的資料post回去給資料庫
+        axios
+          .post(
+            `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=MFd4YlZuOEZ0eWNTa2Z6ek1GUVdLYS9rVTFWMUt1S01BdHNlVW1XZWNJK2ZpRFdVN1RyKzlUSDlwdzdJUzlSd2hEVlJvLzlMZy9rPQ==`,
+            dataCollect.data
+          )
+          .then((res) => {
+            //此可以確認是否回傳成功，但此處為按讚，因此不需要特別動作。
+            console.log(res, dataCollect.data);
+          })
+          .catch((error) => {
+            console.error(error.response.data.error_message);
+          })
+      );
     };
+    //localstorage,於網頁載入時，先從localstorage載入哪個表情先前按過了，如果想要無限洗讚，把這個去除掉就行。
+    const store1 = JSON.parse(localStorage.getItem(`${id}fi-ss-heart`));
+    const store2 = JSON.parse(
+      localStorage.getItem(`${id}fi-sr-grin-squint-tears`)
+    );
+    const store3 = JSON.parse(localStorage.getItem(`${id}fi-sr-angry`));
+    const store4 = JSON.parse(localStorage.getItem(`${id}fi-ss-surprise`));
+    const store5 = JSON.parse(localStorage.getItem(`${id}fi-ss-sad-tear`));
+    icon["0"].isClicked = store1;
+    icon["1"].isClicked = store2;
+    icon["2"].isClicked = store3;
+    icon["3"].isClicked = store4;
+    icon["4"].isClicked = store5;
     let timer = null;
-    console.log(icon);
     onMounted(() => {
       axios
         .get(`https://ap9.ragic.com/lanziyun/convert2/1/${id}?api`)
@@ -89,6 +128,8 @@ export default {
             icon["3"].data = emoji.wow;
             icon["4"].data = emoji.sad;
           });
+          //因為計算讚數的收集(icon)與連結下來的資料gallery、emojidata放置方式不一樣，
+          //是因為要使用Foreach的方式渲染，因此需額外多一個動作將值放為gallery再回傳，才有辦法修改。
         })
         .catch((error) => {
           isError.value = true;
@@ -314,18 +355,18 @@ img {
 //   color: pink;
 // }
 
-// .fi-tr-grin-squint-tears:hover {
+// .fi-sr-grin-squint-tears:hover {
 //   color: yellow;
 // }
 
-// .fi-tr-angry:hover {
+// .fi-sr-angry:hover {
 //   color: red;
 // }
 
-// .fi-tr-surprise:hover {
+// .fi-ss-surprise:hover {
 //   color: gray;
 // }
-// .fi-ts-face-sad-sweat:hover {
+// .fi-ss-sad-tear:hover {
 //   color: lightblue;
 // }
 .icon__container p {

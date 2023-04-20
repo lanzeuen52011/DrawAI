@@ -1,10 +1,12 @@
 <script>
 import { onMounted, reactive } from "vue";
+import { numPrice } from "@/lib/tools.js";
 export default {
   setup() {
     const Arr = reactive({ data: [] });
     const AniArr = reactive({ data: [] });
     const RealArr = reactive({ data: [] });
+
     onMounted(() => {
       axios
         .get(
@@ -14,14 +16,23 @@ export default {
           Arr.data = res.data;
           Arr.data = Object.keys(Arr.data).map((key) => Arr.data[key]);
           Arr.data.reverse();
-          console.log(Arr.data["0"]._ragicId); //拿到伺服器的id，準備拿來說router的
+          // console.log(Arr.data["0"]._ragicId); //拿到伺服器的id，準備拿來說router的
 
           //篩選出動漫畫風的圖片
           AniArr.data = Arr.data.filter((item) => item.style === "anime");
-          console.log("AniArr", AniArr.data);
+          // console.log("AniArr", AniArr.data);
           //篩選出動現實風的圖片
           RealArr.data = Arr.data.filter((item) => item.style === "realistic");
-          console.log("RealArr", RealArr.data);
+          // console.log("RealArr", RealArr.data);
+          // Object.values(RealArr.data).forEach((items) => {
+          //   Object.values(items._subtable_1000050).forEach((item) => {
+          //     // console.log(item);
+          //     Object.values(item).forEach((icon) => {
+          //       icon = numPrice(icon);
+          //       console.log(RealArr.data);
+          //     });
+          //   });
+          // });
         });
     });
 
@@ -36,9 +47,41 @@ export default {
       <ul :class="['list', 'gap']">
         <li :class="['list__item']" v-for="item in RealArr.data" :key="item.id">
           <router-link :to="`/${item._ragicId}`">
-            <div>
+            <div style="width: 100%">
               <img :class="['item__picture']" :src="[item.url]" />
               <p :class="['item__name']">{{ item.name }}{{ item._ragicId }}</p>
+              <div
+                class="like__number grid grid__c-auto"
+                v-for="number in item._subtable_1000050"
+                :key="number"
+              >
+                <i class="fi icon__gallery fi-ss-heart icon__gallery-heart"></i>
+                <p class="number__heart number">
+                  {{ number["heart"] }}
+                </p>
+                <i
+                  class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh"
+                ></i>
+                <p class="number__laugh number">
+                  {{ number["laugh"] }}
+                </p>
+                <i class="fi icon__gallery fi-sr-angry icon__gallery-angry"></i>
+                <p class="number__angry number">
+                  {{ number["angry"] }}
+                </p>
+                <i
+                  class="fi icon__gallery fi-ss-surprise icon__gallery-wow"
+                ></i>
+                <p class="number__wow number">
+                  {{ number["wow"] }}
+                </p>
+                <i
+                  class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad"
+                ></i>
+                <p class="number__sad number">
+                  {{ number["sad"] }}
+                </p>
+              </div>
             </div>
             <div :class="['back']"></div>
           </router-link>
@@ -50,9 +93,18 @@ export default {
       <ul :class="['list', 'gap']">
         <li :class="['list__item']" v-for="item in AniArr.data" :key="item.id">
           <router-link :to="`/${item._ragicId}`">
-            <div>
+            <div class="icon__gallery__container">
               <img :class="['item__picture']" :src="[item.url]" />
               <p :class="['item__name']">{{ item.name }}</p>
+              <i class="fi icon__gallery fi-ss-heart icon__gallery-heart"></i>
+              <i
+                class="fi icon__gallery fi-tr-grin-squint-tears icon__gallery-laugh"
+              ></i>
+              <i class="fi icon__gallery fi-tr-angry icon__gallery-angry"></i>
+              <i class="fi icon__gallery fi-tr-surprise icon__gallery-wow"></i>
+              <i
+                class="fi icon__gallery fi-ts-face-sad-sweat icon__gallery-sad"
+              ></i>
             </div>
             <div :class="['back']"></div>
           </router-link>
@@ -89,6 +141,49 @@ export default {
   // text-shadow: -1px -1px 0 #dddddd, 1px -1px 0 #dddddd, -1px 1px 0 #dddddd,
   //   1px 1px 0 #dddddd;
 }
+
+.like__number {
+  position: absolute;
+  top: 90%;
+  z-index: 1000;
+  width: inherit;
+}
+.icon__gallery-heart {
+  color: rgb(255, 170, 184);
+}
+.icon__gallery-laugh {
+  color: rgb(255, 255, 179);
+}
+.icon__gallery-angry {
+  color: rgb(255, 103, 103);
+}
+.icon__gallery-wow {
+  color: rgb(237, 251, 255);
+}
+.icon__gallery-sad {
+  color: rgb(202, 202, 202);
+}
+.number {
+  margin: 0;
+  color: #fff;
+}
+
+.number__heart {
+  right: 80%;
+}
+.number__laugh {
+  right: 60%;
+}
+.number__angry {
+  right: 40%;
+}
+.number__wow {
+  right: 20%;
+}
+.number__sad {
+  right: 0%;
+}
+
 .list__item:hover {
   scale: 1.05;
 }
@@ -149,4 +244,5 @@ export default {
   right: 0;
   top: 0;
 }
+// icon
 </style>

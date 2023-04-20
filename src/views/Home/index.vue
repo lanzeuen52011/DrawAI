@@ -1,6 +1,9 @@
 <template>
   <nav>
-    <router-link class="Home" to="/">Home</router-link> |
+    <router-link class="Home" to="/"
+      ><img src="./Gallery/drawailogo.png" alt=""
+    /></router-link>
+    |
     <router-link class="About" to="/about">About</router-link>
   </nav>
   <router-view />
@@ -44,11 +47,17 @@ h2 {
   color: #2c3e50;
 }
 nav {
-  padding: 30px;
+  padding: 20px;
   background: #1a1b1e;
+  display: flex;
+  justify-content: space-between;
   a {
     font-weight: bold;
     color: #c1c2c5;
+    display: flex;
+    img {
+      width: 200px;
+    }
 
     &.router-link-exact-active {
       color: #fff;
@@ -76,7 +85,7 @@ li {
 }
 
 .grid__c-auto {
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(0px, 1fr));
 }
 
 //gap

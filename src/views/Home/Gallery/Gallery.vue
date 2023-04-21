@@ -1,5 +1,5 @@
 <script>
-import { onMounted, reactive, computed, ref, watch } from "vue";
+import { onMounted, reactive, ref, watch } from "vue";
 export default {
   setup() {
     const Arr = reactive({ data: [] });
@@ -23,14 +23,12 @@ export default {
           arr.relative = 0; //新增關聯度欄位
           test.data = arr.name.split(""); //把陣列內的名子的所有字拆分
           searchSpilt.text = search.text.split(""); //把Search__input內的值的所有字拆分
-          // console.log("test", test.data, "searchSpilt", searchSpilt);
           for (let i of searchSpilt.text) {
             //把已經拆分過的Search__input的值變成i一個一個放進去比對
             if (includes(test.data, i) === true) {
               //拆芬過的Search__input的值變成i一個一個放進test.data中比對，有相同的就會返為true
               //true的話arr.relative就+1。就是Arr.data[輪流的數字].relative+1。
               arr.relative++;
-              // console.log(arr);
             }
           }
         });
@@ -46,12 +44,10 @@ export default {
         最新畫作: false,
       },
       style: {
-        // Boolean: false,
         現實風: { name: "realistic", Boolean: false },
         動漫風: { name: "anime", Boolean: false },
       },
       dress: {
-        // Boolean: false,
         衣服: { name: "clothes", Boolean: false },
         比基尼: { name: "bikini", Boolean: false },
         洋裝: { name: "dress", Boolean: false },
@@ -60,41 +56,34 @@ export default {
         "襯衫、西裝": { name: "suit", Boolean: false },
       },
       ethnicity: {
-        // Boolean: false,
         人類: { name: "human", Boolean: false },
         動物: { name: "animal", Boolean: false },
         亞人: { name: "demihuman", Boolean: false },
       },
       people: {
-        // Boolean: false,
         "1人": { name: "1", Boolean: false },
         "2人": { name: "2", Boolean: false },
       },
       sex: {
-        // Boolean: false,
         男生: { name: "male", Boolean: false },
         女生: { name: "female", Boolean: false },
       },
       age: {
-        // Boolean: false,
         少女: { name: "girl", Boolean: false },
         女人: { name: "woman", Boolean: false },
         男人: { name: "man", Boolean: false },
       },
     });
-    const dddd = () => {
+    const handleChange = () => {
       types.selects.人氣最高 = false;
       types.selects.最新畫作 = false;
       if (selected.value === "人氣最高") {
         types.selects.人氣最高 = true;
-        console.log(selected.value);
       }
       if (selected.value === "最新畫作") {
         types.selects.最新畫作 = true;
-        console.log(selected.value);
       }
     };
-    console.log(types);
     const toggleType = (category, attribute) => {
       //當點選一個category的attribute時，同一個category的其他attribute會等於false。
       Object.keys(types[category]).forEach((element) => {
@@ -104,23 +93,10 @@ export default {
       //被點選的那個將會產生一次布林值的轉換
       types[category][attribute]["Boolean"] =
         !types[category][attribute]["Boolean"];
+      //每點選一次重製一次資料
       Arr.data = storeArr.data;
-      console.log("b", types[category][attribute]["Boolean"]);
-      // console.log("a", types[category][attribute]["Boolean"]);
-      // console.log("b", types[category]);
-      // console.log("c", types);
-      const filterBoolean = types[category][attribute]["Boolean"];
-      const filterName = types[category][attribute]["name"];
-      // if (filterBoolean === true) {
-      //   Arr.data = storeArr.data.filter((styles) => {
-      //     if (filterName === styles[category]) {
-      //       // console.log("no", styles, category);
-      //       return styles;
-      //     }
-      //   });
-      //   console.log(3, types);
-      // }
     };
+    //每更新一次就重新篩選一次
     watch(
       () => types,
       (newVal) => {
@@ -194,16 +170,12 @@ export default {
           Arr.data = Arr.data.sort((a, b) => b._ragicId - a._ragicId);
         }
       },
+      //deep一定要有不然會監聽不到
       { deep: true }
     );
     const reset = () => {
       Arr.data = storeArr.data;
     };
-    // const handleRealistic = () => {
-    //   types.style.isRealistic = !types.style.isRealistic;
-    //   console.log(types.style.isRealistic);
-    //   console.log(types);
-    // };
 
     onMounted(() => {
       axios
@@ -219,16 +191,6 @@ export default {
           );
           //人氣由小到大排序
           Arr.data = Arr.data.sort((a, b) => b.popular - a.popular);
-
-          // Arr.data.reverse();
-          // // console.log(Arr.data["0"]._ragicId); //拿到伺服器的id，準備拿來說router的
-
-          // //篩選出動漫畫風的圖片
-          // AniArr.data = Arr.data.filter((item) => item.style === "anime");
-          // // console.log("AniArr", AniArr.data);
-          // //篩選出動現實風的圖片
-          // RealArr.data = Arr.data.filter((item) => item.style === "realistic");
-          // console.log("RealArr", RealArr.data);
         });
     });
 
@@ -241,7 +203,7 @@ export default {
       types,
       toggleType,
       reset,
-      dddd,
+      handleChange,
       selected,
     };
   },
@@ -331,7 +293,7 @@ export default {
     </div>
     <div>
       <h1>總畫廊</h1>
-      <select class="select__sort" v-model="selected" @change="dddd">
+      <select class="select__sort" v-model="selected" @change="handleChange">
         {{
           selected
         }}

@@ -136,14 +136,6 @@ export default {
       }
     };
     const toggleType = (category, attribute) => {
-      // if (Object.keys(types[category][attribute]).length <= 1) {
-      //   Object.keys(types[category]).forEach((element) => {
-      //     if (Object.keys(types[category][element]).length > 1) {
-      //       types[category][element]["Boolean"] = false;
-      //       console.log(Object.keys(types[category][element]));
-      //     }
-      //   });
-      // } else {
       //當點選一個category的attribute時，同一個category的其他attribute會等於false。
       Object.keys(types[category]).forEach((element) => {
         if (Object.keys(types[category][element]).length > 1) {
@@ -153,14 +145,10 @@ export default {
       Object.keys(types[category]).forEach((element) => {
         types[category][element]["Boolean"] = false;
       });
-      // Object.keys(types[category]).forEach((element) => {
-      //   if (types[category][element]["Boolean"] === true)
-      //     types[category][element]["Boolean"] = false;
-      // });
+
       //被點選的那個將會產生一次布林值的轉換
       types[category][attribute]["Boolean"] =
         !types[category][attribute]["Boolean"];
-      // }
 
       //每點選一次重製一次資料
       Arr.data = storeArr.data;
@@ -336,7 +324,6 @@ export default {
         types.selects.依關聯性 = false;
         Arr.data = storeArr.data;
         Arr.data = Arr.data.sort((a, b) => b.popular - a.popular);
-        // selected.value = "人氣最高";
         quantity.value = Arr.data.length;
       } else {
         types.style.全部 = { Boolean: true };
@@ -586,9 +573,6 @@ export default {
   height: 300px;
   border-radius: 10px;
   overflow: hidden;
-  //grid用法
-  //   justify-self: center;
-  //   align-self: center;
   background: url("./drawailogo.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -605,8 +589,6 @@ export default {
   color: white;
   z-index: 1000;
   letter-spacing: 0.3rem;
-  // text-shadow: -1px -1px 0 #dddddd, 1px -1px 0 #dddddd, -1px 1px 0 #dddddd,
-  //   1px 1px 0 #dddddd;
 }
 .icon__gallery__container {
   width: 100%;
@@ -708,23 +690,12 @@ export default {
     rgba(0, 0, 0, 0.75) 97.85%,
     rgba(0, 0, 0, 0.8)
   );
-  // rgba(0, 0, 0, 0.213) 73.35%,
-  // rgba(0, 0, 0, 0.237) 76.85%,
-  // rgba(0, 0, 0, 0.262) 80.35%,
-  // rgba(0, 0, 0, 0.285) 83.85%,
-  // rgba(0, 0, 0, 0.306) 87.35%,
-  // rgba(0, 0, 0, 0.324) 90.85%,
-  // rgba(0, 0, 0, 0.338) 94.35%,
-  // rgba(0, 0, 0, 0.347) 97.85%,
-  // #00000059
-  //rgba(0, 0, 0, 0.4) 73.35%, rgba(0, 0, 0, 0.45) 76.85%, rgba(0, 0, 0, 0.50) 80.35%, rgba(0, 0, 0, 0.55) 83.85%, rgba(0, 0, 0, 0.6) 87.35%, rgba(0, 0, 0, 0.65) 90.85%, rgba(0, 0, 0, 0.7) 94.35%, rgba(0, 0, 0, 0.75) 97.85%, rgba(0, 0, 0, 0.8))
   bottom: 0;
   left: 0;
   position: absolute;
   right: 0;
   top: 0;
 }
-// icon
 //select
 .select__container {
   display: flex;

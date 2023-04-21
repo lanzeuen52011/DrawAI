@@ -28,6 +28,7 @@ body {
   align-items: center;
 }
 h1 {
+  display: none;
   margin: 0;
 }
 h2 {

@@ -1,11 +1,210 @@
 <script>
-import { onMounted, reactive, computed } from "vue";
+import { onMounted, reactive, computed, ref, watch } from "vue";
 export default {
   setup() {
     const Arr = reactive({ data: [] });
+    const storeArr = reactive({ data: [] });
     const AniArr = reactive({ data: [] });
     const RealArr = reactive({ data: [] });
-    const abc = () => {};
+    const search = reactive({ text: [] });
+    const searchSpilt = reactive({ text: [] });
+    const test = reactive({ data: [] });
+    const selected = ref("人氣最高");
+
+    function includes(array, searchElement) {
+      for (let element of array) if (element === searchElement) return true;
+      return false;
+    }
+    const handleSearch = () => {
+      //篩選出與搜尋的字較有關聯度的
+      if (search.value !== "") {
+        Arr.data.filter((arr) => {
+          //篩選
+          arr.relative = 0; //新增關聯度欄位
+          test.data = arr.name.split(""); //把陣列內的名子的所有字拆分
+          searchSpilt.text = search.text.split(""); //把Search__input內的值的所有字拆分
+          // console.log("test", test.data, "searchSpilt", searchSpilt);
+          for (let i of searchSpilt.text) {
+            //把已經拆分過的Search__input的值變成i一個一個放進去比對
+            if (includes(test.data, i) === true) {
+              //拆芬過的Search__input的值變成i一個一個放進test.data中比對，有相同的就會返為true
+              //true的話arr.relative就+1。就是Arr.data[輪流的數字].relative+1。
+              arr.relative++;
+              // console.log(arr);
+            }
+          }
+        });
+        //將Arr.data依照關聯值的大小還續，關聯值越大順位越高，越上面
+        Arr.data = Arr.data.sort((a, b) => b.relative - a.relative);
+      }
+    };
+
+    //篩選區域
+    const types = reactive({
+      selects: {
+        人氣最高: false,
+        最新畫作: false,
+      },
+      style: {
+        // Boolean: false,
+        現實風: { name: "realistic", Boolean: false },
+        動漫風: { name: "anime", Boolean: false },
+      },
+      dress: {
+        // Boolean: false,
+        衣服: { name: "clothes", Boolean: false },
+        比基尼: { name: "bikini", Boolean: false },
+        洋裝: { name: "dress", Boolean: false },
+        赤膊: { name: "nude", Boolean: false },
+        太空衣: { name: "spacesuit", Boolean: false },
+        "襯衫、西裝": { name: "suit", Boolean: false },
+      },
+      ethnicity: {
+        // Boolean: false,
+        人類: { name: "human", Boolean: false },
+        動物: { name: "animal", Boolean: false },
+        亞人: { name: "demihuman", Boolean: false },
+      },
+      people: {
+        // Boolean: false,
+        "1人": { name: "1", Boolean: false },
+        "2人": { name: "2", Boolean: false },
+      },
+      sex: {
+        // Boolean: false,
+        男生: { name: "male", Boolean: false },
+        女生: { name: "female", Boolean: false },
+      },
+      age: {
+        // Boolean: false,
+        少女: { name: "girl", Boolean: false },
+        女人: { name: "woman", Boolean: false },
+        男人: { name: "man", Boolean: false },
+      },
+    });
+    const dddd = () => {
+      types.selects.人氣最高 = false;
+      types.selects.最新畫作 = false;
+      if (selected.value === "人氣最高") {
+        types.selects.人氣最高 = true;
+        console.log(selected.value);
+      }
+      if (selected.value === "最新畫作") {
+        types.selects.最新畫作 = true;
+        console.log(selected.value);
+      }
+    };
+    console.log(types);
+    const toggleType = (category, attribute) => {
+      //當點選一個category的attribute時，同一個category的其他attribute會等於false。
+      Object.keys(types[category]).forEach((element) => {
+        if (types[category][element]["Boolean"] === true)
+          types[category][element]["Boolean"] = false;
+      });
+      //被點選的那個將會產生一次布林值的轉換
+      types[category][attribute]["Boolean"] =
+        !types[category][attribute]["Boolean"];
+      Arr.data = storeArr.data;
+      console.log("b", types[category][attribute]["Boolean"]);
+      // console.log("a", types[category][attribute]["Boolean"]);
+      // console.log("b", types[category]);
+      // console.log("c", types);
+      const filterBoolean = types[category][attribute]["Boolean"];
+      const filterName = types[category][attribute]["name"];
+      // if (filterBoolean === true) {
+      //   Arr.data = storeArr.data.filter((styles) => {
+      //     if (filterName === styles[category]) {
+      //       // console.log("no", styles, category);
+      //       return styles;
+      //     }
+      //   });
+      //   console.log(3, types);
+      // }
+    };
+    watch(
+      () => types,
+      (newVal) => {
+        //風格
+        if (newVal.style.動漫風.Boolean === true) {
+          Arr.data = Arr.data.filter((styles) => styles.style === "anime");
+        }
+        if (newVal.style.現實風.Boolean === true) {
+          Arr.data = Arr.data.filter((styles) => styles.style === "realistic");
+        }
+        //服裝
+        if (newVal.dress.衣服.Boolean === true) {
+          Arr.data = Arr.data.filter((styles) => styles.dress === "clothes");
+        }
+        if (newVal.dress.比基尼.Boolean === true) {
+          Arr.data = Arr.data.filter((styles) => styles.dress === "bikini");
+        }
+        if (newVal.dress.洋裝.Boolean === true) {
+          Arr.data = Arr.data.filter((styles) => styles.dress === "dress");
+        }
+        if (newVal.dress.赤膊.Boolean === true) {
+          Arr.data = Arr.data.filter((styles) => styles.dress === "nude");
+        }
+        if (newVal.dress.太空衣.Boolean === true) {
+          Arr.data = Arr.data.filter((styles) => styles.dress === "spacesuit");
+        }
+        if (newVal.dress["襯衫、西裝"].Boolean === true) {
+          Arr.data = Arr.data.filter((styles) => styles.dress === "suit");
+        }
+        //種族
+        if (newVal.ethnicity.人類.Boolean === true) {
+          Arr.data = Arr.data.filter((styles) => styles.ethnicity === "human");
+        }
+        if (newVal.ethnicity.動物.Boolean === true) {
+          Arr.data = Arr.data.filter((styles) => styles.ethnicity === "animal");
+        }
+        if (newVal.ethnicity.亞人.Boolean === true) {
+          Arr.data = Arr.data.filter(
+            (styles) => styles.ethnicity === "demihuman"
+          );
+        }
+        //人數
+        if (newVal.people["1人"].Boolean === true) {
+          Arr.data = Arr.data.filter((styles) => styles.people === "1");
+        }
+        if (newVal.people["2人"].Boolean === true) {
+          Arr.data = Arr.data.filter((styles) => styles.people === "2");
+        }
+        //性別
+        if (newVal.sex.女生.Boolean === true) {
+          Arr.data = Arr.data.filter((styles) => styles.sex === "female");
+        }
+        if (newVal.sex.男生.Boolean === true) {
+          Arr.data = Arr.data.filter((styles) => styles.sex === "male");
+        }
+        //年齡
+        if (newVal.age.女人.Boolean === true) {
+          Arr.data = Arr.data.filter((styles) => styles.age === "woman");
+        }
+        if (newVal.age.少女.Boolean === true) {
+          Arr.data = Arr.data.filter((styles) => styles.age === "girl");
+        }
+        if (newVal.age.男人.Boolean === true) {
+          Arr.data = Arr.data.filter((styles) => styles.age === "man");
+        }
+        //順序
+        if (newVal.selects.人氣最高 === true) {
+          Arr.data = Arr.data.sort((a, b) => b.popular - a.popular);
+        }
+        if (newVal.selects.最新畫作 === true) {
+          Arr.data = Arr.data.sort((a, b) => b._ragicId - a._ragicId);
+        }
+      },
+      { deep: true }
+    );
+    const reset = () => {
+      Arr.data = storeArr.data;
+    };
+    // const handleRealistic = () => {
+    //   types.style.isRealistic = !types.style.isRealistic;
+    //   console.log(types.style.isRealistic);
+    //   console.log(types);
+    // };
+
     onMounted(() => {
       axios
         .get(
@@ -13,10 +212,14 @@ export default {
         )
         .then((res) => {
           Arr.data = res.data;
+          storeArr.data = res.data;
           Arr.data = Object.keys(Arr.data).map((key) => Arr.data[key]);
+          storeArr.data = Object.keys(storeArr.data).map(
+            (key) => storeArr.data[key]
+          );
           //人氣由小到大排序
-          Arr.data.sort((a, b) => b.popular - a.popular);
-          console.log(Arr.data);
+          Arr.data = Arr.data.sort((a, b) => b.popular - a.popular);
+
           // Arr.data.reverse();
           // // console.log(Arr.data["0"]._ragicId); //拿到伺服器的id，準備拿來說router的
 
@@ -29,7 +232,18 @@ export default {
         });
     });
 
-    return { Arr, AniArr, RealArr, abc };
+    return {
+      Arr,
+      AniArr,
+      RealArr,
+      search,
+      handleSearch,
+      types,
+      toggleType,
+      reset,
+      dddd,
+      selected,
+    };
   },
 };
 </script>
@@ -41,15 +255,94 @@ export default {
         type="text"
         class="search__input"
         placeholder="搜尋你想找的大師之作"
+        v-model="search.text"
       />
-      <button @click="abc" class="search__button">
+      <button class="search__button" @click="handleSearch">
         <svg class="search__icon">
           <use xlink:href="@/image/sprite.svg#search"></use>
         </svg>
       </button>
     </div>
     <div>
-      <h2>人氣最高</h2>
+      <!-- 篩選器 -->
+      <div>
+        <button @click="reset">重製</button>
+      </div>
+      <div>
+        <!-- 風格 -->
+        <button
+          v-for="type in Object.keys(types.style)"
+          :key="type"
+          @click="() => toggleType('style', `${type}`)"
+        >
+          {{ type }}
+        </button>
+      </div>
+      <div>
+        <!-- 服裝 -->
+        <button
+          v-for="type in Object.keys(types.dress)"
+          :key="type"
+          @click="() => toggleType('dress', `${type}`)"
+        >
+          {{ type }}
+        </button>
+      </div>
+      <div>
+        <!-- 種族 -->
+        <button
+          v-for="type in Object.keys(types.ethnicity)"
+          :key="type"
+          @click="() => toggleType('ethnicity', `${type}`)"
+        >
+          {{ type }}
+        </button>
+      </div>
+      <div>
+        <!-- 數量 -->
+        <button
+          v-for="type in Object.keys(types.people)"
+          :key="type"
+          @click="() => toggleType('people', `${type}`)"
+        >
+          {{ type }}
+        </button>
+      </div>
+      <div>
+        <!-- 性別 -->
+        <button
+          v-for="type in Object.keys(types.sex)"
+          :key="type"
+          @click="() => toggleType('sex', `${type}`)"
+        >
+          {{ type }}
+        </button>
+      </div>
+      <div>
+        <!-- 年齡 -->
+        <button
+          v-for="type in Object.keys(types.age)"
+          :key="type"
+          @click="() => toggleType('age', `${type}`)"
+        >
+          {{ type }}
+        </button>
+      </div>
+    </div>
+    <div>
+      <h1>總畫廊</h1>
+      <select class="select__sort" v-model="selected" @change="dddd">
+        {{
+          selected
+        }}
+        <option
+          v-for="select in Object.keys(types.selects)"
+          :key="select"
+          :value="select"
+        >
+          {{ select }}
+        </option>
+      </select>
       <ul :class="['list', 'gap']">
         <li :class="['list__item']" v-for="item in Arr.data" :key="item.id">
           <router-link :to="`/${item._ragicId}`">
@@ -281,4 +574,18 @@ export default {
   top: 0;
 }
 // icon
+//select__sort
+.select__sort {
+  text-align: start;
+  padding: 0;
+  color: #e9ecef;
+  background: #25262b;
+  outline: 0;
+  border: 0;
+  font-size: 3rem;
+  cursor: pointer;
+  margin: 4rem 0;
+  display: block;
+  font-weight: 600;
+}
 </style>

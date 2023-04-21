@@ -5,7 +5,6 @@ export default {
     const Arr = reactive({ data: [] });
     const AniArr = reactive({ data: [] });
     const RealArr = reactive({ data: [] });
-    const abc = () => {};
     onMounted(() => {
       axios
         .get(
@@ -26,7 +25,7 @@ export default {
         });
     });
 
-    return { Arr, AniArr, RealArr, abc };
+    return { Arr, AniArr, RealArr };
   },
 };
 </script>

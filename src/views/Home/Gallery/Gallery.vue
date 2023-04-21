@@ -23,8 +23,9 @@ export default {
       (newVal) => {
         //篩選出與搜尋的字較有關聯度的
         if (newVal.length === 0) {
-          types.selects.人氣最高 = true;
+          types.selects.最新畫作 = false;
           types.selects.依關聯性 = false;
+          types.selects.人氣最高 = true;
           selected.value = "人氣最高";
         }
         if (newVal.length > 0) {
@@ -52,9 +53,7 @@ export default {
     );
     //按了才搜尋
     const handleSearch = () => {
-      //篩選出與搜尋的字較有關聯度的
       if (search.value !== "") {
-        isSearch.value = true;
         Arr.data.filter((arr) => {
           //篩選
           arr.relative = 0; //新增關聯度欄位
@@ -73,6 +72,8 @@ export default {
         Arr.data = Arr.data.sort((a, b) => b.relative - a.relative);
       }
       quantity.value = Arr.data.length;
+      types.selects.依關聯性 = true;
+      selected.value = "依關聯性";
     };
 
     //篩選區域
@@ -83,12 +84,12 @@ export default {
         依關聯性: false,
       },
       style: {
-        全部: { Boolean: false },
+        全部: { Boolean: true },
         現實風: { name: "realistic", Boolean: false },
         動漫風: { name: "anime", Boolean: false },
       },
       dress: {
-        全部: { Boolean: false },
+        全部: { Boolean: true },
         衣服: { name: "clothes", Boolean: false },
         比基尼: { name: "bikini", Boolean: false },
         洋裝: { name: "dress", Boolean: false },
@@ -97,23 +98,23 @@ export default {
         "襯衫、西裝": { name: "suit", Boolean: false },
       },
       ethnicity: {
-        全部: { Boolean: false },
+        全部: { Boolean: true },
         人類: { name: "human", Boolean: false },
         動物: { name: "animal", Boolean: false },
         亞人: { name: "demihuman", Boolean: false },
       },
       people: {
-        全部: { Boolean: false },
+        全部: { Boolean: true },
         "1人": { name: "1", Boolean: false },
         "2人": { name: "2", Boolean: false },
       },
       sex: {
-        全部: { Boolean: false },
+        全部: { Boolean: true },
         男生: { name: "male", Boolean: false },
         女生: { name: "female", Boolean: false },
       },
       age: {
-        全部: { Boolean: false },
+        全部: { Boolean: true },
         少女: { name: "girl", Boolean: false },
         女人: { name: "woman", Boolean: false },
         男人: { name: "man", Boolean: false },
@@ -135,20 +136,31 @@ export default {
       }
     };
     const toggleType = (category, attribute) => {
-      if (types[category][attribute] === "全部") {
-        Object.keys(types[category]).forEach((element) => {
+      // if (Object.keys(types[category][attribute]).length <= 1) {
+      //   Object.keys(types[category]).forEach((element) => {
+      //     if (Object.keys(types[category][element]).length > 1) {
+      //       types[category][element]["Boolean"] = false;
+      //       console.log(Object.keys(types[category][element]));
+      //     }
+      //   });
+      // } else {
+      //當點選一個category的attribute時，同一個category的其他attribute會等於false。
+      Object.keys(types[category]).forEach((element) => {
+        if (Object.keys(types[category][element]).length > 1) {
           types[category][element]["Boolean"] = false;
-        });
-      } else {
-        //當點選一個category的attribute時，同一個category的其他attribute會等於false。
-        Object.keys(types[category]).forEach((element) => {
-          if (types[category][element]["Boolean"] === true)
-            types[category][element]["Boolean"] = false;
-        });
-        //被點選的那個將會產生一次布林值的轉換
-        types[category][attribute]["Boolean"] =
-          !types[category][attribute]["Boolean"];
-      }
+        }
+      });
+      Object.keys(types[category]).forEach((element) => {
+        types[category][element]["Boolean"] = false;
+      });
+      // Object.keys(types[category]).forEach((element) => {
+      //   if (types[category][element]["Boolean"] === true)
+      //     types[category][element]["Boolean"] = false;
+      // });
+      //被點選的那個將會產生一次布林值的轉換
+      types[category][attribute]["Boolean"] =
+        !types[category][attribute]["Boolean"];
+      // }
 
       //每點選一次重製一次資料
       Arr.data = storeArr.data;
@@ -158,6 +170,13 @@ export default {
       () => types,
       (newVal) => {
         //風格
+        if (newVal.style.全部.Boolean === true) {
+          Object.keys(types.style).forEach((element) => {
+            if (Object.keys(types.style[element]).length > 1) {
+              types.style[element]["Boolean"] = false;
+            }
+          });
+        }
         if (newVal.style.動漫風.Boolean === true) {
           Arr.data = Arr.data.filter((styles) => styles.style === "anime");
         }
@@ -165,6 +184,13 @@ export default {
           Arr.data = Arr.data.filter((styles) => styles.style === "realistic");
         }
         //服裝
+        if (newVal.dress.全部.Boolean === true) {
+          Object.keys(types.dress).forEach((element) => {
+            if (Object.keys(types.dress[element]).length > 1) {
+              types.dress[element]["Boolean"] = false;
+            }
+          });
+        }
         if (newVal.dress.衣服.Boolean === true) {
           Arr.data = Arr.data.filter((styles) => styles.dress === "clothes");
         }
@@ -184,6 +210,13 @@ export default {
           Arr.data = Arr.data.filter((styles) => styles.dress === "suit");
         }
         //種族
+        if (newVal.ethnicity.全部.Boolean === true) {
+          Object.keys(types.ethnicity).forEach((element) => {
+            if (Object.keys(types.ethnicity[element]).length > 1) {
+              types.ethnicity[element]["Boolean"] = false;
+            }
+          });
+        }
         if (newVal.ethnicity.人類.Boolean === true) {
           Arr.data = Arr.data.filter((styles) => styles.ethnicity === "human");
         }
@@ -196,6 +229,13 @@ export default {
           );
         }
         //人數
+        if (newVal.people.全部.Boolean === true) {
+          Object.keys(types.people).forEach((element) => {
+            if (Object.keys(types.people[element]).length > 1) {
+              types.people[element]["Boolean"] = false;
+            }
+          });
+        }
         if (newVal.people["1人"].Boolean === true) {
           Arr.data = Arr.data.filter((styles) => styles.people === "1");
         }
@@ -203,6 +243,13 @@ export default {
           Arr.data = Arr.data.filter((styles) => styles.people === "2");
         }
         //性別
+        if (newVal.sex.全部.Boolean === true) {
+          Object.keys(types.sex).forEach((element) => {
+            if (Object.keys(types.sex[element]).length > 1) {
+              types.sex[element]["Boolean"] = false;
+            }
+          });
+        }
         if (newVal.sex.女生.Boolean === true) {
           Arr.data = Arr.data.filter((styles) => styles.sex === "female");
         }
@@ -210,6 +257,13 @@ export default {
           Arr.data = Arr.data.filter((styles) => styles.sex === "male");
         }
         //年齡
+        if (newVal.age.全部.Boolean === true) {
+          Object.keys(types.age).forEach((element) => {
+            if (Object.keys(types.age[element]).length > 1) {
+              types.age[element]["Boolean"] = false;
+            }
+          });
+        }
         if (newVal.age.女人.Boolean === true) {
           Arr.data = Arr.data.filter((styles) => styles.age === "woman");
         }
@@ -254,8 +308,53 @@ export default {
       //deep一定要有不然會監聽不到
       { deep: true }
     );
-    const reset = () => {
+    const resetAll = () => {
+      search.text = "";
+      types.style.全部 = { Boolean: true };
+      types.dress.全部 = { Boolean: true };
+      types.ethnicity.全部 = { Boolean: true };
+      types.people.全部 = { Boolean: true };
+      types.sex.全部 = { Boolean: true };
+      types.age.全部 = { Boolean: true };
+      types.selects.人氣最高 = { Boolean: true };
+      types.selects.人氣最高 = true;
+      types.selects.依關聯性 = false;
       Arr.data = storeArr.data;
+      Arr.data = Arr.data.sort((a, b) => b.popular - a.popular);
+      selected.value = "人氣最高";
+      quantity.value = Arr.data.length;
+    };
+    const resetFilter = () => {
+      if (search.text.length === 0) {
+        types.style.全部 = { Boolean: true };
+        types.dress.全部 = { Boolean: true };
+        types.ethnicity.全部 = { Boolean: true };
+        types.people.全部 = { Boolean: true };
+        types.sex.全部 = { Boolean: true };
+        types.age.全部 = { Boolean: true };
+        types.selects.人氣最高 = { Boolean: true };
+        types.selects.依關聯性 = false;
+        Arr.data = storeArr.data;
+        Arr.data = Arr.data.sort((a, b) => b.popular - a.popular);
+        // selected.value = "人氣最高";
+        quantity.value = Arr.data.length;
+      } else {
+        types.style.全部 = { Boolean: true };
+        types.dress.全部 = { Boolean: true };
+        types.ethnicity.全部 = { Boolean: true };
+        types.people.全部 = { Boolean: true };
+        types.sex.全部 = { Boolean: true };
+        types.age.全部 = { Boolean: true };
+        types.selects.依關聯性 = true;
+        selected.value = "依關聯性";
+        Arr.data = storeArr.data;
+        Arr.data = Arr.data.sort((a, b) => b.popular - a.popular);
+        handleSearch;
+        quantity.value = Arr.data.length;
+      }
+    };
+    const resetSearch = () => {
+      search.text = "";
     };
 
     onMounted(() => {
@@ -284,7 +383,9 @@ export default {
       handleSearch,
       types,
       toggleType,
-      reset,
+      resetAll,
+      resetSearch,
+      resetFilter,
       handleChange,
       selected,
       quantity,
@@ -311,7 +412,9 @@ export default {
     <div>
       <!-- 篩選器 -->
       <div>
-        <button @click="reset">重製</button>
+        <button @click="resetAll">一鍵清除篩選與搜尋</button>
+        <button @click="resetFilter">清除篩選</button>
+        <button @click="resetSearch">清除搜尋</button>
       </div>
       <div>
         <!-- 風格 -->

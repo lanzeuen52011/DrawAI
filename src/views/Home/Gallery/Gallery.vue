@@ -7,17 +7,54 @@ export default {
     const AniArr = reactive({ data: [] });
     const RealArr = reactive({ data: [] });
     const search = reactive({ text: [] });
+    const isSearch = ref(false);
     const searchSpilt = reactive({ text: [] });
     const test = reactive({ data: [] });
     const selected = ref("人氣最高");
+    const quantity = ref("");
 
     function includes(array, searchElement) {
       for (let element of array) if (element === searchElement) return true;
       return false;
     }
+    //有打字就搜尋
+    watch(
+      () => search.text,
+      (newVal) => {
+        //篩選出與搜尋的字較有關聯度的
+        if (newVal.length === 0) {
+          types.selects.人氣最高 = true;
+          types.selects.依關聯性 = false;
+          selected.value = "人氣最高";
+        }
+        if (newVal.length > 0) {
+          Arr.data.filter((arr) => {
+            //篩選
+            arr.relative = 0; //新增關聯度欄位
+            test.data = arr.name.split(""); //把陣列內的名子的所有字拆分
+            searchSpilt.text = search.text.split(""); //把Search__input內的值的所有字拆分
+            for (let i of searchSpilt.text) {
+              //把已經拆分過的Search__input的值變成i一個一個放進去比對
+              if (includes(test.data, i) === true) {
+                //拆芬過的Search__input的值變成i一個一個放進test.data中比對，有相同的就會返為true
+                //true的話arr.relative就+1。就是Arr.data[輪流的數字].relative+1。
+                arr.relative++;
+              }
+            }
+          });
+          //將Arr.data依照關聯值的大小還續，關聯值越大順位越高，越上面
+          Arr.data = Arr.data.sort((a, b) => b.relative - a.relative);
+          quantity.value = Arr.data.length;
+          types.selects.依關聯性 = true;
+          selected.value = "依關聯性";
+        }
+      }
+    );
+    //按了才搜尋
     const handleSearch = () => {
       //篩選出與搜尋的字較有關聯度的
       if (search.value !== "") {
+        isSearch.value = true;
         Arr.data.filter((arr) => {
           //篩選
           arr.relative = 0; //新增關聯度欄位
@@ -35,19 +72,23 @@ export default {
         //將Arr.data依照關聯值的大小還續，關聯值越大順位越高，越上面
         Arr.data = Arr.data.sort((a, b) => b.relative - a.relative);
       }
+      quantity.value = Arr.data.length;
     };
 
     //篩選區域
     const types = reactive({
       selects: {
-        人氣最高: false,
+        人氣最高: true,
         最新畫作: false,
+        依關聯性: false,
       },
       style: {
+        全部: { Boolean: false },
         現實風: { name: "realistic", Boolean: false },
         動漫風: { name: "anime", Boolean: false },
       },
       dress: {
+        全部: { Boolean: false },
         衣服: { name: "clothes", Boolean: false },
         比基尼: { name: "bikini", Boolean: false },
         洋裝: { name: "dress", Boolean: false },
@@ -56,19 +97,23 @@ export default {
         "襯衫、西裝": { name: "suit", Boolean: false },
       },
       ethnicity: {
+        全部: { Boolean: false },
         人類: { name: "human", Boolean: false },
         動物: { name: "animal", Boolean: false },
         亞人: { name: "demihuman", Boolean: false },
       },
       people: {
+        全部: { Boolean: false },
         "1人": { name: "1", Boolean: false },
         "2人": { name: "2", Boolean: false },
       },
       sex: {
+        全部: { Boolean: false },
         男生: { name: "male", Boolean: false },
         女生: { name: "female", Boolean: false },
       },
       age: {
+        全部: { Boolean: false },
         少女: { name: "girl", Boolean: false },
         女人: { name: "woman", Boolean: false },
         男人: { name: "man", Boolean: false },
@@ -77,22 +122,34 @@ export default {
     const handleChange = () => {
       types.selects.人氣最高 = false;
       types.selects.最新畫作 = false;
+      types.selects.依關聯性 = false;
+
       if (selected.value === "人氣最高") {
         types.selects.人氣最高 = true;
       }
       if (selected.value === "最新畫作") {
         types.selects.最新畫作 = true;
       }
+      if (selected.value === "依關聯性") {
+        types.selects.依關聯性 = true;
+      }
     };
     const toggleType = (category, attribute) => {
-      //當點選一個category的attribute時，同一個category的其他attribute會等於false。
-      Object.keys(types[category]).forEach((element) => {
-        if (types[category][element]["Boolean"] === true)
+      if (types[category][attribute] === "全部") {
+        Object.keys(types[category]).forEach((element) => {
           types[category][element]["Boolean"] = false;
-      });
-      //被點選的那個將會產生一次布林值的轉換
-      types[category][attribute]["Boolean"] =
-        !types[category][attribute]["Boolean"];
+        });
+      } else {
+        //當點選一個category的attribute時，同一個category的其他attribute會等於false。
+        Object.keys(types[category]).forEach((element) => {
+          if (types[category][element]["Boolean"] === true)
+            types[category][element]["Boolean"] = false;
+        });
+        //被點選的那個將會產生一次布林值的轉換
+        types[category][attribute]["Boolean"] =
+          !types[category][attribute]["Boolean"];
+      }
+
       //每點選一次重製一次資料
       Arr.data = storeArr.data;
     };
@@ -169,6 +226,30 @@ export default {
         if (newVal.selects.最新畫作 === true) {
           Arr.data = Arr.data.sort((a, b) => b._ragicId - a._ragicId);
         }
+
+        if (newVal.selects.依關聯性 === true) {
+          if (search.text.length !== 0) {
+            //篩選出與搜尋的字較有關聯度的
+            Arr.data.filter((arr) => {
+              //篩選
+              arr.relative = 0; //新增關聯度欄位
+              test.data = arr.name.split(""); //把陣列內的名子的所有字拆分
+              searchSpilt.text = search.text.split(""); //把Search__input內的值的所有字拆分
+              for (let i of searchSpilt.text) {
+                //把已經拆分過的Search__input的值變成i一個一個放進去比對
+                if (includes(test.data, i) === true) {
+                  //拆芬過的Search__input的值變成i一個一個放進test.data中比對，有相同的就會返為true
+                  //true的話arr.relative就+1。就是Arr.data[輪流的數字].relative+1。
+                  arr.relative++;
+                }
+              }
+            });
+            //將Arr.data依照關聯值的大小還續，關聯值越大順位越高，越上面
+            Arr.data = Arr.data.sort((a, b) => b.relative - a.relative);
+          }
+        }
+
+        quantity.value = Arr.data.length;
       },
       //deep一定要有不然會監聽不到
       { deep: true }
@@ -189,8 +270,9 @@ export default {
           storeArr.data = Object.keys(storeArr.data).map(
             (key) => storeArr.data[key]
           );
-          //人氣由小到大排序
+          //人氣由小到大
           Arr.data = Arr.data.sort((a, b) => b.popular - a.popular);
+          quantity.value = Arr.data.length;
         });
     });
 
@@ -205,6 +287,7 @@ export default {
       reset,
       handleChange,
       selected,
+      quantity,
     };
   },
 };
@@ -293,18 +376,21 @@ export default {
     </div>
     <div>
       <h1>總畫廊</h1>
-      <select class="select__sort" v-model="selected" @change="handleChange">
-        {{
-          selected
-        }}
-        <option
-          v-for="select in Object.keys(types.selects)"
-          :key="select"
-          :value="select"
-        >
-          {{ select }}
-        </option>
-      </select>
+      <div class="select__container">
+        <select class="select__sort" v-model="selected" @change="handleChange">
+          {{
+            selected
+          }}
+          <option
+            v-for="select in Object.keys(types.selects)"
+            :key="select"
+            :value="select"
+          >
+            {{ select }}
+          </option>
+        </select>
+        <p>幫您搜尋到的張數{{ quantity }}</p>
+      </div>
       <ul :class="['list', 'gap']">
         <li :class="['list__item']" v-for="item in Arr.data" :key="item.id">
           <router-link :to="`/${item._ragicId}`">
@@ -536,7 +622,14 @@ export default {
   top: 0;
 }
 // icon
-//select__sort
+//select
+.select__container {
+  display: flex;
+  align-items: center;
+}
+.select__container > p {
+  color: #fff;
+}
 .select__sort {
   text-align: start;
   padding: 0;

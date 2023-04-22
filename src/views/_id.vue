@@ -230,92 +230,116 @@ export default {
 </template>
 <style lang="scss" scoped>
 //body contanier
-body .id__container {
+.id__container {
   background: #000;
   height: 100vh;
   display: flex;
   align-items: center;
-}
-.id__container .container {
-  background: #000;
+  > .container {
+    background: #000;
+    &.grid__2c {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    > .picture__info {
+      //picture
+      background: #25262b;
+      display: flex;
+      grid-template-rows: 100px 360px;
+      flex-direction: column;
+      > .picture__name {
+        color: #f7f7f7;
+        letter-spacing: 0.3rem;
+        padding: 20px;
+        display: block;
+      }
+      > .picture__discri {
+        color: #f7f7f7;
+        text-align: left;
+        letter-spacing: 0.2rem;
+        margin: 5% 10%;
+        height: 22.7vh;
+        overflow-y: overlay;
+        font-size: 1.6rem;
+        width: 30vw;
+        word-wrap: break-word;
+      }
+      .icon__container {
+        //icon
+        display: flex;
+        margin: 1rem 4rem;
+        border: 1px solid #fff;
+        border-radius: 10px;
+
+        > .icon__container__box {
+          display: flex;
+          .pink,
+          .yellow,
+          .red,
+          .gray,
+          .lightblue {
+            animation-name: isClicked;
+            animation-duration: 0.3s;
+          }
+          > .fi {
+            color: #fff;
+            padding: 1.3rem 2rem 1rem;
+            cursor: pointer;
+            &.pink {
+              color: pink;
+            }
+            &.yellow {
+              color: yellow;
+            }
+            &.red {
+              color: red;
+            }
+            &.gray {
+              color: gray;
+            }
+            &.lightblue {
+              color: lightblue;
+            }
+          }
+          > p {
+            margin: 1rem;
+            color: #fff;
+            margin-left: 0;
+          }
+        }
+      }
+    }
+    > .button__back {
+      //backward button
+
+      position: absolute;
+      right: 0;
+      top: 0;
+      background: none;
+      color: white;
+      cursor: pointer;
+      border: 0;
+      width: 50px;
+      height: 50px;
+      > .bx-x {
+        content: "\ec8d";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #e9ecef;
+        transform: scale(5);
+        width: 10px;
+        height: 10px;
+        margin: 0;
+      }
+    }
+    > img {
+      height: 90vh;
+      width: 90vh;
+      object-fit: contain;
+    }
+  }
 }
 
-.grid__2c {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-img {
-  height: 90vh;
-  width: 90vh;
-  object-fit: contain;
-}
-
-//backward button
-.button__back {
-  position: absolute;
-  right: 0;
-  top: 0;
-  background: none;
-  color: white;
-  cursor: pointer;
-  border: 0;
-  width: 50px;
-  height: 50px;
-}
-
-.bx-x {
-  content: "\ec8d";
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #e9ecef;
-  transform: scale(5);
-  width: 10px;
-  height: 10px;
-  margin: 0;
-}
-
-//picture
-.picture__info {
-  background: #25262b;
-  display: flex;
-  grid-template-rows: 100px 360px;
-  flex-direction: column;
-}
-.picture__name {
-  color: #f7f7f7;
-  letter-spacing: 0.3rem;
-  padding: 20px;
-  display: block;
-}
-.picture__discri {
-  color: #f7f7f7;
-  text-align: left;
-  letter-spacing: 0.2rem;
-  margin: 5% 10%;
-  height: 22.7vh;
-  overflow-y: overlay;
-  font-size: 1.6rem;
-  width: 30vw;
-  word-wrap: break-word;
-}
-
-//icon
-
-.icon__container {
-  display: flex;
-  margin: 1rem 4rem;
-  border: 1px solid #fff;
-  border-radius: 10px;
-}
-.icon__container__box {
-  display: flex;
-}
-.fi {
-  color: #fff;
-  padding: 1.3rem 2rem 1rem;
-  cursor: pointer;
-}
 @keyframes isClicked {
   0% {
     scale: 0.6;
@@ -329,77 +353,44 @@ img {
     scale: 1;
   }
 }
-.pink,
-.yellow,
-.red,
-.gray,
-.lightblue {
-  animation-name: isClicked;
-  animation-duration: 0.3s;
-}
-.pink {
-  color: pink;
-}
-.yellow {
-  color: yellow;
-}
-.red {
-  color: red;
-}
-.gray {
-  color: gray;
-}
-.lightblue {
-  color: lightblue;
-}
-
-.icon__container p {
-  margin: 1rem;
-  color: #fff;
-  margin-left: 0;
-}
 
 //comment
 .comment {
   height: 38vh;
   max-width: 36vw;
   overflow: hidden;
-}
-.comment__name {
-  margin: 2rem 0 0 3rem;
-  width: 100%;
-  padding: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.9);
-}
-.comment__scroll {
-  overflow-y: overlay;
-  height: 28vh;
-  max-width: 36vw;
-}
-.comment__author {
-  color: #f7f7f7;
-  letter-spacing: 0.3rem;
-  margin: 3% 7% 1%;
-  text-align: left;
-  font-size: 1.6rem;
-  border-bottom: 1px solid;
-  width: fit-content;
-}
-.comment__paragraph {
-  color: #f7f7f7;
-  text-align: left;
-  letter-spacing: 0.2rem;
-  margin: 1% 8% 3% 9%;
-  font-size: 1rem;
-}
-.comment__each {
-  border: 1px solid #fff;
-  border-radius: 30px;
-  margin: 5% 5% 5% 10%;
-}
+  > .comment__name {
+    margin: 2rem 0 0 3rem;
+    width: 100%;
+    padding: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+  }
 
-.active {
-  color: red;
-  fill: red;
+  .comment__scroll {
+    overflow-y: overlay;
+    height: 28vh;
+    max-width: 36vw;
+    > .comment__each {
+      border: 1px solid #fff;
+      border-radius: 30px;
+      margin: 5% 5% 5% 10%;
+      > .comment__author {
+        color: #f7f7f7;
+        letter-spacing: 0.3rem;
+        margin: 3% 7% 1%;
+        text-align: left;
+        font-size: 1.6rem;
+        border-bottom: 1px solid;
+        width: fit-content;
+      }
+      > .comment__paragraph {
+        color: #f7f7f7;
+        text-align: left;
+        letter-spacing: 0.2rem;
+        margin: 1% 8% 3% 9%;
+        font-size: 1rem;
+      }
+    }
+  }
 }
 </style>

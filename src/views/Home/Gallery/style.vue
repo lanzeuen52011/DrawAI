@@ -5,6 +5,8 @@ export default {
     const Arr = reactive({ data: [] });
     const AniArr = reactive({ data: [] });
     const RealArr = reactive({ data: [] });
+    const maleArr = reactive({ data: [] });
+    const femaleArr = reactive({ data: [] });
     onMounted(() => {
       axios
         .get(
@@ -25,10 +27,18 @@ export default {
             .filter((item) => item.style === "realistic")
             .sort((a, b) => b.popular - a.popular);
           // console.log("RealArr", RealArr.data);
+          maleArr.data = Arr.data
+            .filter((item) => item.sex === "male")
+            .sort((a, b) => b.popular - a.popular);
+          console.log("male", maleArr.data);
+          femaleArr.data = Arr.data
+            .filter((item) => item.sex === "female")
+            .sort((a, b) => b.popular - a.popular);
+          console.log("female", femaleArr.data);
         });
     });
 
-    return { Arr, AniArr, RealArr };
+    return { Arr, AniArr, RealArr, maleArr, femaleArr };
   },
 };
 </script>
@@ -99,6 +109,124 @@ export default {
         <li
           :class="['list__item', 'style__list__item']"
           v-for="item in AniArr.data"
+          :key="item.id"
+        >
+          <router-link :to="`/${item._ragicId}`">
+            <div class="icon__gallery__container">
+              <img :class="['item__picture']" :src="[item.url]" />
+              <p :class="['item__name']">{{ item.name }}</p>
+              <div
+                class="like__number grid grid__c-auto"
+                v-for="number in item._subtable_1000050"
+                :key="number"
+              >
+                <i
+                  class="fi icon__gallery fi-ss-heart icon__gallery-heart opacity"
+                ></i>
+                <p
+                  class="number__heart number opacity"
+                  v-formatNumber="number['heart']"
+                ></p>
+                <i
+                  class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh opacity"
+                ></i>
+                <p
+                  class="number__laugh number opacity"
+                  v-formatNumber="number['laugh']"
+                ></p>
+                <i
+                  class="fi icon__gallery fi-sr-angry icon__gallery-angry opacity"
+                ></i>
+                <p
+                  class="number__angry number opacity"
+                  v-formatNumber="number['angry']"
+                ></p>
+                <i
+                  class="fi icon__gallery fi-ss-surprise icon__gallery-wow opacity"
+                ></i>
+                <p
+                  class="number__wow number opacity"
+                  v-formatNumber="number['wow']"
+                ></p>
+                <i
+                  class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad opacity"
+                ></i>
+                <p
+                  class="number__sad number opacity"
+                  v-formatNumber="number['sad']"
+                ></p>
+              </div>
+            </div>
+            <div :class="['back']"></div>
+          </router-link>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="style__h2">男性</h2>
+      <ul :class="['list', 'style__list', 'gap']">
+        <li
+          :class="['list__item', 'style__list__item']"
+          v-for="item in maleArr.data"
+          :key="item.id"
+        >
+          <router-link :to="`/${item._ragicId}`">
+            <div class="icon__gallery__container">
+              <img :class="['item__picture']" :src="[item.url]" />
+              <p :class="['item__name']">{{ item.name }}</p>
+              <div
+                class="like__number grid grid__c-auto"
+                v-for="number in item._subtable_1000050"
+                :key="number"
+              >
+                <i
+                  class="fi icon__gallery fi-ss-heart icon__gallery-heart opacity"
+                ></i>
+                <p
+                  class="number__heart number opacity"
+                  v-formatNumber="number['heart']"
+                ></p>
+                <i
+                  class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh opacity"
+                ></i>
+                <p
+                  class="number__laugh number opacity"
+                  v-formatNumber="number['laugh']"
+                ></p>
+                <i
+                  class="fi icon__gallery fi-sr-angry icon__gallery-angry opacity"
+                ></i>
+                <p
+                  class="number__angry number opacity"
+                  v-formatNumber="number['angry']"
+                ></p>
+                <i
+                  class="fi icon__gallery fi-ss-surprise icon__gallery-wow opacity"
+                ></i>
+                <p
+                  class="number__wow number opacity"
+                  v-formatNumber="number['wow']"
+                ></p>
+                <i
+                  class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad opacity"
+                ></i>
+                <p
+                  class="number__sad number opacity"
+                  v-formatNumber="number['sad']"
+                ></p>
+              </div>
+            </div>
+            <div :class="['back']"></div>
+          </router-link>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="style__h2">女性</h2>
+      <ul :class="['list', 'style__list', 'gap']">
+        <li
+          :class="['list__item', 'style__list__item']"
+          v-for="item in femaleArr.data"
           :key="item.id"
         >
           <router-link :to="`/${item._ragicId}`">

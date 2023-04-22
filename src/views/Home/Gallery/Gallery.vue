@@ -280,7 +280,7 @@ export default {
         if (newVal.selects.最新畫作 === true) {
           Arr.data = Arr.data.sort((a, b) => b._ragicId - a._ragicId);
         }
-
+        quantity.value = Arr.data.length;
         if (newVal.selects.依關聯性 === true) {
           if (search.text.length !== 0) {
             //篩選出與搜尋的字較有關聯度的

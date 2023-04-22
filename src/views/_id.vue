@@ -286,6 +286,7 @@ img {
   color: #f7f7f7;
   letter-spacing: 0.3rem;
   padding: 20px;
+  display: block;
 }
 .picture__discri {
   color: #f7f7f7;

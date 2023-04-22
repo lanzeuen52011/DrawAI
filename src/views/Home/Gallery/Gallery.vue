@@ -7,11 +7,18 @@ export default {
     const AniArr = reactive({ data: [] });
     const RealArr = reactive({ data: [] });
     const search = reactive({ text: [] });
-    const isSearch = ref(false);
     const searchSpilt = reactive({ text: [] });
     const test = reactive({ data: [] });
     const selected = ref("人氣最高");
     const quantity = ref("");
+    const isFocus = ref(false);
+    const isKeep = ref(false);
+    const handleFocus = () => {
+      isFocus.value = !isFocus.value;
+    };
+    const keepShow = () => {
+      isKeep.value = !isKeep.value;
+    };
 
     function includes(array, searchElement) {
       for (let element of array) if (element === searchElement) return true;
@@ -26,6 +33,7 @@ export default {
           types.selects.最新畫作 = false;
           types.selects.依關聯性 = false;
           types.selects.人氣最高 = true;
+          quantity.value = Arr.data.length;
           selected.value = "人氣最高";
         }
         if (newVal.length > 0) {
@@ -45,7 +53,6 @@ export default {
           });
           //將Arr.data依照關聯值的大小還續，關聯值越大順位越高，越上面
           Arr.data = Arr.data.sort((a, b) => b.relative - a.relative);
-          quantity.value = Arr.data.length;
           types.selects.依關聯性 = true;
           selected.value = "依關聯性";
         }
@@ -71,7 +78,12 @@ export default {
         //將Arr.data依照關聯值的大小還續，關聯值越大順位越高，越上面
         Arr.data = Arr.data.sort((a, b) => b.relative - a.relative);
       }
-      quantity.value = Arr.data.length;
+      if (Arr.data[0].relative === 0) {
+        quantity.value = "沒有關聯的作品";
+        console.log(Arr.data[0].relative);
+      } else {
+        quantity.value = Arr.data.length;
+      }
       types.selects.依關聯性 = true;
       selected.value = "依關聯性";
     };
@@ -288,10 +300,13 @@ export default {
             });
             //將Arr.data依照關聯值的大小還續，關聯值越大順位越高，越上面
             Arr.data = Arr.data.sort((a, b) => b.relative - a.relative);
+            if (Arr.data[0].relative === 0) {
+              quantity.value = "沒有關聯的作品";
+            } else {
+              quantity.value = Arr.data.length;
+            }
           }
         }
-
-        quantity.value = Arr.data.length;
       },
       //deep一定要有不然會監聽不到
       { deep: true }
@@ -363,7 +378,7 @@ export default {
     });
 
     return {
-      Arr,
+      Arr, //將網路上的資料下載下來的陣列
       AniArr,
       RealArr,
       search,
@@ -376,92 +391,123 @@ export default {
       handleChange,
       selected,
       quantity,
+      isFocus,
+      handleFocus,
+      keepShow,
+      isKeep,
     };
   },
 };
 </script>
 <template>
   <div class="container body" id="app">
-    <div class="search__container container">
-      <input
-        aria-label="Domain"
-        type="text"
-        class="search__input"
-        placeholder="搜尋你想找的大師之作"
-        v-model="search.text"
-      />
-      <button class="search__button" @click="handleSearch">
-        <svg class="search__icon">
-          <use xlink:href="@/image/sprite.svg#search"></use>
-        </svg>
-      </button>
-    </div>
     <div>
-      <!-- 篩選器 -->
-      <div>
-        <button @click="resetAll">一鍵清除篩選與搜尋</button>
-        <button @click="resetFilter">清除篩選</button>
-        <button @click="resetSearch">清除搜尋</button>
-      </div>
-      <div>
-        <!-- 風格 -->
-        <button
-          v-for="type in Object.keys(types.style)"
-          :key="type"
-          @click="() => toggleType('style', `${type}`)"
-        >
-          {{ type }}
+      <div class="search__container container">
+        <input
+          aria-label="Domain"
+          type="text"
+          class="search__input"
+          placeholder="搜尋你想找的大師之作"
+          v-model="search.text"
+          @focus="handleFocus"
+          @blur="handleFocus"
+        />
+        <button class="search__button" @click="handleSearch">
+          <svg class="search__icon">
+            <use xlink:href="@/image/sprite.svg#search"></use>
+          </svg>
         </button>
       </div>
-      <div>
-        <!-- 服裝 -->
-        <button
-          v-for="type in Object.keys(types.dress)"
-          :key="type"
-          @click="() => toggleType('dress', `${type}`)"
-        >
-          {{ type }}
-        </button>
-      </div>
-      <div>
-        <!-- 種族 -->
-        <button
-          v-for="type in Object.keys(types.ethnicity)"
-          :key="type"
-          @click="() => toggleType('ethnicity', `${type}`)"
-        >
-          {{ type }}
-        </button>
-      </div>
-      <div>
-        <!-- 數量 -->
-        <button
-          v-for="type in Object.keys(types.people)"
-          :key="type"
-          @click="() => toggleType('people', `${type}`)"
-        >
-          {{ type }}
-        </button>
-      </div>
-      <div>
-        <!-- 性別 -->
-        <button
-          v-for="type in Object.keys(types.sex)"
-          :key="type"
-          @click="() => toggleType('sex', `${type}`)"
-        >
-          {{ type }}
-        </button>
-      </div>
-      <div>
-        <!-- 年齡 -->
-        <button
-          v-for="type in Object.keys(types.age)"
-          :key="type"
-          @click="() => toggleType('age', `${type}`)"
-        >
-          {{ type }}
-        </button>
+      <div :class="['filter__container', { show: isFocus }, { show: isKeep }]">
+        <!-- 篩選器 -->
+        <div class="flex filter__item-1">
+          <div>
+            <button class="filter__btn active filter__btn-fn" @click="resetAll">
+              一鍵清除篩選與搜尋
+            </button>
+            <button
+              class="filter__btn active filter__btn-fn"
+              @click="resetFilter"
+            >
+              清除篩選
+            </button>
+            <button
+              class="filter__btn active filter__btn-fn"
+              @click="resetSearch"
+            >
+              清除搜尋
+            </button>
+          </div>
+          <button class="filter__btn active filter__btn-fn" @click="keepShow">
+            固定選單
+          </button>
+        </div>
+        <div>
+          <!-- 風格 -->
+          <button
+            v-for="type in Object.keys(types.style)"
+            :key="type"
+            @click="() => toggleType('style', `${type}`)"
+            :class="['filter__btn', { active: types.style[type].Boolean }]"
+          >
+            {{ type }}
+          </button>
+        </div>
+        <div>
+          <!-- 服裝 -->
+          <button
+            v-for="type in Object.keys(types.dress)"
+            :key="type"
+            @click="() => toggleType('dress', `${type}`)"
+            :class="['filter__btn', { active: types.dress[type].Boolean }]"
+          >
+            {{ type }}
+          </button>
+        </div>
+        <div>
+          <!-- 種族 -->
+          <button
+            v-for="type in Object.keys(types.ethnicity)"
+            :key="type"
+            @click="() => toggleType('ethnicity', `${type}`)"
+            :class="['filter__btn', { active: types.ethnicity[type].Boolean }]"
+          >
+            {{ type }}
+          </button>
+        </div>
+        <div>
+          <!-- 數量 -->
+          <button
+            v-for="type in Object.keys(types.people)"
+            :key="type"
+            @click="() => toggleType('people', `${type}`)"
+            :class="['filter__btn', { active: types.people[type].Boolean }]"
+          >
+            {{ type }}
+          </button>
+        </div>
+        <div>
+          <!-- 性別 -->
+          <button
+            v-for="type in Object.keys(types.sex)"
+            :key="type"
+            @click="() => toggleType('sex', `${type}`)"
+            :class="['filter__btn', { active: types.sex[type].Boolean }]"
+          >
+            {{ type }}
+          </button>
+        </div>
+        <div>
+          <!-- 年齡 -->
+          <button
+            v-for="type in Object.keys(types.age)"
+            :key="type"
+            @click="() => toggleType('age', `${type}`)"
+            :class="['filter__btn', { active: types.age[type].Boolean }]"
+          >
+            {{ type }}
+          </button>
+        </div>
       </div>
     </div>
     <div>
@@ -479,7 +525,7 @@ export default {
             {{ select }}
           </option>
         </select>
-        <p>幫您搜尋到的張數{{ quantity }}</p>
+        <p>幫您搜尋到的張數：{{ quantity }}</p>
       </div>
       <ul :class="['list', 'gap']">
         <li :class="['list__item']" v-for="item in Arr.data" :key="item.id">
@@ -542,6 +588,10 @@ export default {
   align-items: center;
   justify-content: center;
   margin: 5rem 0 3rem;
+  position: fixed;
+  top: -4vh;
+  z-index: 3000;
+  right: 61vh;
 }
 .search__input {
   width: 33vw;
@@ -716,5 +766,46 @@ export default {
   margin: 4rem 0;
   display: block;
   font-weight: 600;
+}
+.filter__container {
+  display: none;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  width: 33vw;
+  position: fixed;
+  z-index: 3000;
+  top: 8.8vh;
+  right: 35.1vw;
+  background: #3e3e3e;
+  padding: 0.3rem 0rem 1rem 1rem;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+.show {
+  display: flex;
+}
+.filter__container:hover {
+  display: flex;
+}
+.filter__item-1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 2rem;
+  width: 100%;
+}
+.filter__btn-fn {
+  margin: 0 0.5rem;
+}
+.filter__btn.active {
+  background: #000;
+  transition: background 0.15s;
+  color: #fff;
+}
+.filter__btn {
+  background: none;
+  border: 0;
+  color: #bdbdbd;
 }
 </style>

@@ -59,6 +59,7 @@ nav {
   top: 0;
   height: 12vh;
   z-index: 2000;
+  align-items: center;
   a {
     font-weight: bold;
     color: #c1c2c5;
@@ -119,5 +120,6 @@ a {
 }
 .body {
   margin-top: 20vh;
+  position: relative;
 }
 </style>

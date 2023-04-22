@@ -6,7 +6,7 @@
     <div class="flex flex-row">
       <router-link class="About" to="/">總畫廊</router-link>
       <router-link class="About" to="/style">風格導覽</router-link>
-      <router-link class="About" to="/about">About</router-link>
+      <router-link class="About" to="/about">關於我們</router-link>
     </div>
   </nav>
   <router-view />

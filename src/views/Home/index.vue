@@ -119,7 +119,7 @@ a {
   padding: 0 2rem;
 }
 .body {
-  margin-top: 20vh;
+  margin-top: 15vh;
   position: relative;
 }
 </style>

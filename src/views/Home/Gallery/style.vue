@@ -15,13 +15,16 @@ export default {
           Arr.data = Object.keys(Arr.data).map((key) => Arr.data[key]);
           Arr.data.reverse();
           // console.log(Arr.data["0"]._ragicId); //拿到伺服器的id，準備拿來說router的
-
           //篩選出動漫畫風的圖片
-          AniArr.data = Arr.data.filter((item) => item.style === "anime");
+          AniArr.data = Arr.data
+            .filter((item) => item.style === "anime")
+            .sort((a, b) => b.popular - a.popular);
           // console.log("AniArr", AniArr.data);
           //篩選出動現實風的圖片
-          RealArr.data = Arr.data.filter((item) => item.style === "realistic");
-          console.log("RealArr", RealArr.data);
+          RealArr.data = Arr.data
+            .filter((item) => item.style === "realistic")
+            .sort((a, b) => b.popular - a.popular);
+          // console.log("RealArr", RealArr.data);
         });
     });
 
@@ -32,9 +35,13 @@ export default {
 <template>
   <div class="container body" id="app">
     <div>
-      <h2>現實風</h2>
-      <ul :class="['list', 'gap']">
-        <li :class="['list__item']" v-for="item in RealArr.data" :key="item.id">
+      <h2 class="style__h2">現實風</h2>
+      <ul :class="['list', 'style__list', 'gap']">
+        <li
+          :class="['list__item', 'style__list__item']"
+          v-for="item in RealArr.data"
+          :key="item.id"
+        >
           <router-link :to="`/${item._ragicId}`">
             <div class="icon__gallery__container">
               <img :class="['item__picture']" :src="[item.url]" />
@@ -87,9 +94,13 @@ export default {
       </ul>
     </div>
     <div>
-      <h2>動漫風</h2>
-      <ul :class="['list', 'gap']">
-        <li :class="['list__item']" v-for="item in AniArr.data" :key="item.id">
+      <h2 class="style__h2">動漫風</h2>
+      <ul :class="['list', 'style__list', 'gap']">
+        <li
+          :class="['list__item', 'style__list__item']"
+          v-for="item in AniArr.data"
+          :key="item.id"
+        >
           <router-link :to="`/${item._ragicId}`">
             <div class="icon__gallery__container">
               <img :class="['item__picture']" :src="[item.url]" />
@@ -174,6 +185,26 @@ export default {
 }
 .search__button:hover {
   opacity: 1;
+}
+.style__h2 {
+  margin: 3rem 0 0rem 0;
+  padding: 0;
+}
+.list.style__list {
+  list-style: none;
+  padding: 0;
+  justify-content: start;
+  align-items: center;
+  height: 45vh;
+  overflow-x: auto;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  margin-top: 0;
+}
+
+.style__list__item {
+  flex-shrink: 0;
+  margin-right: 20px;
 }
 .list__item {
   width: 300px;

@@ -1,3 +1,13 @@
+<script>
+import { onMounted } from "vue";
+export default {
+  setup() {
+    onMounted(() => {});
+    return {};
+  },
+};
+</script>
+
 <template>
   <nav>
     <router-link class="Home" to="/"
@@ -6,10 +16,72 @@
     <div class="flex flex-row">
       <router-link class="About" to="/">總畫廊</router-link>
       <router-link class="About" to="/style">風格導覽</router-link>
-      <router-link class="About" to="/about">關於我們</router-link>
+      <router-link class="About" to="/about">關於我</router-link>
     </div>
   </nav>
   <router-view />
+  <footer class="footer grid grid__c-auto">
+    <div class="footer__item list">
+      <router-link class="About" to="/">
+        <img class="footer__logo" src="./Gallery/drawailogo.png" alt="" />
+        <p>Copyright 2023 LanZiYun</p>
+      </router-link>
+    </div>
+    <div class="footer__item"></div>
+    <div class="footer__item">
+      <h3>
+        <router-link class="About" to="/style">風格導覽</router-link>
+      </h3>
+      <ul class="list footer__list">
+        <li>
+          <router-link
+            class="About"
+            :to="{ path: '/style', hash: '#realistic' }"
+            >現實風</router-link
+          >
+        </li>
+        <li>
+          <router-link class="About" :to="{ path: '/style', hash: '#anime' }"
+            >動漫風</router-link
+          >
+        </li>
+        <li>
+          <router-link class="About" :to="{ path: '/style', hash: '#male' }"
+            >男性</router-link
+          >
+        </li>
+        <li>
+          <router-link class="About" :to="{ path: '/style', hash: '#female' }"
+            >女性</router-link
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="footer__item">
+      <h3>
+        <router-link class="About" to="/about">關於我</router-link>
+      </h3>
+      <ul class="list footer__list">
+        <li>
+          <a href="https://pda.104.com.tw/profile/preview?vno=765py47ci"
+            >我的簡歷</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="footer__item">
+      <h3>
+        <a class="no__a">其他網站</a>
+      </h3>
+      <ul class="list footer__list">
+        <li>
+          <a href="https://let-him-cook.netlify.app/">
+            <img class="other__logo" src="./LetHimCook1.png" alt="" />
+          </a>
+        </li>
+      </ul>
+    </div>
+  </footer>
 </template>
 
 <style lang="scss">
@@ -66,6 +138,7 @@ nav {
     display: flex;
     img {
       width: 200px;
+      object-fit: contain;
     }
 
     &.router-link-exact-active {
@@ -106,6 +179,7 @@ li {
 a {
   text-decoration: none;
 }
+
 .flex {
   display: flex;
   justify-content: center;
@@ -121,5 +195,79 @@ a {
 .body {
   margin-top: 15vh;
   position: relative;
+}
+.footer {
+  background: #1a1b1e;
+  padding: 10vh 10vw 10vh 5vw;
+}
+.footer__item {
+  flex-direction: column;
+  justify-content: start;
+  > p {
+    margin: 0;
+    font-size: 1.6rem;
+    color: #fff;
+    opacity: 0.7;
+  }
+  > img {
+    width: 70%;
+    object-fit: contain;
+    height: 40%;
+  }
+  > h3 {
+    margin: 0;
+    text-align: left;
+    font-size: 2rem;
+    margin-top: 0;
+    color: #fff;
+
+    > a {
+      color: #fff;
+      font-size: 2rem;
+      opacity: 0.9;
+      &.no__a {
+        opacity: 1;
+      }
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+  > a {
+    opacity: 0.9;
+    &:hover {
+      opacity: 1;
+    }
+    > p {
+      margin: 0;
+      font-size: 1.6rem;
+      color: #fff;
+      opacity: 0.7;
+    }
+    > img {
+      object-fit: contain;
+      width: 80%;
+    }
+  }
+  > ul {
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    margin: 0.5rem 2.5rem 0;
+    > li {
+      > a {
+        color: #fff;
+        justify-content: start;
+        font-size: 1.6rem;
+        opacity: 0.7;
+        &:hover {
+          opacity: 1;
+        }
+        > .other__logo {
+          width: 12vw;
+        }
+      }
+    }
+  }
 }
 </style>

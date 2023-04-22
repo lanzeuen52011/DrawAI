@@ -1,5 +1,5 @@
 <script>
-import { onMounted, reactive, computed } from "vue";
+import { onMounted, reactive, ref, toRefs } from "vue";
 export default {
   setup() {
     const Arr = reactive({ data: [] });
@@ -7,7 +7,16 @@ export default {
     const RealArr = reactive({ data: [] });
     const maleArr = reactive({ data: [] });
     const femaleArr = reactive({ data: [] });
+
     onMounted(() => {
+      if (window.location.hash) {
+        console.log(window.location.hash);
+        const element = document.querySelector(window.location.hash);
+        window.scrollTo({
+          top: element.offsetTop,
+          behavior: "smooth",
+        });
+      }
       axios
         .get(
           "https://ap9.ragic.com/lanziyun/convert2/1?api&APIKey=MFd4YlZuOEZ0eWNTa2Z6ek1GUVdLYS9rVTFWMUt1S01BdHNlVW1XZWNJK2ZpRFdVN1RyKzlUSDlwdzdJUzlSd2hEVlJvLzlMZy9rPQ=="
@@ -30,23 +39,29 @@ export default {
           maleArr.data = Arr.data
             .filter((item) => item.sex === "male")
             .sort((a, b) => b.popular - a.popular);
-          console.log("male", maleArr.data);
+          // console.log("male", maleArr.data);
           femaleArr.data = Arr.data
             .filter((item) => item.sex === "female")
             .sort((a, b) => b.popular - a.popular);
-          console.log("female", femaleArr.data);
+          // console.log("female", femaleArr.data);
         });
     });
 
-    return { Arr, AniArr, RealArr, maleArr, femaleArr };
+    return {
+      Arr,
+      AniArr,
+      RealArr,
+      maleArr,
+      femaleArr,
+    };
   },
 };
 </script>
 <template>
   <div class="container body" id="app">
-    <div>
+    <div id="realistic">
       <h2 class="style__h2">現實風</h2>
-      <ul :class="['list', 'style__list', 'gap']">
+      <ul id="realistic2" :class="['list', 'style__list', 'gap']">
         <li
           :class="['list__item', 'style__list__item']"
           v-for="item in RealArr.data"
@@ -103,9 +118,9 @@ export default {
         </li>
       </ul>
     </div>
-    <div>
+    <div id="anime">
       <h2 class="style__h2">動漫風</h2>
-      <ul :class="['list', 'style__list', 'gap']">
+      <ul :class="['list', 'style__list', 'gap']" id="anime2">
         <li
           :class="['list__item', 'style__list__item']"
           v-for="item in AniArr.data"
@@ -162,9 +177,9 @@ export default {
         </li>
       </ul>
     </div>
-    <div>
+    <div id="male">
       <h2 class="style__h2">男性</h2>
-      <ul :class="['list', 'style__list', 'gap']">
+      <ul id="male2" :class="['list', 'style__list', 'gap']">
         <li
           :class="['list__item', 'style__list__item']"
           v-for="item in maleArr.data"
@@ -221,9 +236,9 @@ export default {
         </li>
       </ul>
     </div>
-    <div>
+    <div id="female">
       <h2 class="style__h2">女性</h2>
-      <ul :class="['list', 'style__list', 'gap']">
+      <ul id="female2" :class="['list', 'style__list', 'gap']">
         <li
           :class="['list__item', 'style__list__item']"
           v-for="item in femaleArr.data"
@@ -283,6 +298,9 @@ export default {
   </div>
 </template>
 <style lang="scss">
+#realistic2 {
+  user-select: none;
+}
 .search__container {
   display: flex;
   align-items: center;
@@ -328,11 +346,16 @@ export default {
   white-space: nowrap;
   flex-wrap: nowrap;
   margin-top: 0;
+
+  width: 85vw;
 }
 
 .style__list__item {
   flex-shrink: 0;
   margin-right: 20px;
+}
+.style__list__item[draggable="true"] {
+  cursor: move;
 }
 .list__item {
   width: 300px;

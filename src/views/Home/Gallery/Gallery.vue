@@ -24,6 +24,7 @@ export default {
       for (let element of array) if (element === searchElement) return true;
       return false;
     }
+
     //有打字就搜尋
     watch(
       () => search.text,

@@ -199,45 +199,9 @@ a {
 .footer {
   background: #1a1b1e;
   padding: 10vh 10vw 10vh 5vw;
-}
-.footer__item {
-  flex-direction: column;
-  justify-content: start;
-  > p {
-    margin: 0;
-    font-size: 1.6rem;
-    color: #fff;
-    opacity: 0.7;
-  }
-  > img {
-    width: 70%;
-    object-fit: contain;
-    height: 40%;
-  }
-  > h3 {
-    margin: 0;
-    text-align: left;
-    font-size: 2rem;
-    margin-top: 0;
-    color: #fff;
-
-    > a {
-      color: #fff;
-      font-size: 2rem;
-      opacity: 0.9;
-      &.no__a {
-        opacity: 1;
-      }
-      &:hover {
-        opacity: 1;
-      }
-    }
-  }
-  > a {
-    opacity: 0.9;
-    &:hover {
-      opacity: 1;
-    }
+  > .footer__item {
+    flex-direction: column;
+    justify-content: start;
     > p {
       margin: 0;
       font-size: 1.6rem;
@@ -245,26 +209,62 @@ a {
       opacity: 0.7;
     }
     > img {
+      width: 70%;
       object-fit: contain;
-      width: 80%;
+      height: 40%;
     }
-  }
-  > ul {
-    flex-direction: column;
-    justify-content: start;
-    align-items: start;
-    margin: 0.5rem 2.5rem 0;
-    > li {
+    > h3 {
+      margin: 0;
+      text-align: left;
+      font-size: 2rem;
+      margin-top: 0;
+      color: #fff;
+
       > a {
         color: #fff;
-        justify-content: start;
-        font-size: 1.6rem;
-        opacity: 0.7;
+        font-size: 2rem;
+        opacity: 0.9;
+        &.no__a {
+          opacity: 1;
+        }
         &:hover {
           opacity: 1;
         }
-        > .other__logo {
-          width: 12vw;
+      }
+    }
+    > a {
+      opacity: 0.9;
+      &:hover {
+        opacity: 1;
+      }
+      > p {
+        margin: 0;
+        font-size: 1.6rem;
+        color: #fff;
+        opacity: 0.7;
+      }
+      > img {
+        object-fit: contain;
+        width: 80%;
+      }
+    }
+    > ul {
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+      margin: 0.5rem 2.5rem 0;
+      > li {
+        > a {
+          color: #fff;
+          justify-content: start;
+          font-size: 1.6rem;
+          opacity: 0.7;
+          &:hover {
+            opacity: 1;
+          }
+          > .other__logo {
+            width: 12vw;
+          }
         }
       }
     }

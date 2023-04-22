@@ -737,7 +737,7 @@ export default {
   transition: scale 0.15s;
   cursor: pointer;
   position: relative;
-  &:hover > .item__name {
+  &:hover > a > .icon__gallery__container > .item__name {
     position: absolute;
     top: 75%;
     width: 100%; //置中
@@ -745,13 +745,17 @@ export default {
     z-index: 1000;
     letter-spacing: 0.3rem;
   }
-  &:hover > .opacity {
+  &:hover
+    > a
+    > .icon__gallery__container
+    > .like__number.grid.grid__c-auto
+    > .opacity {
     opacity: 0.8;
   }
   &:hover {
     scale: 1.05;
   }
-  &:hover > .back {
+  &:hover > a > .back {
     background-image: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0.2) 0,
@@ -791,60 +795,65 @@ export default {
     right: 0;
     top: 0;
   }
-  > .icon__gallery__container {
-    width: 100%;
-    > .item__picture {
-      width: 300px;
-      height: 300px;
-      object-fit: contain;
-      backdrop-filter: blur(10px);
-      /* background: #e6ebee; */
-    }
-    > .like__number {
-      position: absolute;
-      top: 90%;
-      z-index: 1000;
-      width: inherit;
-      scale: 0.6;
-      > .icon__gallery {
-        justify-self: center;
-        &.icon__gallery-heart {
-          color: rgb(255, 170, 184);
-        }
-        &.icon__gallery-laugh {
-          color: rgb(255, 255, 179);
-        }
-        &.icon__gallery-angry {
-          color: rgb(255, 103, 103);
-        }
-        &.icon__gallery-wow {
-          color: rgb(237, 251, 255);
-        }
-        &.icon__gallery-sad {
-          color: rgb(202, 202, 202);
-        }
+  > a {
+    > .icon__gallery__container {
+      width: 100%;
+      > .item__picture {
+        width: 300px;
+        height: 300px;
+        object-fit: contain;
+        backdrop-filter: blur(10px);
+        /* background: #e6ebee; */
       }
-      .number {
-        margin: 0;
-        color: #fff;
-        justify-self: center;
-        &.number__heart {
-          right: 80%;
+      > .like__number {
+        position: absolute;
+        top: 90%;
+        z-index: 1000;
+        width: inherit;
+        scale: 0.6;
+        > .icon__gallery {
+          justify-self: center;
+          &.icon__gallery-heart {
+            color: rgb(255, 170, 184);
+          }
+          &.icon__gallery-laugh {
+            color: rgb(255, 255, 179);
+          }
+          &.icon__gallery-angry {
+            color: rgb(255, 103, 103);
+          }
+          &.icon__gallery-wow {
+            color: rgb(237, 251, 255);
+          }
+          &.icon__gallery-sad {
+            color: rgb(202, 202, 202);
+          }
+          &.opacity {
+            opacity: 0;
+          }
         }
-        &.number__laugh {
-          right: 60%;
-        }
-        &.number__angry {
-          right: 40%;
-        }
-        &.number__wow {
-          right: 20%;
-        }
-        &.number__sad {
-          right: 0%;
-        }
-        &.opacity {
-          opacity: 0;
+        > .number {
+          margin: 0;
+          color: #fff;
+          justify-self: center;
+          &.number__heart {
+            right: 80%;
+          }
+          &.number__laugh {
+            right: 60%;
+          }
+          &.number__angry {
+            right: 40%;
+          }
+          &.number__wow {
+            right: 20%;
+          }
+          &.number__sad {
+            right: 0%;
+          }
+          &.opacity {
+            opacity: 0;
+          }
         }
       }
     }

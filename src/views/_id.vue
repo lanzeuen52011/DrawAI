@@ -352,24 +352,7 @@ img {
 .lightblue {
   color: lightblue;
 }
-// .fi-ss-heart:hover {
-//   color: pink;
-// }
 
-// .fi-sr-grin-squint-tears:hover {
-//   color: yellow;
-// }
-
-// .fi-sr-angry:hover {
-//   color: red;
-// }
-
-// .fi-ss-surprise:hover {
-//   color: gray;
-// }
-// .fi-ss-sad-tear:hover {
-//   color: lightblue;
-// }
 .icon__container p {
   margin: 1rem;
   color: #fff;

@@ -410,7 +410,8 @@ export default {
     }
   }
 }
-
+//icon 不放進.item__list的SCSS內是因為，當list__item:hover時，.back跟.opacity會有效果，
+//如果把這個引入進去，會失效，因為權重不一
 .icon__gallery {
   justify-self: center;
   &.icon__gallery-heart {
@@ -432,6 +433,8 @@ export default {
     opacity: 0;
   }
 }
+//number 不放進.item__list的SCSS內是因為，當list__item:hover時，.back跟.opacity會有效果，
+//如果把這個引入進去，會失效，因為權重不一
 .number {
   margin: 0;
   color: #fff;
@@ -455,6 +458,4 @@ export default {
     right: 0%;
   }
 }
-
-// icon
 </style>

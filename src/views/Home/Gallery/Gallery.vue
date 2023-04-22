@@ -439,7 +439,10 @@ export default {
               清除搜尋
             </button>
           </div>
-          <button class="filter__btn active filter__btn-fn" @click="keepShow">
+          <button
+            :class="['filter__btn', { active: isKeep }, 'filter__btn-fn']"
+            @click="keepShow"
+          >
             固定選單
           </button>
         </div>
@@ -584,6 +587,7 @@ export default {
   </div>
 </template>
 <style lang="scss">
+//search
 .search__container {
   display: flex;
   align-items: center;
@@ -593,181 +597,34 @@ export default {
   top: -4vh;
   z-index: 3000;
   right: 61vh;
-}
-.search__input {
-  width: 33vw;
-  height: 6vh;
-  border-radius: 10px;
-  padding-left: 1rem;
-  font-size: 1.5rem;
-}
-.search__button {
-  width: 3.5rem;
-  height: 5.5rem;
-  padding: 4px;
-  background: none;
-  outline: 0;
-  border: 0;
-  opacity: 0.5;
-  margin: 0 1rem;
-}
-.search__icon {
-  width: 100%;
-  height: 100%;
-  fill: #fff;
-}
-.search__button:hover {
-  opacity: 1;
-}
-.list__item {
-  width: 300px;
-  height: 300px;
-  border-radius: 10px;
-  overflow: hidden;
-  background: url("./drawailogo.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-  transition: scale 0.15s;
-  cursor: pointer;
-  position: relative;
+  > .search__input {
+    width: 33vw;
+    height: 6vh;
+    border-radius: 10px;
+    padding-left: 1rem;
+    font-size: 1.5rem;
+  }
+  > .search__button {
+    width: 3.5rem;
+    height: 5.5rem;
+    padding: 4px;
+    background: none;
+    outline: 0;
+    border: 0;
+    opacity: 0.5;
+    margin: 0 1rem;
+    &:hover {
+      opacity: 1;
+    }
+    > .search__icon {
+      width: 100%;
+      height: 100%;
+      fill: #fff;
+    }
+  }
 }
 
-.list__item:hover .item__name {
-  position: absolute;
-  top: 75%;
-  width: 100%; //置中
-  color: white;
-  z-index: 1000;
-  letter-spacing: 0.3rem;
-}
-.icon__gallery__container {
-  width: 100%;
-}
-
-.like__number {
-  position: absolute;
-  top: 90%;
-  z-index: 1000;
-  width: inherit;
-  scale: 0.6;
-}
-.icon__gallery-heart {
-  color: rgb(255, 170, 184);
-}
-.icon__gallery-laugh {
-  color: rgb(255, 255, 179);
-}
-.icon__gallery-angry {
-  color: rgb(255, 103, 103);
-}
-.icon__gallery-wow {
-  color: rgb(237, 251, 255);
-}
-.icon__gallery-sad {
-  color: rgb(202, 202, 202);
-}
-.icon__gallery {
-  justify-self: center;
-}
-.number {
-  margin: 0;
-  color: #fff;
-  justify-self: center;
-}
-
-.number__heart {
-  right: 80%;
-}
-.number__laugh {
-  right: 60%;
-}
-.number__angry {
-  right: 40%;
-}
-.number__wow {
-  right: 20%;
-}
-.number__sad {
-  right: 0%;
-}
-.opacity {
-  opacity: 0;
-}
-.list__item:hover .opacity {
-  opacity: 0.8;
-}
-.list__item:hover {
-  scale: 1.05;
-}
-.item__picture {
-  width: 300px;
-  height: 300px;
-  object-fit: contain;
-  backdrop-filter: blur(10px);
-  /* background: #e6ebee; */
-}
-.list__item:hover .back {
-  background-image: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.2) 0,
-    rgba(0, 0, 0, 0.19) 3.5%,
-    rgba(0, 0, 0, 0.18) 7%,
-    rgba(0, 0, 0, 0.17) 10.35%,
-    rgba(0, 0, 0, 0.16) 13.85%,
-    rgba(0, 0, 0, 0.15) 17.35%,
-    rgba(0, 0, 0, 0.14) 20.85%,
-    rgba(0, 0, 0, 0.13) 24.35%,
-    rgba(0, 0, 0, 0.12) 27.85%,
-    rgba(0, 0, 0, 0.11) 31.35%,
-    rgba(0, 0, 0, 0.1) 34.85%,
-    rgba(0, 0, 0, 0.126) 38.35%,
-    rgba(0, 0, 0, 0.112) 41.85%,
-    rgba(0, 0, 0, 0.103) 45.35%,
-    #0000001a 48.85%,
-    rgba(0, 0, 0, 0.103) 52.35%,
-    rgba(0, 0, 0, 0.112) 55.85%,
-    rgba(0, 0, 0, 0.126) 59.35%,
-    rgba(0, 0, 0, 0.144) 62.85%,
-    rgba(0, 0, 0, 0.165) 66.35%,
-    rgba(0, 0, 0, 0.188) 69.85%,
-    rgba(0, 0, 0, 0.4) 73.35%,
-    rgba(0, 0, 0, 0.45) 76.85%,
-    rgba(0, 0, 0, 0.5) 80.35%,
-    rgba(0, 0, 0, 0.55) 83.85%,
-    rgba(0, 0, 0, 0.6) 87.35%,
-    rgba(0, 0, 0, 0.65) 90.85%,
-    rgba(0, 0, 0, 0.7) 94.35%,
-    rgba(0, 0, 0, 0.75) 97.85%,
-    rgba(0, 0, 0, 0.8)
-  );
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-//select
-.select__container {
-  display: flex;
-  align-items: center;
-}
-.select__container > p {
-  color: #fff;
-}
-.select__sort {
-  text-align: start;
-  padding: 0;
-  color: #e9ecef;
-  background: #25262b;
-  outline: 0;
-  border: 0;
-  font-size: 3rem;
-  cursor: pointer;
-  margin: 4rem 0;
-  display: block;
-  font-weight: 600;
-}
+//filter
 .filter__container {
   display: none;
   flex-direction: column;
@@ -782,31 +639,215 @@ export default {
   padding: 0.3rem 0rem 1rem 1rem;
   border-radius: 10px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  &:hover {
+    display: flex;
+  }
+  &.show {
+    display: flex;
+  }
+  > div {
+    > .filter__btn {
+      background: none;
+      border: 0;
+      color: #bdbdbd;
+      &.active {
+        background: #000;
+        transition: background 0.15s;
+        color: #fff;
+      }
+    }
+    &.filter__item-1 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-right: 2rem;
+      width: 100%;
+      > .filter__btn-fn {
+        margin: 0 0.5rem;
+        &.filter__btn {
+          background: none;
+          border: 0;
+          color: #bdbdbd;
+          background: #000;
+          opacity: 0.5;
+        }
+        &.active {
+          transition: background 0.15s;
+          color: #fff;
+          opacity: 1;
+        }
+        &:hover {
+          transition: background 0.15s;
+          color: #fff;
+          opacity: 1;
+        }
+      }
+      > div {
+        > .filter__btn-fn {
+          margin: 0 0.5rem;
+          &.filter__btn {
+            background: none;
+            border: 0;
+            color: #bdbdbd;
+          }
+          &.active {
+            background: #000;
+            transition: background 0.15s;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
 }
-.show {
+
+//select
+.select__container {
   display: flex;
-}
-.filter__container:hover {
-  display: flex;
-}
-.filter__item-1 {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding-right: 2rem;
-  width: 100%;
+  > .select__sort {
+    text-align: start;
+    padding: 0;
+    color: #e9ecef;
+    background: #25262b;
+    outline: 0;
+    border: 0;
+    font-size: 3rem;
+    cursor: pointer;
+    margin: 4rem 0;
+    display: block;
+    font-weight: 600;
+  }
+  > p {
+    color: #fff;
+  }
 }
-.filter__btn-fn {
-  margin: 0 0.5rem;
-}
-.filter__btn.active {
-  background: #000;
-  transition: background 0.15s;
-  color: #fff;
-}
-.filter__btn {
-  background: none;
-  border: 0;
-  color: #bdbdbd;
+
+//list，也就是照片那些的content啦
+
+.list__item {
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: url("./drawailogo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  transition: scale 0.15s;
+  cursor: pointer;
+  position: relative;
+  &:hover > .item__name {
+    position: absolute;
+    top: 75%;
+    width: 100%; //置中
+    color: white;
+    z-index: 1000;
+    letter-spacing: 0.3rem;
+  }
+  &:hover > .opacity {
+    opacity: 0.8;
+  }
+  &:hover {
+    scale: 1.05;
+  }
+  &:hover > .back {
+    background-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.2) 0,
+      rgba(0, 0, 0, 0.19) 3.5%,
+      rgba(0, 0, 0, 0.18) 7%,
+      rgba(0, 0, 0, 0.17) 10.35%,
+      rgba(0, 0, 0, 0.16) 13.85%,
+      rgba(0, 0, 0, 0.15) 17.35%,
+      rgba(0, 0, 0, 0.14) 20.85%,
+      rgba(0, 0, 0, 0.13) 24.35%,
+      rgba(0, 0, 0, 0.12) 27.85%,
+      rgba(0, 0, 0, 0.11) 31.35%,
+      rgba(0, 0, 0, 0.1) 34.85%,
+      rgba(0, 0, 0, 0.126) 38.35%,
+      rgba(0, 0, 0, 0.112) 41.85%,
+      rgba(0, 0, 0, 0.103) 45.35%,
+      #0000001a 48.85%,
+      rgba(0, 0, 0, 0.103) 52.35%,
+      rgba(0, 0, 0, 0.112) 55.85%,
+      rgba(0, 0, 0, 0.126) 59.35%,
+      rgba(0, 0, 0, 0.144) 62.85%,
+      rgba(0, 0, 0, 0.165) 66.35%,
+      rgba(0, 0, 0, 0.188) 69.85%,
+      rgba(0, 0, 0, 0.4) 73.35%,
+      rgba(0, 0, 0, 0.45) 76.85%,
+      rgba(0, 0, 0, 0.5) 80.35%,
+      rgba(0, 0, 0, 0.55) 83.85%,
+      rgba(0, 0, 0, 0.6) 87.35%,
+      rgba(0, 0, 0, 0.65) 90.85%,
+      rgba(0, 0, 0, 0.7) 94.35%,
+      rgba(0, 0, 0, 0.75) 97.85%,
+      rgba(0, 0, 0, 0.8)
+    );
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  > .icon__gallery__container {
+    width: 100%;
+    > .item__picture {
+      width: 300px;
+      height: 300px;
+      object-fit: contain;
+      backdrop-filter: blur(10px);
+      /* background: #e6ebee; */
+    }
+    > .like__number {
+      position: absolute;
+      top: 90%;
+      z-index: 1000;
+      width: inherit;
+      scale: 0.6;
+      > .icon__gallery {
+        justify-self: center;
+        &.icon__gallery-heart {
+          color: rgb(255, 170, 184);
+        }
+        &.icon__gallery-laugh {
+          color: rgb(255, 255, 179);
+        }
+        &.icon__gallery-angry {
+          color: rgb(255, 103, 103);
+        }
+        &.icon__gallery-wow {
+          color: rgb(237, 251, 255);
+        }
+        &.icon__gallery-sad {
+          color: rgb(202, 202, 202);
+        }
+      }
+      .number {
+        margin: 0;
+        color: #fff;
+        justify-self: center;
+        &.number__heart {
+          right: 80%;
+        }
+        &.number__laugh {
+          right: 60%;
+        }
+        &.number__angry {
+          right: 40%;
+        }
+        &.number__wow {
+          right: 20%;
+        }
+        &.number__sad {
+          right: 0%;
+        }
+        &.opacity {
+          opacity: 0;
+        }
+      }
+    }
+  }
 }
 </style>

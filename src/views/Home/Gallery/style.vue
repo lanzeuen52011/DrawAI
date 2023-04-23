@@ -298,12 +298,18 @@ export default {
   </div>
 </template>
 <style lang="scss">
-@media screen and (max-width: 1024px) {
-  #realistic,
-  #anime,
-  #male,
-  #female {
+#realistic,
+#anime,
+#male,
+#female {
+  @media screen and (max-width: 1024px) {
     padding: 0 6rem;
+  }
+  @media screen and (max-width: 376px) {
+    padding: 0 4rem;
+  }
+  @media screen and (max-width: 360px) {
+    padding: 0 2rem;
   }
 }
 
@@ -379,6 +385,9 @@ export default {
     }
     &:hover {
       scale: 1.05;
+      @media screen and (max-width: 1300px) {
+        scale: 1;
+      }
     }
     &:hover .back {
       background-image: linear-gradient(

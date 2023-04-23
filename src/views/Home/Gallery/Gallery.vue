@@ -110,7 +110,7 @@ export default {
         洋裝: { name: "dress", Boolean: false },
         赤膊: { name: "nude", Boolean: false },
         太空衣: { name: "spacesuit", Boolean: false },
-        "襯衫、西裝": { name: "suit", Boolean: false },
+        襯衫: { name: "suit", Boolean: false },
       },
       ethnicity: {
         全部: { Boolean: true },
@@ -209,7 +209,7 @@ export default {
         if (newVal.dress.太空衣.Boolean === true) {
           Arr.data = Arr.data.filter((styles) => styles.dress === "spacesuit");
         }
-        if (newVal.dress["襯衫、西裝"].Boolean === true) {
+        if (newVal.dress.襯衫.Boolean === true) {
           Arr.data = Arr.data.filter((styles) => styles.dress === "suit");
         }
         //種族
@@ -404,7 +404,7 @@ export default {
 </script>
 <template>
   <div class="container body" id="app">
-    <div>
+    <div class="filterandsearch div">
       <div class="search__container container">
         <input
           aria-label="Domain"
@@ -589,173 +589,207 @@ export default {
   </div>
 </template>
 <style lang="scss">
-//search
-.search__container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 5rem 0 3rem;
+.filterandsearch {
   position: fixed;
   top: -4vh;
   z-index: 3000;
   right: 33vw;
-  @media screen and (max-width: 1060px) {
-    right: 36vw;
+  //search
+  &.div {
+    @media screen and (max-height: 400px) {
+      top: -6vh;
+    }
   }
-  @media screen and (max-width: 900px) {
-    right: 0vw;
+  @media screen and (max-width: 960px) {
+    position: fixed;
     top: 7vh;
+    right: 0vw;
   }
-  > .search__input {
+  @media screen and (max-width: 650px) {
+    right: 40vw;
+    left: 3vw;
+  }
+  @media screen and (max-width: 426px) {
+    left: 9vw;
+  }
+  @media screen and (max-width: 372px) {
+    right: -12vw;
+  }
+  .search__container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5rem 0rem 0 0rem;
+    z-index: 3000;
+    @media screen and (max-width: 426px) {
+      width: 95vw;
+    }
+    @media screen and (max-width: 373px) {
+      width: 100%;
+    }
+    > .search__input {
+      width: 33vw;
+      height: 6vh;
+      border-radius: 10px;
+      padding-left: 1rem;
+      font-size: 1.5rem;
+      @media screen and (max-width: 1024px) {
+        width: 29vw;
+      }
+      @media screen and (max-width: 960px) {
+        width: 35vw;
+      }
+      @media screen and (max-width: 650px) {
+        width: 53.5vw;
+      }
+      @media screen and (max-width: 426px) {
+        width: 83vw;
+      }
+    }
+    > .search__button {
+      width: 3.5rem;
+      height: 5.5rem;
+      padding: 4px;
+      background: none;
+      outline: 0;
+      border: 0;
+      opacity: 0.5;
+      margin: 0 1rem;
+      &:hover {
+        opacity: 1;
+      }
+      > .search__icon {
+        width: 100%;
+        height: 100%;
+        fill: #fff;
+        @media screen and (max-width: 426px) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  //filter
+  .filter__container {
+    position: relative;
+    top: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
     width: 33vw;
-    height: 6vh;
+    z-index: 3000;
+    background: #3e3e3e;
+    padding: 0.3rem 0rem 1rem 1rem;
     border-radius: 10px;
-    padding-left: 1rem;
-    font-size: 1.5rem;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    @media screen and (max-height: 400px) {
+      top: -3.5vh;
+    }
     @media screen and (max-width: 1024px) {
       width: 29vw;
     }
-  }
-  > .search__button {
-    width: 3.5rem;
-    height: 5.5rem;
-    padding: 4px;
-    background: none;
-    outline: 0;
-    border: 0;
-    opacity: 0.5;
-    margin: 0 1rem;
+
+    @media screen and (max-width: 960px) {
+      width: 34.5vw;
+    }
+    @media screen and (max-width: 650px) {
+      width: 50.5vw;
+    }
+    @media screen and (max-width: 426px) {
+      width: 82.5vw;
+    }
+    @media screen and (max-width: 373px) {
+      right: -2vw;
+    }
+
     &:hover {
-      opacity: 1;
-    }
-    > .search__icon {
-      width: 100%;
-      height: 100%;
-      fill: #fff;
-      @media screen and (max-width: 900px) {
-        display: none;
-      }
-    }
-  }
-}
-
-//filter
-.filter__container {
-  display: none;
-  flex-direction: column;
-  align-items: start;
-  justify-content: center;
-  width: 33vw;
-  position: fixed;
-  z-index: 3000;
-  top: 8.8vh;
-  right: 36.6vw;
-  background: #3e3e3e;
-  padding: 0.3rem 0rem 1rem 1rem;
-  border-radius: 10px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-  @media screen and (max-width: 1439px) {
-    right: 37.6vw;
-  }
-  @media screen and (max-width: 1060px) {
-    right: 41vw;
-  }
-  @media screen and (max-width: 1024px) {
-    width: 28.5vw;
-    right: 42.1vw;
-  }
-  @media screen and (max-width: 900px) {
-    width: 29vw;
-    right: 6.3vw;
-    top: 18vh;
-  }
-  @media screen and (max-width: 820px) {
-    top: 17vh;
-  }
-  @media screen and (max-width: 768px) {
-    right: 7.3vw;
-  }
-  &:hover {
-    display: flex;
-  }
-  &.show {
-    display: flex;
-  }
-  > div {
-    @media screen and (max-width: 1024px) {
-      position: relative;
-    }
-    &.dress .filter__btn:first-child {
-      @media screen and (max-width: 1024px) {
-        position: relative;
-        left: -12px;
-      }
-      @media screen and (max-width: 768px) {
-        left: -3px;
-      }
-    }
-
-    > .filter__btn {
-      background: none;
-      border: 0;
-      color: #bdbdbd;
-      &.active {
-        background: #000;
-        transition: background 0.15s;
-        color: #fff;
-      }
-    }
-    &.filter__item-1 {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-right: 2rem;
-      width: 100%;
-      @media screen and (max-width: 768px) {
-        padding-right: 0;
+    }
+    &.show {
+      display: flex;
+    }
+    > div {
+      // @media screen and (max-width: 1024px) {
+      //   position: relative;
+      // }
+      &.dress .filter__btn:first-child {
+        @media screen and (max-width: 325px) {
+          position: relative;
+          left: -7.3vw;
+        }
+        //   @media screen and (max-width: 1024px) {
+        //     position: relative;
+        //     left: -1.1vw;
+        //   }
+        //   @media screen and (max-width: 768px) {
+        //     left: -3px;
+        //   }
       }
-      > .filter__btn-fn {
-        margin: 0 0.5rem;
-        @media screen and (max-width: 1024px) {
-          width: 80px;
-        }
-        &.filter__btn {
-          background: none;
-          border: 0;
-          color: #bdbdbd;
-          background: #000;
-          opacity: 0.5;
-        }
+
+      > .filter__btn {
+        background: none;
+        border: 0;
+        color: #bdbdbd;
         &.active {
+          background: #000;
           transition: background 0.15s;
           color: #fff;
-          opacity: 1;
-        }
-        &:hover {
-          transition: background 0.15s;
-          color: #fff;
-          opacity: 1;
         }
       }
-      > div {
+      &.filter__item-1 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-right: 2rem;
+        width: 100%;
+        @media screen and (max-width: 768px) {
+          padding-right: 0;
+        }
         > .filter__btn-fn {
           margin: 0 0.5rem;
+          @media screen and (max-width: 1024px) {
+            width: 80px;
+          }
           &.filter__btn {
             background: none;
             border: 0;
             color: #bdbdbd;
+            background: #000;
+            opacity: 0.5;
           }
           &.active {
-            background: #000;
             transition: background 0.15s;
             color: #fff;
+            opacity: 1;
+          }
+          &:hover {
+            transition: background 0.15s;
+            color: #fff;
+            opacity: 1;
+          }
+        }
+        > div {
+          > .filter__btn-fn {
+            margin: 0 0.5rem;
+            &.filter__btn {
+              background: none;
+              border: 0;
+              color: #bdbdbd;
+            }
+            &.active {
+              background: #000;
+              transition: background 0.15s;
+              color: #fff;
+            }
           }
         }
       }
     }
   }
 }
-
 //select
 .select__container {
   display: flex;
@@ -764,8 +798,12 @@ export default {
   @media screen and (max-width: 1024px) {
     margin-left: 3rem;
   }
-  @media screen and (max-width: 520px) {
+  @media screen and (max-width: 960px) {
     padding-top: 4rem;
+  }
+  @media screen and (max-width: 372px) {
+    padding-top: 4rem;
+    margin: 0;
   }
   > .select__sort {
     text-align: start;

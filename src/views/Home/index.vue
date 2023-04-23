@@ -6,6 +6,7 @@ export default {
     const style = ref(false);
     const about = ref(false);
     const other = ref(false);
+    const nav = ref(false);
     const chevronToggle = (element) => {
       if (element === "style") {
         style.value = !style.value;
@@ -16,8 +17,11 @@ export default {
       if (element === "other") {
         other.value = !other.value;
       }
+      if (element === "nav") {
+        nav.value = !nav.value;
+      }
     };
-    return { chevronToggle, style, about, other };
+    return { chevronToggle, style, about, other, nav };
   },
 };
 </script>
@@ -25,12 +29,16 @@ export default {
 <template>
   <nav>
     <router-link class="Home Home__logo" to="/"
-      ><img src="./Gallery/drawailogo.png" alt=""
+      ><img class="logo__normal" src="./Gallery/drawailogo.png" alt="" />
+      <img class="logo__mini" src="./Gallery/drawailogomini.png" alt=""
     /></router-link>
-    <button class="collapse__btn">
+    <button
+      @click="chevronToggle('nav')"
+      :class="['collapse__btn', { active: nav }]"
+    >
       <img src="./Gallery/menu.png" alt="" />
     </button>
-    <div class="flex flex-row">
+    <div :class="['flex', 'flex-row', { active: nav }]">
       <router-link class="About" to="/">總畫廊</router-link>
       <router-link class="About" to="/style">風格導覽</router-link>
       <router-link class="About" to="/about">關於我</router-link>
@@ -105,12 +113,6 @@ export default {
 </template>
 
 <style lang="scss">
-.collapse__btn {
-  display: none;
-  @media screen and (max-width: 768) {
-    display: none;
-  }
-}
 html {
   font-size: 62.5%;
 }
@@ -158,13 +160,71 @@ nav {
   height: 12vh;
   z-index: 2000;
   align-items: center;
+  @media screen and (max-width: 650px) {
+    z-index: 4000;
+  }
+  .collapse__btn {
+    display: none;
+    @media screen and (max-width: 650px) {
+      display: inline-block;
+      background: none;
+      width: 65px;
+      border: 0;
+      opacity: 0.8;
+    }
+    &.active {
+      @media screen and (max-width: 650px) {
+        opacity: 1;
+      }
+    }
+    img {
+      width: 80%;
+    }
+  }
+  .flex.flex-row {
+    @media screen and (max-width: 650px) {
+      flex-direction: column;
+      height: 0;
+      overflow: hidden;
+      display: none;
+    }
+    &.active {
+      position: absolute;
+      display: flex;
+      height: auto;
+      top: 12vh;
+      right: 0vw;
+      background: #000;
+    }
+    a {
+      @media screen and (max-width: 650px) {
+        border-bottom: 1px solid;
+      }
+    }
+  }
   a {
     font-weight: bold;
     color: #c1c2c5;
     display: flex;
+
     img {
       height: 8vh;
       object-fit: contain;
+
+      @media screen and (max-width: 426px) {
+        height: 6vh;
+      }
+      &.logo__normal {
+        @media screen and (max-width: 426px) {
+          display: none;
+        }
+      }
+      &.logo__mini {
+        display: none;
+        @media screen and (max-width: 426px) {
+          display: block;
+        }
+      }
     }
 
     &.router-link-exact-active {
@@ -211,7 +271,7 @@ a {
   justify-content: center;
   align-items: center;
   padding-right: 5rem;
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 1200px) {
     padding-right: 0;
   }
 }
@@ -220,6 +280,9 @@ a {
 }
 .Home {
   padding: 0 2rem;
+  @media screen and (max-width: 650px) {
+    padding: 0;
+  }
 }
 .body {
   margin-top: 15vh;

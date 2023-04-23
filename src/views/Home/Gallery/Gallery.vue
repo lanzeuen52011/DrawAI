@@ -61,7 +61,15 @@ export default {
     );
     //按了才搜尋
     const handleSearch = () => {
-      if (search.value !== "") {
+      //篩選出與搜尋的字較有關聯度的
+      if (search.text.length === 0) {
+        types.selects.最新畫作 = false;
+        types.selects.依關聯性 = false;
+        types.selects.人氣最高 = true;
+        quantity.value = Arr.data.length;
+        selected.value = "人氣最高";
+      }
+      if (search.text.length > 0) {
         Arr.data.filter((arr) => {
           //篩選
           arr.relative = 0; //新增關聯度欄位
@@ -78,15 +86,9 @@ export default {
         });
         //將Arr.data依照關聯值的大小還續，關聯值越大順位越高，越上面
         Arr.data = Arr.data.sort((a, b) => b.relative - a.relative);
+        types.selects.依關聯性 = true;
+        selected.value = "依關聯性";
       }
-      if (Arr.data[0].relative === 0) {
-        quantity.value = "沒有關聯的作品";
-        console.log(Arr.data[0].relative);
-      } else {
-        quantity.value = Arr.data.length;
-      }
-      types.selects.依關聯性 = true;
-      selected.value = "依關聯性";
     };
 
     //篩選區域
@@ -457,7 +459,7 @@ export default {
             {{ type }}
           </button>
         </div>
-        <div>
+        <div class="dress">
           <!-- 服裝 -->
           <button
             v-for="type in Object.keys(types.dress)"
@@ -596,13 +598,19 @@ export default {
   position: fixed;
   top: -4vh;
   z-index: 3000;
-  right: 61vh;
+  right: 33vw;
+  @media screen and (max-width: 1060px) {
+    right: 36vw;
+  }
   > .search__input {
     width: 33vw;
     height: 6vh;
     border-radius: 10px;
     padding-left: 1rem;
     font-size: 1.5rem;
+    @media screen and (max-width: 1024px) {
+      width: 29vw;
+    }
   }
   > .search__button {
     width: 3.5rem;
@@ -639,6 +647,10 @@ export default {
   padding: 0.3rem 0rem 1rem 1rem;
   border-radius: 10px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  @media screen and (max-width: 1024px) {
+    width: 28.5vw;
+    right: 42.1vw;
+  }
   &:hover {
     display: flex;
   }
@@ -646,6 +658,14 @@ export default {
     display: flex;
   }
   > div {
+    @media screen and (max-width: 1024px) {
+      position: relative;
+    }
+    &.dress .filter__btn:first-child {
+      position: relative;
+      left: -12px;
+    }
+
     > .filter__btn {
       background: none;
       border: 0;
@@ -664,6 +684,9 @@ export default {
       width: 100%;
       > .filter__btn-fn {
         margin: 0 0.5rem;
+        @media screen and (max-width: 1024px) {
+          width: 80px;
+        }
         &.filter__btn {
           background: none;
           border: 0;
@@ -705,6 +728,9 @@ export default {
 .select__container {
   display: flex;
   align-items: center;
+  @media screen and (max-width: 1024px) {
+    margin-left: 3rem;
+  }
   > .select__sort {
     text-align: start;
     padding: 0;
@@ -717,6 +743,9 @@ export default {
     margin: 4rem 0;
     display: block;
     font-weight: 600;
+    @media screen and (max-width: 1024px) {
+      margin: 2rem 0;
+    }
   }
   > p {
     color: #fff;

@@ -298,6 +298,15 @@ export default {
   </div>
 </template>
 <style lang="scss">
+@media screen and (max-width: 1024px) {
+  #realistic,
+  #anime,
+  #male,
+  #female {
+    padding: 0 6rem;
+  }
+}
+
 .style__h2 {
   margin: 3rem 0 0rem 0;
   padding: 0;

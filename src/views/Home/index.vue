@@ -185,6 +185,9 @@ a {
   justify-content: center;
   align-items: center;
   padding-right: 5rem;
+  @media screen and (max-width: 1024px) {
+    padding-right: 0;
+  }
 }
 .flex a {
   padding: 0 2rem;

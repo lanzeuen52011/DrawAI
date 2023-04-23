@@ -602,6 +602,10 @@ export default {
   @media screen and (max-width: 1060px) {
     right: 36vw;
   }
+  @media screen and (max-width: 900px) {
+    right: 0vw;
+    top: 7vh;
+  }
   > .search__input {
     width: 33vw;
     height: 6vh;
@@ -628,6 +632,9 @@ export default {
       width: 100%;
       height: 100%;
       fill: #fff;
+      @media screen and (max-width: 900px) {
+        display: none;
+      }
     }
   }
 }
@@ -642,14 +649,31 @@ export default {
   position: fixed;
   z-index: 3000;
   top: 8.8vh;
-  right: 35.1vw;
+  right: 36.6vw;
   background: #3e3e3e;
   padding: 0.3rem 0rem 1rem 1rem;
   border-radius: 10px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  @media screen and (max-width: 1439px) {
+    right: 37.6vw;
+  }
+  @media screen and (max-width: 1060px) {
+    right: 41vw;
+  }
   @media screen and (max-width: 1024px) {
     width: 28.5vw;
     right: 42.1vw;
+  }
+  @media screen and (max-width: 900px) {
+    width: 29vw;
+    right: 6.3vw;
+    top: 18vh;
+  }
+  @media screen and (max-width: 820px) {
+    top: 17vh;
+  }
+  @media screen and (max-width: 768px) {
+    right: 7.3vw;
   }
   &:hover {
     display: flex;
@@ -662,8 +686,13 @@ export default {
       position: relative;
     }
     &.dress .filter__btn:first-child {
-      position: relative;
-      left: -12px;
+      @media screen and (max-width: 1024px) {
+        position: relative;
+        left: -12px;
+      }
+      @media screen and (max-width: 768px) {
+        left: -3px;
+      }
     }
 
     > .filter__btn {
@@ -682,6 +711,9 @@ export default {
       align-items: center;
       padding-right: 2rem;
       width: 100%;
+      @media screen and (max-width: 768px) {
+        padding-right: 0;
+      }
       > .filter__btn-fn {
         margin: 0 0.5rem;
         @media screen and (max-width: 1024px) {
@@ -728,8 +760,12 @@ export default {
 .select__container {
   display: flex;
   align-items: center;
+  padding-left: 1rem;
   @media screen and (max-width: 1024px) {
     margin-left: 3rem;
+  }
+  @media screen and (max-width: 520px) {
+    padding-top: 4rem;
   }
   > .select__sort {
     text-align: start;
@@ -746,9 +782,15 @@ export default {
     @media screen and (max-width: 1024px) {
       margin: 2rem 0;
     }
+    @media screen and (max-width: 620px) {
+      font-size: 2rem;
+    }
   }
   > p {
     color: #fff;
+    @media screen and (max-width: 620px) {
+      font-size: 1.7rem;
+    }
   }
 }
 
@@ -774,6 +816,22 @@ export default {
     z-index: 1000;
     letter-spacing: 0.3rem;
   }
+  > a > .icon__gallery__container > .item__name {
+    @media screen and (max-width: 1300px) {
+      position: absolute;
+      top: 75%;
+      width: 100%; //置中
+      color: white;
+      z-index: 1000;
+      letter-spacing: 0.3rem;
+    }
+    @media screen and (max-width: 900px) {
+      top: 72%;
+    }
+    @media screen and (max-width: 450px) {
+      top: 67%;
+    }
+  }
   &:hover
     > a
     > .icon__gallery__container
@@ -781,8 +839,16 @@ export default {
     > .opacity {
     opacity: 0.8;
   }
+  > a > .icon__gallery__container > .like__number.grid.grid__c-auto > .opacity {
+    @media screen and (max-width: 1300px) {
+      opacity: 0.8;
+    }
+  }
   &:hover {
     scale: 1.05;
+    @media screen and (max-width: 1300px) {
+      scale: 1;
+    }
   }
   &:hover > a > .back {
     background-image: linear-gradient(
@@ -823,6 +889,48 @@ export default {
     position: absolute;
     right: 0;
     top: 0;
+  }
+  > a > .back {
+    @media screen and (max-width: 1300px) {
+      background-image: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.2) 0,
+        rgba(0, 0, 0, 0.19) 3.5%,
+        rgba(0, 0, 0, 0.18) 7%,
+        rgba(0, 0, 0, 0.17) 10.35%,
+        rgba(0, 0, 0, 0.16) 13.85%,
+        rgba(0, 0, 0, 0.15) 17.35%,
+        rgba(0, 0, 0, 0.14) 20.85%,
+        rgba(0, 0, 0, 0.13) 24.35%,
+        rgba(0, 0, 0, 0.12) 27.85%,
+        rgba(0, 0, 0, 0.11) 31.35%,
+        rgba(0, 0, 0, 0.1) 34.85%,
+        rgba(0, 0, 0, 0.126) 38.35%,
+        rgba(0, 0, 0, 0.112) 41.85%,
+        rgba(0, 0, 0, 0.103) 45.35%,
+        #0000001a 48.85%,
+        rgba(0, 0, 0, 0.103) 52.35%,
+        rgba(0, 0, 0, 0.112) 55.85%,
+        rgba(0, 0, 0, 0.126) 59.35%,
+        rgba(0, 0, 0, 0.144) 62.85%,
+        rgba(0, 0, 0, 0.165) 66.35%,
+        rgba(0, 0, 0, 0.188) 69.85%,
+        rgba(0, 0, 0, 0.4) 73.35%,
+        rgba(0, 0, 0, 0.45) 76.85%,
+        rgba(0, 0, 0, 0.5) 80.35%,
+        rgba(0, 0, 0, 0.55) 83.85%,
+        rgba(0, 0, 0, 0.6) 87.35%,
+        rgba(0, 0, 0, 0.65) 90.85%,
+        rgba(0, 0, 0, 0.7) 94.35%,
+        rgba(0, 0, 0, 0.75) 97.85%,
+        rgba(0, 0, 0, 0.8)
+      );
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
   }
   > a {
     > .icon__gallery__container {

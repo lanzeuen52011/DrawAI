@@ -1,18 +1,35 @@
 <script>
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 export default {
   setup() {
     onMounted(() => {});
-    return {};
+    const style = ref(false);
+    const about = ref(false);
+    const other = ref(false);
+    const chevronToggle = (element) => {
+      if (element === "style") {
+        style.value = !style.value;
+      }
+      if (element === "about") {
+        about.value = !about.value;
+      }
+      if (element === "other") {
+        other.value = !other.value;
+      }
+    };
+    return { chevronToggle, style, about, other };
   },
 };
 </script>
 
 <template>
   <nav>
-    <router-link class="Home" to="/"
+    <router-link class="Home Home__logo" to="/"
       ><img src="./Gallery/drawailogo.png" alt=""
     /></router-link>
+    <button class="collapse__btn">
+      <img src="./Gallery/menu.png" alt="" />
+    </button>
     <div class="flex flex-row">
       <router-link class="About" to="/">總畫廊</router-link>
       <router-link class="About" to="/style">風格導覽</router-link>
@@ -28,11 +45,12 @@ export default {
       </router-link>
     </div>
     <div class="footer__item"></div>
-    <div class="footer__item">
+    <div class="footer__item" @click="chevronToggle('style')">
       <h3>
         <router-link class="About" to="/style">風格導覽</router-link>
       </h3>
-      <ul class="list footer__list">
+      <i :class="['bx', 'bxs-chevron-right', { active: style }]"></i>
+      <ul :class="['list', 'footer__list', { chevronon: style }]">
         <li>
           <router-link
             class="About"
@@ -57,11 +75,12 @@ export default {
         </li>
       </ul>
     </div>
-    <div class="footer__item">
+    <div class="footer__item" @click="chevronToggle('about')">
       <h3>
         <router-link class="About" to="/about">關於我</router-link>
       </h3>
-      <ul class="list footer__list">
+      <i :class="['bx', 'bxs-chevron-right', { active: about }]"></i>
+      <ul :class="['list', 'footer__list', { chevronon: about }]">
         <li>
           <a href="https://pda.104.com.tw/profile/preview?vno=765py47ci"
             >我的簡歷</a
@@ -69,11 +88,12 @@ export default {
         </li>
       </ul>
     </div>
-    <div class="footer__item">
+    <div class="footer__item" @click="chevronToggle('other')">
       <h3>
         <a class="no__a">其他網站</a>
       </h3>
-      <ul class="list footer__list">
+      <i :class="['bx', 'bxs-chevron-right', { active: other }]"></i>
+      <ul :class="['list', 'footer__list', { chevronon: other }]">
         <li>
           <a href="https://let-him-cook.netlify.app/">
             <img class="other__logo" src="./LetHimCook1.png" alt="" />
@@ -85,6 +105,12 @@ export default {
 </template>
 
 <style lang="scss">
+.collapse__btn {
+  display: none;
+  @media screen and (max-width: 768) {
+    display: none;
+  }
+}
 html {
   font-size: 62.5%;
 }
@@ -137,7 +163,7 @@ nav {
     color: #c1c2c5;
     display: flex;
     img {
-      width: 200px;
+      height: 8vh;
       object-fit: contain;
     }
 
@@ -201,10 +227,48 @@ a {
 }
 .footer {
   background: #1a1b1e;
-  padding: 10vh 10vw 10vh 5vw;
+  padding: 10vh 10vw;
+  @media screen and (max-width: 768px) {
+    grid-template-rows: repeat(auto-fit, minmax(0px, 1fr));
+    grid-template-columns: 1fr;
+    position: relative;
+    // padding-top: 7vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    // padding-bottom: 20vh;
+  }
   > .footer__item {
     flex-direction: column;
     justify-content: start;
+    @media screen and (max-width: 768px) {
+      position: relative;
+      left: 6vw;
+    }
+    &.list {
+      justify-content: center;
+      @media screen and (max-width: 768px) {
+        order: 10;
+        left: 0;
+        padding-top: 5vh;
+      }
+    }
+    > i {
+      display: none;
+      @media screen and (max-width: 768px) {
+        display: inline-block;
+        position: relative;
+        color: #fff;
+        scale: 2;
+        top: -4.5vh;
+        right: -20vw;
+        transition: all 0.15s;
+      }
+      &.active {
+        @media screen and (max-width: 768px) {
+          rotate: 90deg;
+        }
+      }
+    }
     > p {
       margin: 0;
       font-size: 1.6rem;
@@ -222,13 +286,22 @@ a {
       font-size: 2rem;
       margin-top: 0;
       color: #fff;
+      @media screen and (max-width: 768px) {
+        font-size: 3rem;
+      }
 
       > a {
         color: #fff;
         font-size: 2rem;
         opacity: 0.9;
+        @media screen and (max-width: 768px) {
+          font-size: 3rem;
+        }
         &.no__a {
           opacity: 1;
+          @media screen and (max-width: 768px) {
+            opacity: 0.9;
+          }
         }
         &:hover {
           opacity: 1;
@@ -256,17 +329,43 @@ a {
       justify-content: start;
       align-items: start;
       margin: 0.5rem 2.5rem 0;
+      @media screen and (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        height: 0;
+        opacity: 0;
+        margin-top: 0;
+        position: relative;
+        overflow: hidden;
+        top: -3vh;
+        transition: all 0.5s;
+        border-bottom: 1px solid #7a7a7a;
+        width: 50vw;
+      }
+      &.chevronon {
+        height: auto;
+        opacity: 1;
+      }
       > li {
         > a {
           color: #fff;
           justify-content: start;
           font-size: 1.6rem;
           opacity: 0.7;
+          @media screen and (max-width: 768px) {
+            font-size: 2rem;
+          }
           &:hover {
             opacity: 1;
           }
           > .other__logo {
             width: 12vw;
+            @media screen and (max-width: 768px) {
+              width: 40vw;
+            }
+            @media screen and (max-width: 375px) {
+              width: 50vw;
+            }
           }
         }
       }

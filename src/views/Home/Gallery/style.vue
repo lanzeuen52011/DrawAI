@@ -321,8 +321,11 @@ export default {
     overflow-x: auto;
     white-space: nowrap;
     flex-wrap: nowrap;
-    margin-top: 0;
+    margin: 0 auto;
     width: 85vw;
+    @media screen and (max-width: 1300px) {
+      height: auto;
+    }
   }
   > .list__item {
     width: 300px;

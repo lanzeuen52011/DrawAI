@@ -597,13 +597,14 @@ export default {
   //search
   &.div {
     @media screen and (max-height: 400px) {
-      top: -6vh;
+      top: -4vh;
     }
   }
   @media screen and (max-width: 960px) {
     position: fixed;
     top: 7vh;
     right: 0vw;
+    z-index: 1500;
   }
   @media screen and (max-width: 650px) {
     right: 40vw;

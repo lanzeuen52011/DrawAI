@@ -25,7 +25,8 @@ export default {
             <p>履歷連結參考：</p>
             <a href="https://pda.104.com.tw/profile/preview?vno=765py47ci"
               >104人力銀行</a
-            >
+            >、
+            <a href="https://www.cakeresume.com/ziyunlan">ResumeCake</a>
           </div>
         </div>
       </div>

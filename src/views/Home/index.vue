@@ -90,8 +90,15 @@ export default {
       <i :class="['bx', 'bxs-chevron-right', { active: about }]"></i>
       <ul :class="['list', 'footer__list', { chevronon: about }]">
         <li>
-          <a href="https://pda.104.com.tw/profile/preview?vno=765py47ci"
-            >我的簡歷</a
+          <router-link
+            class="About"
+            :to="{ path: '/about', hash: '#aboutProfile' }"
+            >關於我</router-link
+          >
+        </li>
+        <li>
+          <router-link class="About" :to="{ path: '/about', hash: '#aboutWeb' }"
+            >關於網站</router-link
           >
         </li>
       </ul>

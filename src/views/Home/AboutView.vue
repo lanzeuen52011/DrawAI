@@ -9,7 +9,7 @@ export default {
 <template>
   <div class="about container body" id="app">
     <h1>關於</h1>
-    <div>
+    <div id="aboutProfile">
       <h2>關於我</h2>
       <div class="about__profile">
         <img class="profile__avatar" src="@/assets/avatar.webp" alt="" />
@@ -31,7 +31,7 @@ export default {
         </div>
       </div>
     </div>
-    <div>
+    <div id="aboutWeb">
       <h2>網站構成工具</h2>
       <ul class="about__web">
         <li>網頁元素:</li>

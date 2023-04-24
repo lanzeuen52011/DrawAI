@@ -199,6 +199,7 @@ nav {
     a {
       @media screen and (max-width: 650px) {
         border-bottom: 1px solid;
+        font-size: 2.5rem;
       }
     }
   }

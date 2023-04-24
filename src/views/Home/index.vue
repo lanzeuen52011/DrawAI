@@ -218,6 +218,7 @@ nav {
     img {
       height: 8vh;
       object-fit: contain;
+      width: 30vw;
 
       @media screen and (max-width: 426px) {
         height: 6vh;
@@ -287,10 +288,7 @@ a {
   padding: 0 2rem;
 }
 .Home {
-  padding: 0 2rem;
-  @media screen and (max-width: 650px) {
-    padding: 0;
-  }
+  padding: 0;
 }
 .body {
   margin-top: 15vh;

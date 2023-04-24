@@ -231,12 +231,14 @@ export default {
 <style lang="scss" scoped>
 //body contanier
 .id__container {
-  background: #000;
-  height: 100vh;
+  background: #25262b;
   display: flex;
   align-items: center;
+
   > .container {
-    background: #000;
+    background: #25262b;
+    max-width: 4000px;
+    margin: auto;
     &.grid__2c {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -260,7 +262,7 @@ export default {
         height: 22.7vh;
         overflow-y: overlay;
         font-size: 1.6rem;
-        width: 30vw;
+        width: 80%;
         word-wrap: break-word;
       }
       .icon__container {
@@ -269,6 +271,7 @@ export default {
         margin: 1rem 4rem;
         border: 1px solid #fff;
         border-radius: 10px;
+        justify-content: center;
 
         > .icon__container__box {
           display: flex;
@@ -333,8 +336,8 @@ export default {
       }
     }
     > img {
-      height: 90vh;
-      width: 90vh;
+      height: 100%;
+      width: 100%;
       object-fit: contain;
     }
   }
@@ -356,9 +359,13 @@ export default {
 
 //comment
 .comment {
-  height: 38vh;
-  max-width: 36vw;
+  // height: 100%;
+  max-width: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
   > .comment__name {
     margin: 2rem 0 0 3rem;
     width: 100%;
@@ -368,7 +375,7 @@ export default {
 
   .comment__scroll {
     overflow-y: overlay;
-    height: 28vh;
+    height: 34vh;
     max-width: 36vw;
     > .comment__each {
       border: 1px solid #fff;

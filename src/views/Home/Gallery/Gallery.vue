@@ -404,7 +404,7 @@ export default {
 </script>
 <template>
   <div class="container body" id="app">
-    <div class="filterandsearch div">
+    <div class="filterandsearch div forRWD">
       <div class="search__container container">
         <input
           aria-label="Domain"
@@ -591,21 +591,44 @@ export default {
 <style lang="scss">
 .filterandsearch {
   position: fixed;
-  top: -4vh;
+  top: 0vh;
   z-index: 3000;
   right: 33vw;
   //search
   &.div {
-    @media screen and (max-height: 400px) {
+    @media screen and (max-height: 1600px) and (min-width: 1000px) {
+      top: -0.5vh;
+    }
+    @media screen and (max-height: 1400px) and (min-width: 1000px) {
+      top: -0.5vh;
+    }
+    @media screen and (max-height: 1280px) and (min-width: 1000px) {
+      top: -1vh;
+    }
+
+    @media screen and (max-height: 1100px) and (min-width: 1000px) {
+      top: -1.5vh;
+    }
+    @media screen and (max-height: 1000px) and (min-width: 1000px) {
+      top: -2.5vh;
+    }
+    @media screen and (max-height: 900px) and (min-width: 1000px) {
+      top: -3vh;
+    }
+    @media screen and (max-height: 850px) and (min-width: 1000px) {
       top: -4vh;
     }
   }
+  @media screen and (max-width: 1500px) {
+    right: 30vw;
+  }
   @media screen and (max-width: 960px) {
     position: fixed;
-    top: 7vh;
+    top: 9vh;
     right: 0vw;
     z-index: 1500;
   }
+
   @media screen and (max-width: 650px) {
     right: 40vw;
     left: 3vw;

@@ -234,25 +234,56 @@ export default {
   background: #25262b;
   display: flex;
   align-items: center;
+  justify-content: center;
+  height: 100vh;
+  @media screen and (max-width: 1300px) {
+    display: block;
+  }
 
   > .container {
     background: #25262b;
     max-width: 4000px;
     margin: auto;
     &.grid__2c {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 50% 40%;
+      justify-content: center;
+      @media screen and (max-width: 1300px) {
+        grid-template-rows: 60% 40%;
+        grid-template-columns: 1fr;
+      }
+      @media screen and (max-width: 1100px) {
+        grid-template-rows: 50% 50%;
+      }
+      @media screen and (max-width: 870px) {
+        grid-template-rows: 45% 55%;
+      }
+      @media screen and (max-width: 600px) {
+        grid-template-rows: 40% 60%;
+      }
     }
     > .picture__info {
       //picture
       background: #25262b;
       display: flex;
-      grid-template-rows: 100px 360px;
       flex-direction: column;
+      @media screen and (min-width: 1500px) {
+        display: grid;
+        grid-template-columns: auto;
+      }
+      @media screen and (max-width: 1300px) {
+        width: 100vw;
+      }
       > .picture__name {
         color: #f7f7f7;
         letter-spacing: 0.3rem;
         padding: 20px;
         display: block;
+        @media screen and (max-width: 700px) {
+          padding: 0 20px 20px;
+        }
+        @media screen and (max-width: 500px) {
+          font-size: 3rem;
+        }
       }
       > .picture__discri {
         color: #f7f7f7;
@@ -272,9 +303,28 @@ export default {
         border: 1px solid #fff;
         border-radius: 10px;
         justify-content: center;
+        align-items: center;
+        @media screen and (min-width: 1600px) {
+          align-items: center;
+          font-size: 3rem;
+        }
+        @media screen and (max-width: 1300px) and (min-height: 800px) {
+          font-size: 3rem;
+        }
+        @media screen and (max-width: 800px) and (min-height: 800px) {
+          font-size: 1.5rem;
+        }
+        @media screen and (max-width: 600px) {
+          flex-direction: column;
+          font-size: 1.5rem;
+        }
+        @media screen and (max-width: 374px) {
+          font-size: 0.5rem;
+        }
 
         > .icon__container__box {
           display: flex;
+          width: 100%;
           .pink,
           .yellow,
           .red,
@@ -314,7 +364,7 @@ export default {
     > .button__back {
       //backward button
 
-      position: absolute;
+      position: fixed;
       right: 0;
       top: 0;
       background: none;
@@ -366,6 +416,9 @@ export default {
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
+  @media screen and (max-width: 850px) and (min-height: 400px) {
+    height: 50%;
+  }
   > .comment__name {
     margin: 2rem 0 0 3rem;
     width: 100%;
@@ -376,7 +429,10 @@ export default {
   .comment__scroll {
     overflow-y: overlay;
     height: 34vh;
-    max-width: 36vw;
+    @media screen and (max-width: 850px) and (max-height: 400px) {
+      height: 90vh;
+    }
+    // max-width: 36vw;
     > .comment__each {
       border: 1px solid #fff;
       border-radius: 30px;

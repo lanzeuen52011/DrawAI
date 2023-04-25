@@ -140,6 +140,9 @@ body {
 .container {
   max-width: 1300px;
   margin: 0 auto;
+  @media screen and (min-width: 1600px) {
+    max-width: 100%;
+  }
 }
 h1 {
   margin: 0;

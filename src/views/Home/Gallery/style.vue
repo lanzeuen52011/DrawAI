@@ -316,6 +316,9 @@ export default {
 .style__h2 {
   margin: 3rem 0 0rem 0;
   padding: 0;
+  @media screen and (min-width: 1600px) {
+    margin: 3rem 0 0rem 5vw;
+  }
 }
 .style__list {
   &.list {
@@ -329,6 +332,9 @@ export default {
     flex-wrap: nowrap;
     margin: 0 auto;
     width: 85vw;
+    @media screen and (min-height: 1000px) {
+      height: 30vh;
+    }
     @media screen and (max-width: 1300px) {
       height: auto;
     }

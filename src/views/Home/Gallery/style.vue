@@ -332,7 +332,7 @@ export default {
     flex-wrap: nowrap;
     margin: 0 auto;
     width: 85vw;
-    @media screen and (min-height: 1000px) {
+    @media screen and (min-height: 1100px) {
       height: 30vh;
     }
     @media screen and (max-width: 1300px) {

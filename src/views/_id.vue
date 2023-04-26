@@ -28,7 +28,6 @@ export default {
     const handleCommentLeave = () => {
       isComment.value = !isComment.value;
       if (Object.keys(gallery.data).length < 20) {
-        console.log(false);
         const copiedData = {
           _subtable_1000074: {
             0: {
@@ -53,7 +52,6 @@ export default {
           commentArr.data[a][1000073] = commentArr.data[a].comment;
           delete commentArr.data[a].comment;
           delete commentArr.data[a].author;
-          console.log(commentArr.data[a]);
         });
         dataprocess1.data._subtable_1000074 = commentArr.data;
         axios
@@ -78,7 +76,6 @@ export default {
           delete commentArr.data[a][1000073];
         });
       } else if (Object.keys(gallery.data).length >= 20) {
-        console.log(true);
         const copiedData = Object.assign({}, gallery.data._subtable_1000074[0]);
         let i = Object.keys(gallery.data._subtable_1000074).length;
         copiedData.author = commentAuthor.value;
@@ -92,10 +89,7 @@ export default {
           delete commentArr.data[a].comment;
           delete commentArr.data[a].author;
         });
-        console.log(commentArr.data);
-        console.log(copiedData);
         dataprocess1.data._subtable_1000074 = commentArr.data;
-        console.log(dataprocess1.data);
         axios
           .post(
             `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=OGZiV2psUTdxVkxKVTk3NXRmeUxtYS9sZHdocDVXTkU1cG85TEtvWU1rN0xVS01xMFZBaFdYTGU2OUthV082TQ==`,
@@ -229,10 +223,6 @@ export default {
           gallery.data = res.data[id];
           emojidata.data = res.data[id]._subtable_1000050;
           commentArr.data = res.data[id]._subtable_1000074;
-          console.log(commentArr);
-
-          console.log(gallery.data._subtable_1000074);
-          console.log(gallery.data);
           Object.values(emojidata.data).forEach((emoji) => {
             icon["0"].data = emoji.heart;
             icon["1"].data = emoji.laugh;

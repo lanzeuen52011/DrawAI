@@ -60,7 +60,7 @@ export default {
             dataprocess1.data
           )
           .then((res) => {
-            console.log(res, dataprocess1.data);
+            console.log(res);
           })
           .catch((error) => {
             console.error(error.response.data.error_message);
@@ -96,7 +96,7 @@ export default {
             dataprocess1.data
           )
           .then((res) => {
-            console.log(res, dataprocess1.data);
+            console.log(res);
           })
           .catch((error) => {
             console.error(error.response.data.error_message);

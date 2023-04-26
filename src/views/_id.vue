@@ -17,108 +17,106 @@ export default {
     const commentAuthor = ref("");
     const commentContent = ref("");
     const commentArr = reactive({ data: {} });
+    function includes(array, searchElement) {
+      for (let element of array) if (element === searchElement) return true;
+      return false;
+    }
 
     const handleComment = () => {
       isComment.value = !isComment.value;
     };
     const handleCommentLeave = () => {
       isComment.value = !isComment.value;
+      if (Object.keys(gallery.data).length < 20) {
+        console.log(false);
+        const copiedData = {
+          _subtable_1000074: {
+            0: {
+              author: "sss",
+              comment: "sss",
+              time: "2023/04/26 16:51:00",
+              _header_Y: [19],
+              _parentRagicId: 27,
+              _ragicId: 0,
+              _start_X: 1,
+            },
+          },
+        };
 
-      console.log(commentArr.data);
-
-      const commentContainer = reactive({
-        _ragicId: 0,
-        _parentRagicId: Number(`${id}`),
-        _header_Y: [gallery.data._subtable_1000074[0]._header_Y[0]],
-        _start_X: gallery.data._subtable_1000074[0]._start_X,
-        author: `${commentAuthor.value}`,
-        comment: `${commentContent.value}`,
-      });
-      const copiedData = Object.assign({}, gallery.data._subtable_1000074[0]);
-      const commentContainer2 = ref(gallery["data"]["_subtable_1000074"][0]);
-
-      commentContainer2.value.author = `${commentAuthor.value}`;
-      commentContainer2.value.comment = `${commentContent.value}`;
-
-      gallery["data"]["_subtable_1000074"][0] = copiedData;
-
-      let i = Object.keys(gallery.data._subtable_1000074).length;
-
-      gallery.data._subtable_1000074[Number(`${i}`)] = commentContainer2.value;
-
-      commentAuthor.value = "";
-      commentContent.value = "";
-      console.log(gallery.data);
-
-      dataprocess1.data = gallery["data"];
-      dataCollect1.data = {
-        _subtable_1000074: dataprocess1.data._subtable_1000074,
-      };
-      let b = gallery["data"]["_subtable_1000074"][0]["_ragicId"];
-
-      Object.keys(dataCollect1.data._subtable_1000074).forEach((a) => {
-        dataCollect1.data._index_ = gallery.data._index_;
-        dataCollect1.data._subtable_1000074[a]._parentRagicId = Number(`${id}`);
-        dataCollect1.data._subtable_1000074[a]._ragicId = Number(`${b}`);
-        dataCollect1.data._subtable_1000074[a]._start_X = 1;
-        dataCollect1.data._subtable_1000074[a]._header_Y = [19];
-        dataCollect1.data._subtable_1000074[a]["1000067"] =
-          dataCollect1.data._subtable_1000074[a].author;
-        console.log(dataCollect1.data._subtable_1000074[a]["1000067"]);
-        console.log(dataCollect1.data._subtable_1000074[a].author);
-        dataCollect1.data._subtable_1000074[a]["1000068"] =
-          dataCollect1.data._subtable_1000074[a].comment;
-        console.log(dataCollect1.data._subtable_1000074[a]["1000068"]);
-        console.log(dataCollect1.data._subtable_1000074[a].comment);
-        delete dataCollect1.data._subtable_1000074[a].comment;
-        delete dataCollect1.data._subtable_1000074[a].author;
-        b++;
-      });
-      console.log(dataCollect1.data);
-      console.log(gallery.data);
-      const dataCollect2 = dataCollect1.data;
-      console.log(dataCollect2);
-      const test = { _subtable_1000074: commentArr.data };
-
-      axios
-        .post(
-          `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=OGZiV2psUTdxVkxKVTk3NXRmeUxtYS9sZHdocDVXTkU1cG85TEtvWU1rN0xVS01xMFZBaFdYTGU2OUthV082TQ==`,
-          test
-        )
-        .then((res) => {
-          //此可以確認是否回傳成功，但此處為按讚，因此不需要特別動作。
-          console.log(res, test);
-        })
-        .catch((error) => {
-          console.error(error.response.data.error_message);
+        let i = 0;
+        copiedData._subtable_1000074[0].author = commentAuthor.value;
+        copiedData._subtable_1000074[0].comment = commentContent.value;
+        copiedData._subtable_1000074[0]._ragicId = 0;
+        commentArr.data = copiedData._subtable_1000074;
+        Object.keys(commentArr.data).forEach((a) => {
+          commentArr.data[a][1000072] = commentArr.data[a].author;
+          commentArr.data[a][1000073] = commentArr.data[a].comment;
+          delete commentArr.data[a].comment;
+          delete commentArr.data[a].author;
+          console.log(commentArr.data[a]);
         });
+        dataprocess1.data._subtable_1000074 = commentArr.data;
+        axios
+          .post(
+            `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=OGZiV2psUTdxVkxKVTk3NXRmeUxtYS9sZHdocDVXTkU1cG85TEtvWU1rN0xVS01xMFZBaFdYTGU2OUthV082TQ==`,
+            dataprocess1.data
+          )
+          .then((res) => {
+            console.log(res, dataprocess1.data);
+          })
+          .catch((error) => {
+            console.error(error.response.data.error_message);
+          });
 
-      // const comment = reactive({
-      //   author: commentAuthor.value,
-      //   comment: commentContent.value,
-      // });
-      // const newCommentObj = {};
-      // newCommentObj[3] = comment;
-      // const i = gallery.data._subtable_1000074;
-      // Object.keys(gallery.data._subtable_1000074).push(newCommentObj);
-      // console.log(gallery.data._subtable_1000074);
-      // console.log(comment);
-      // console.log(Array(i));
-      // Object.keys(gallery.data._subtable_1000074).forEach((a) => {
-      //   console.log(Object.keys(gallery.data._subtable_1000074[a]));
-      //   // if (gallery.data[a] === "_subtable_1000074") console.log(true);
-      // });
-      commentAuthor.value = "";
-      commentContent.value = "";
-      // Object.keys(dataCollect1.data._subtable_1000074).forEach((a) => {
-      //   dataCollect1.data._subtable_1000074[a].author =
-      //     dataCollect1.data._subtable_1000074[a]["1000067"];
-      //   dataprocess1.data._subtable_1000074[a].comment =
-      //     dataCollect1.data._subtable_1000074[a]["1000068"];
-      //   delete dataCollect1.data._subtable_1000074[a]["1000067"];
-      //   delete dataCollect1.data._subtable_1000074[a]["1000068"];
-      // });
-      // console.log(dataCollect1);
+        commentAuthor.value = "";
+        commentContent.value = "";
+        gallery.data._subtable_1000074 = copiedData._subtable_1000074;
+        Object.keys(commentArr.data).forEach((a) => {
+          commentArr.data[a].author = commentArr.data[a][1000072];
+          commentArr.data[a].comment = commentArr.data[a][1000073];
+          delete commentArr.data[a][1000072];
+          delete commentArr.data[a][1000073];
+        });
+      } else if (Object.keys(gallery.data).length >= 20) {
+        console.log(true);
+        const copiedData = Object.assign({}, gallery.data._subtable_1000074[0]);
+        let i = Object.keys(gallery.data._subtable_1000074).length;
+        copiedData.author = commentAuthor.value;
+        copiedData.comment = commentContent.value;
+        copiedData._ragicId = Number(`${i}`);
+        copiedData._header_Y = [gallery.data._subtable_1000074[0]._header_Y[0]];
+        commentArr.data[Number(`${i}`)] = copiedData;
+        Object.keys(commentArr.data).forEach((a) => {
+          commentArr.data[a][1000072] = commentArr.data[a].author;
+          commentArr.data[a][1000073] = commentArr.data[a].comment;
+          delete commentArr.data[a].comment;
+          delete commentArr.data[a].author;
+        });
+        console.log(commentArr.data);
+        console.log(copiedData);
+        dataprocess1.data._subtable_1000074 = commentArr.data;
+        console.log(dataprocess1.data);
+        axios
+          .post(
+            `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=OGZiV2psUTdxVkxKVTk3NXRmeUxtYS9sZHdocDVXTkU1cG85TEtvWU1rN0xVS01xMFZBaFdYTGU2OUthV082TQ==`,
+            dataprocess1.data
+          )
+          .then((res) => {
+            console.log(res, dataprocess1.data);
+          })
+          .catch((error) => {
+            console.error(error.response.data.error_message);
+          });
+
+        commentAuthor.value = "";
+        commentContent.value = "";
+        Object.keys(commentArr.data).forEach((a) => {
+          commentArr.data[a].author = commentArr.data[a][1000072];
+          commentArr.data[a].comment = commentArr.data[a][1000073];
+          delete commentArr.data[a][1000072];
+          delete commentArr.data[a][1000073];
+        });
+      }
     };
 
     const corsURL = "https://cors-anywhere.herokuapp.com/"; // use cors-anywhere to fetch api data
@@ -231,6 +229,7 @@ export default {
           gallery.data = res.data[id];
           emojidata.data = res.data[id]._subtable_1000050;
           commentArr.data = res.data[id]._subtable_1000074;
+          console.log(commentArr);
 
           console.log(gallery.data._subtable_1000074);
           console.log(gallery.data);
@@ -343,6 +342,10 @@ export default {
             </div>
           </div>
           <div class="comment__scroll">
+            <article class="comment__each">
+              <p class="comment__author">管理者</p>
+              <p class="comment__paragraph">提醒：留言功能尚未完善</p>
+            </article>
             <article
               class="comment__each"
               v-for="item in gallery.data._subtable_1000074"
@@ -603,6 +606,9 @@ export default {
             position: absolute;
             top: 100%;
             left: 20%;
+            @media screen and (max-width: 500px) {
+              left: 10%;
+            }
           }
           > input,
           button {

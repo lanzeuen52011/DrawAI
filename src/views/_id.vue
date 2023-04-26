@@ -11,6 +11,115 @@ export default {
     const emojidata = reactive({ data: {} });
     const dataprocess = reactive({ data: {} });
     const dataCollect = reactive({ data: {} });
+    const dataprocess1 = reactive({ data: {} });
+    const dataCollect1 = reactive({ data: {} });
+    const isComment = ref(false);
+    const commentAuthor = ref("");
+    const commentContent = ref("");
+    const commentArr = reactive({ data: {} });
+
+    const handleComment = () => {
+      isComment.value = !isComment.value;
+    };
+    const handleCommentLeave = () => {
+      isComment.value = !isComment.value;
+
+      console.log(commentArr.data);
+
+      const commentContainer = reactive({
+        _ragicId: 0,
+        _parentRagicId: Number(`${id}`),
+        _header_Y: [gallery.data._subtable_1000074[0]._header_Y[0]],
+        _start_X: gallery.data._subtable_1000074[0]._start_X,
+        author: `${commentAuthor.value}`,
+        comment: `${commentContent.value}`,
+      });
+      const copiedData = Object.assign({}, gallery.data._subtable_1000074[0]);
+      const commentContainer2 = ref(gallery["data"]["_subtable_1000074"][0]);
+
+      commentContainer2.value.author = `${commentAuthor.value}`;
+      commentContainer2.value.comment = `${commentContent.value}`;
+
+      gallery["data"]["_subtable_1000074"][0] = copiedData;
+
+      let i = Object.keys(gallery.data._subtable_1000074).length;
+
+      gallery.data._subtable_1000074[Number(`${i}`)] = commentContainer2.value;
+
+      commentAuthor.value = "";
+      commentContent.value = "";
+      console.log(gallery.data);
+
+      dataprocess1.data = gallery["data"];
+      dataCollect1.data = {
+        _subtable_1000074: dataprocess1.data._subtable_1000074,
+      };
+      let b = gallery["data"]["_subtable_1000074"][0]["_ragicId"];
+
+      Object.keys(dataCollect1.data._subtable_1000074).forEach((a) => {
+        dataCollect1.data._index_ = gallery.data._index_;
+        dataCollect1.data._subtable_1000074[a]._parentRagicId = Number(`${id}`);
+        dataCollect1.data._subtable_1000074[a]._ragicId = Number(`${b}`);
+        dataCollect1.data._subtable_1000074[a]._start_X = 1;
+        dataCollect1.data._subtable_1000074[a]._header_Y = [19];
+        dataCollect1.data._subtable_1000074[a]["1000067"] =
+          dataCollect1.data._subtable_1000074[a].author;
+        console.log(dataCollect1.data._subtable_1000074[a]["1000067"]);
+        console.log(dataCollect1.data._subtable_1000074[a].author);
+        dataCollect1.data._subtable_1000074[a]["1000068"] =
+          dataCollect1.data._subtable_1000074[a].comment;
+        console.log(dataCollect1.data._subtable_1000074[a]["1000068"]);
+        console.log(dataCollect1.data._subtable_1000074[a].comment);
+        delete dataCollect1.data._subtable_1000074[a].comment;
+        delete dataCollect1.data._subtable_1000074[a].author;
+        b++;
+      });
+      console.log(dataCollect1.data);
+      console.log(gallery.data);
+      const dataCollect2 = dataCollect1.data;
+      console.log(dataCollect2);
+      const test = { _subtable_1000074: commentArr.data };
+
+      axios
+        .post(
+          `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=OGZiV2psUTdxVkxKVTk3NXRmeUxtYS9sZHdocDVXTkU1cG85TEtvWU1rN0xVS01xMFZBaFdYTGU2OUthV082TQ==`,
+          test
+        )
+        .then((res) => {
+          //此可以確認是否回傳成功，但此處為按讚，因此不需要特別動作。
+          console.log(res, test);
+        })
+        .catch((error) => {
+          console.error(error.response.data.error_message);
+        });
+
+      // const comment = reactive({
+      //   author: commentAuthor.value,
+      //   comment: commentContent.value,
+      // });
+      // const newCommentObj = {};
+      // newCommentObj[3] = comment;
+      // const i = gallery.data._subtable_1000074;
+      // Object.keys(gallery.data._subtable_1000074).push(newCommentObj);
+      // console.log(gallery.data._subtable_1000074);
+      // console.log(comment);
+      // console.log(Array(i));
+      // Object.keys(gallery.data._subtable_1000074).forEach((a) => {
+      //   console.log(Object.keys(gallery.data._subtable_1000074[a]));
+      //   // if (gallery.data[a] === "_subtable_1000074") console.log(true);
+      // });
+      commentAuthor.value = "";
+      commentContent.value = "";
+      // Object.keys(dataCollect1.data._subtable_1000074).forEach((a) => {
+      //   dataCollect1.data._subtable_1000074[a].author =
+      //     dataCollect1.data._subtable_1000074[a]["1000067"];
+      //   dataprocess1.data._subtable_1000074[a].comment =
+      //     dataCollect1.data._subtable_1000074[a]["1000068"];
+      //   delete dataCollect1.data._subtable_1000074[a]["1000067"];
+      //   delete dataCollect1.data._subtable_1000074[a]["1000068"];
+      // });
+      // console.log(dataCollect1);
+    };
 
     const corsURL = "https://cors-anywhere.herokuapp.com/"; // use cors-anywhere to fetch api data
     const icon = reactive({
@@ -89,7 +198,7 @@ export default {
         //將回傳的資料post回去給資料庫
         axios
           .post(
-            `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=OGZiV2psUTdxVkxKVTk3NXRmeUxtZFZzU1ZqcXJYaG4zZmdMMlRINFlJcDdzQU4yeWVyR2tjeW44d1FBekZ0dw==`,
+            `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=OGZiV2psUTdxVkxKVTk3NXRmeUxtYS9sZHdocDVXTkU1cG85TEtvWU1rN0xVS01xMFZBaFdYTGU2OUthV082TQ==`,
             dataCollect.data
           )
           .then((res) => {
@@ -121,6 +230,10 @@ export default {
         .then((res) => {
           gallery.data = res.data[id];
           emojidata.data = res.data[id]._subtable_1000050;
+          commentArr.data = res.data[id]._subtable_1000074;
+
+          console.log(gallery.data._subtable_1000074);
+          console.log(gallery.data);
           Object.values(emojidata.data).forEach((emoji) => {
             icon["0"].data = emoji.heart;
             icon["1"].data = emoji.laugh;
@@ -152,7 +265,18 @@ export default {
     const back = () => {
       router.go(-1);
     };
-    return { gallery, isError, back, icon, toggleEmotion };
+    return {
+      gallery,
+      isError,
+      back,
+      icon,
+      toggleEmotion,
+      handleComment,
+      isComment,
+      handleCommentLeave,
+      commentAuthor,
+      commentContent,
+    };
   },
 };
 </script>
@@ -165,13 +289,16 @@ export default {
       <img :src="gallery.data.url" alt="" />
       <div class="picture__info">
         <h1 class="picture__name">{{ gallery["data"].name }}</h1>
-        <p class="picture__discri">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
-          quaerat fugit laudantium beatae, dignissimos sunt modi qui enim
-          consequatur sequi est quibusdam praesentium nobis deleniti.
-          Praesentium qui eius minus!
-          Quisquamaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-        </p>
+        <div class="picture__discri">
+          <h2>描述</h2>
+          <p>
+            {{ gallery["data"].description }}
+          </p>
+          <h2>參數</h2>
+          <p>
+            {{ gallery["data"].modeldescrip }}
+          </p>
+        </div>
         <div class="icon__container">
           <div
             v-for="item in icon"
@@ -190,34 +317,40 @@ export default {
           </div>
         </div>
         <div class="comment">
-          <h2 class="comment__name">Comment</h2>
+          <div class="comment__name__container">
+            <h2 class="comment__name">留言板</h2>
+            <div class="comment__leave__container">
+              <button :class="[{ active: isComment }]" @click="handleComment">
+                我要留言
+              </button>
+              <div :class="['comment__leave', { show: isComment }]">
+                <input
+                  type="text"
+                  class="leave__author"
+                  placeholder="留言作者名子"
+                  v-model="commentAuthor"
+                />
+                <input
+                  type="text"
+                  class="leave__content"
+                  placeholder="留言內容"
+                  v-model="commentContent"
+                />
+                <button class="comment__submit" @click="handleCommentLeave">
+                  送出
+                </button>
+              </div>
+            </div>
+          </div>
           <div class="comment__scroll">
-            <article class="comment__each">
-              <p class="comment__author">Matt Lan</p>
+            <article
+              class="comment__each"
+              v-for="item in gallery.data._subtable_1000074"
+              :key="item"
+            >
+              <p class="comment__author">{{ item["author"] }}</p>
               <p class="comment__paragraph">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Obcaecati quisquam dicta repellendus eum illo! Dicta et aperiam
-              </p>
-            </article>
-            <article class="comment__each">
-              <p class="comment__author">Matt Lan</p>
-              <p class="comment__paragraph">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Obcaecati quisquam dicta repellendus eum illo! Dicta et aperiam
-              </p>
-            </article>
-            <article class="comment__each">
-              <p class="comment__author">Matt Lan</p>
-              <p class="comment__paragraph">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Obcaecati quisquam dicta repellendus eum illo! Dicta et aperiam
-              </p>
-            </article>
-            <article class="comment__each">
-              <p class="comment__author">Matt Lan</p>
-              <p class="comment__paragraph">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Obcaecati quisquam dicta repellendus eum illo! Dicta et aperiam
+                {{ item["comment"] }}
               </p>
             </article>
           </div>
@@ -295,6 +428,13 @@ export default {
         font-size: 1.6rem;
         width: 80%;
         word-wrap: break-word;
+        > h2 {
+          padding: 0;
+        }
+        > p {
+          padding-left: 2rem;
+          text-indent: 2rem;
+        }
       }
       .icon__container {
         //icon
@@ -419,16 +559,75 @@ export default {
   @media screen and (max-width: 850px) and (min-height: 400px) {
     height: 50%;
   }
-  > .comment__name {
-    margin: 2rem 0 0 3rem;
-    width: 100%;
-    padding: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+  > div {
+    &.comment__name__container {
+      display: flex;
+      margin: 2rem 0 0 3rem;
+      width: 100%;
+      padding: 0;
+      padding-left: 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+      position: relative;
+      > .comment__name {
+        margin: 0;
+      }
+      > .comment__leave__container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        > button {
+          border-radius: 25%;
+          border: 0;
+          outline: 0;
+          cursor: pointer;
+          opacity: 0.8;
+          margin: 0 2rem;
+          color: #e9ecef;
+          background: #000;
+          padding: 0.5rem 1rem;
+          &.active {
+            color: #fff;
+            opacity: 1;
+          }
+          &:hover {
+            color: #fff;
+            opacity: 1;
+          }
+        }
+        > .comment__leave {
+          display: none;
+          &.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 100%;
+            left: 20%;
+          }
+          > input,
+          button {
+            padding-left: 1rem;
+            outline: 0;
+            border: 0;
+            border-radius: 10px;
+            &.leave__author {
+              width: 10rem;
+            }
+            &.comment__submit {
+              &:hover {
+                background: #ccc;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   .comment__scroll {
     overflow-y: overlay;
     height: 34vh;
+    width: 100%;
     @media screen and (max-width: 850px) and (max-height: 400px) {
       height: 90vh;
     }

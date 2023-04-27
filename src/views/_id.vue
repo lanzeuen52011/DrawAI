@@ -54,6 +54,7 @@ export default {
           delete commentArr.data[a].author;
         });
         dataprocess1.data._subtable_1000074 = commentArr.data;
+        console.log(dataprocess1.data);
         axios
           .post(
             `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=OGZiV2psUTdxVkxKVTk3NXRmeUxtYS9sZHdocDVXTkU1cG85TEtvWU1rN0xVS01xMFZBaFdYTGU2OUthV082TQ==`,
@@ -90,6 +91,7 @@ export default {
           delete commentArr.data[a].author;
         });
         dataprocess1.data._subtable_1000074 = commentArr.data;
+        console.log(dataprocess1.data);
         axios
           .post(
             `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=OGZiV2psUTdxVkxKVTk3NXRmeUxtYS9sZHdocDVXTkU1cG85TEtvWU1rN0xVS01xMFZBaFdYTGU2OUthV082TQ==`,

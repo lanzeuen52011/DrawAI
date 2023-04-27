@@ -205,7 +205,11 @@ export default {
     });
 
     const back = () => {
-      router.go(-1);
+      if (history.state.back === null) {
+        window.location = window.location.origin + "/";
+      } else {
+        router.go(-1);
+      }
     };
     return {
       gallery,

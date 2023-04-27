@@ -25,10 +25,10 @@ export default {
     const handleCommentLeave = () => {
       isComment.value = !isComment.value;
       let data = JSON.stringify({
-        _subtable_1000074: {
+        _subtable_1000077: {
           "-1": {
             1000072: `${commentAuthor.value}`,
-            1000073: `${commentContent.value}`,
+            1000076: `${commentContent.value}`,
           },
         },
       });
@@ -39,7 +39,7 @@ export default {
         url: `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=OGZiV2psUTdxVkxKVTk3NXRmeUxtYS9sZHdocDVXTkU1cG85TEtvWU1rN0xVS01xMFZBaFdYTGU2OUthV082TQ==`,
         headers: {
           "Content-Type": "application/json",
-          Cookie: "JSESSIONID=node019u8efboog81a19x06w12jqsye74033.node0",
+          withCredentials: true,
         },
         data: data,
       };
@@ -47,7 +47,7 @@ export default {
       axios
         .request(config)
         .then((response) => {
-          console.log(JSON.stringify(response.data));
+          console.log(response, JSON.stringify(response.data));
         })
         .catch((error) => {
           console.log(error);
@@ -175,7 +175,8 @@ export default {
         .then((res) => {
           gallery.data = res.data[id];
           emojidata.data = res.data[id]._subtable_1000050;
-          commentArr.data = res.data[id]._subtable_1000074;
+          commentArr.data = res.data[id]._subtable_1000077;
+          console.log(gallery.data);
           Object.values(emojidata.data).forEach((emoji) => {
             icon["0"].data = emoji.heart;
             icon["1"].data = emoji.laugh;
@@ -287,7 +288,7 @@ export default {
           <div class="comment__scroll">
             <article
               class="comment__each"
-              v-for="item in gallery.data._subtable_1000074"
+              v-for="item in gallery.data._subtable_1000077"
               :key="item"
             >
               <p class="comment__author">{{ item["author"] }}</p>

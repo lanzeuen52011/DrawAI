@@ -344,12 +344,6 @@ export default {
     height: 300px;
     border-radius: 10px;
     overflow: hidden;
-    //grid用法
-    //   justify-self: center;
-    //   align-self: center;
-    background: url("./drawailogo.png");
-    background-repeat: no-repeat;
-    background-position: center;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
     transition: scale 0.15s;
     cursor: pointer;

@@ -597,32 +597,81 @@ export default {
   //search
   &.div {
     @media screen and (max-height: 1600px) and (min-width: 1000px) {
-      top: -0.5vh;
+      top: calc(50% - 50vh);
     }
-    @media screen and (max-height: 1400px) and (min-width: 1000px) {
-      top: -0.5vh;
-    }
-    @media screen and (max-height: 1280px) and (min-width: 1000px) {
-      top: -1vh;
-    }
+    // @media screen and (max-height: 1600px) and (min-width: 1000px) {
+    //   top: -0.5vh;
+    // }
+    // @media screen and (max-height: 1400px) and (min-width: 1000px) {
+    //   top: -0.5vh;
+    // }
+    // @media screen and (max-height: 1280px) and (min-width: 1000px) {
+    //   top: -1vh;
+    // }
 
-    @media screen and (max-height: 1100px) and (min-width: 1000px) {
-      top: -1.5vh;
-    }
-    @media screen and (max-height: 1000px) and (min-width: 1000px) {
-      top: -2.5vh;
-    }
-    @media screen and (max-height: 900px) and (min-width: 1000px) {
-      top: -3vh;
-    }
-    @media screen and (max-height: 850px) and (min-width: 1000px) {
-      top: -4vh;
-    }
+    // @media screen and (max-height: 1100px) and (min-width: 1000px) {
+    //   top: -1.5vh;
+    // }
+    // @media screen and (max-height: 1000px) and (min-width: 1000px) {
+    //   top: -2.5vh;
+    // }
+    // @media screen and (max-height: 900px) and (min-width: 1000px) {
+    //   top: -3vh;
+    // }
+    // @media screen and (max-height: 850px) and (min-width: 1000px) {
+    //   top: -4vh;
+    // }
+    // @media screen and (max-height: 750px) and (min-width: 1000px) {
+    //   top: -4.5vh;
+    // }
+    // @media screen and (max-height: 700px) and (min-width: 1000px) {
+    //   top: -5vh;
+    // }
+    // @media screen and (max-height: 650px) and (min-width: 1000px) {
+    //   top: -6vh;
+    // }
+    // @media screen and (max-height: 600px) and (min-width: 1000px) {
+    //   top: -7vh;
+    // }
+    // @media screen and (max-height: 550px) and (min-width: 1000px) {
+    //   top: -9vh;
+    // }
+    // @media screen and (max-height: 500px) and (min-width: 1000px) {
+    //   top: -10vh;
+    // }
+    // @media screen and (max-height: 450px) and (min-width: 1000px) {
+    //   top: -11vh;
+    // }
+
+    // @media screen and (max-height: 400px) and (min-width: 1000px) {
+    //   top: -14vh;
+    // }
+    // @media screen and (max-height: 375px) and (min-width: 1000px) {
+    //   top: -16vh;
+    // }
+    // @media screen and (max-height: 325px) and (min-width: 1000px) {
+    //   top: -18vh;
+    // }
+    // @media screen and (max-height: 300px) and (min-width: 1000px) {
+    //   top: -20vh;
+    // }
+    // @media screen and (max-height: 275px) and (min-width: 1000px) {
+    //   top: -22vh;
+    // }
+    // @media screen and (max-height: 250px) and (min-width: 1000px) {
+    //   top: -24vh;
+    // }
+    // @media screen and (max-height: 225px) and (min-width: 1000px) {
+    //   top: -26vh;
+    // }
+    // @media screen and (max-height: 210px) and (min-width: 1000px) {
+    //   top: -28vh;
+    // }
   }
   @media screen and (max-width: 1500px) {
     right: 30vw;
   }
-  @media screen and (max-width: 960px) {
+  @media screen and (max-width: 1050px) {
     position: fixed;
     top: 9vh;
     right: 0vw;
@@ -644,8 +693,18 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 5rem 0rem 0 0rem;
+    margin: calc(-3% + 5vh) 0rem 0 0rem;
     z-index: 3000;
+    @media screen and (max-height: 800px) and (min-width: 1000px) {
+      margin: calc(0% + 2vh) 0rem 0 0rem;
+    }
+    @media screen and (max-height: 650px) and (min-width: 1000px) {
+      margin: calc(0% + 1vh) 0rem 0 0rem;
+    }
+    @media screen and (max-height: 500px) and (min-width: 1000px) {
+      margin: calc(-3% + 2vh) 0rem 0 0rem;
+    }
+
     @media screen and (max-width: 426px) {
       width: 95vw;
     }
@@ -863,9 +922,6 @@ export default {
   height: 300px;
   border-radius: 10px;
   overflow: hidden;
-  background: url("./drawailogo.png");
-  background-repeat: no-repeat;
-  background-position: center;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   transition: scale 0.15s;
   cursor: pointer;

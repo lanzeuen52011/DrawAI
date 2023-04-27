@@ -211,6 +211,9 @@ nav {
         border-bottom: 1px solid;
         font-size: 2.5rem;
       }
+      @media screen and (min-width: 1500px) {
+        font-size: calc(-7.5% + 1.4vw);
+      }
     }
   }
   a {

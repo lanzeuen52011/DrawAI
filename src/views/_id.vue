@@ -17,105 +17,56 @@ export default {
     const commentAuthor = ref("");
     const commentContent = ref("");
     const commentArr = reactive({ data: {} });
-    function includes(array, searchElement) {
-      for (let element of array) if (element === searchElement) return true;
-      return false;
-    }
+    const corsURL = "https://cors-anywhere.herokuapp.com/"; // use cors-anywhere to fetch api data
 
     const handleComment = () => {
       isComment.value = !isComment.value;
     };
     const handleCommentLeave = () => {
       isComment.value = !isComment.value;
-      if (Object.keys(gallery.data).length < 20) {
-        const copiedData = {
-          _subtable_1000074: {
-            0: {
-              author: "sss",
-              comment: "sss",
-              time: "2023/04/26 16:51:00",
-              _header_Y: [19],
-              _parentRagicId: 27,
-              _ragicId: 0,
-              _start_X: 1,
-            },
+      let data = JSON.stringify({
+        _subtable_1000074: {
+          "-1": {
+            1000072: `${commentAuthor.value}`,
+            1000073: `${commentContent.value}`,
           },
-        };
+        },
+      });
 
-        let i = 0;
-        copiedData._subtable_1000074[0].author = commentAuthor.value;
-        copiedData._subtable_1000074[0].comment = commentContent.value;
-        copiedData._subtable_1000074[0]._ragicId = 0;
-        commentArr.data = copiedData._subtable_1000074;
-        Object.keys(commentArr.data).forEach((a) => {
-          commentArr.data[a][1000072] = commentArr.data[a].author;
-          commentArr.data[a][1000073] = commentArr.data[a].comment;
-          delete commentArr.data[a].comment;
-          delete commentArr.data[a].author;
+      let config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=OGZiV2psUTdxVkxKVTk3NXRmeUxtYS9sZHdocDVXTkU1cG85TEtvWU1rN0xVS01xMFZBaFdYTGU2OUthV082TQ==`,
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: "JSESSIONID=node019u8efboog81a19x06w12jqsye74033.node0",
+        },
+        data: data,
+      };
+
+      axios
+        .request(config)
+        .then((response) => {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
         });
-        dataprocess1.data._subtable_1000074 = commentArr.data;
-        console.log(dataprocess1.data);
+      let timer = null;
+      setTimeout(() => {
         axios
-          .post(
-            `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=OGZiV2psUTdxVkxKVTk3NXRmeUxtYS9sZHdocDVXTkU1cG85TEtvWU1rN0xVS01xMFZBaFdYTGU2OUthV082TQ==`,
-            dataprocess1.data
-          )
+          .get(`https://ap9.ragic.com/lanziyun/convert2/1/${id}?api`)
           .then((res) => {
-            console.log(res);
+            gallery.data = res.data[id];
           })
           .catch((error) => {
-            console.error(error.response.data.error_message);
+            console.log(error);
           });
-
         commentAuthor.value = "";
         commentContent.value = "";
-        gallery.data._subtable_1000074 = copiedData._subtable_1000074;
-        Object.keys(commentArr.data).forEach((a) => {
-          commentArr.data[a].author = commentArr.data[a][1000072];
-          commentArr.data[a].comment = commentArr.data[a][1000073];
-          delete commentArr.data[a][1000072];
-          delete commentArr.data[a][1000073];
-        });
-      } else if (Object.keys(gallery.data).length >= 20) {
-        const copiedData = Object.assign({}, gallery.data._subtable_1000074[0]);
-        let i = Object.keys(gallery.data._subtable_1000074).length;
-        copiedData.author = commentAuthor.value;
-        copiedData.comment = commentContent.value;
-        copiedData._ragicId = Number(`${i}`);
-        copiedData._header_Y = [gallery.data._subtable_1000074[0]._header_Y[0]];
-        commentArr.data[Number(`${i}`)] = copiedData;
-        Object.keys(commentArr.data).forEach((a) => {
-          commentArr.data[a][1000072] = commentArr.data[a].author;
-          commentArr.data[a][1000073] = commentArr.data[a].comment;
-          delete commentArr.data[a].comment;
-          delete commentArr.data[a].author;
-        });
-        dataprocess1.data._subtable_1000074 = commentArr.data;
-        console.log(dataprocess1.data);
-        axios
-          .post(
-            `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=OGZiV2psUTdxVkxKVTk3NXRmeUxtYS9sZHdocDVXTkU1cG85TEtvWU1rN0xVS01xMFZBaFdYTGU2OUthV082TQ==`,
-            dataprocess1.data
-          )
-          .then((res) => {
-            console.log(res, dataprocess1.data);
-          })
-          .catch((error) => {
-            console.error(error.response.data.error_message);
-          });
-
-        commentAuthor.value = "";
-        commentContent.value = "";
-        Object.keys(commentArr.data).forEach((a) => {
-          commentArr.data[a].author = commentArr.data[a][1000072];
-          commentArr.data[a].comment = commentArr.data[a][1000073];
-          delete commentArr.data[a][1000072];
-          delete commentArr.data[a][1000073];
-        });
-      }
+      }, 1000);
     };
 
-    const corsURL = "https://cors-anywhere.herokuapp.com/"; // use cors-anywhere to fetch api data
     const icon = reactive({
       0: {
         class: "fi-ss-heart",
@@ -334,10 +285,6 @@ export default {
             </div>
           </div>
           <div class="comment__scroll">
-            <article class="comment__each">
-              <p class="comment__author">管理者</p>
-              <p class="comment__paragraph">提醒：留言功能尚未完善</p>
-            </article>
             <article
               class="comment__each"
               v-for="item in gallery.data._subtable_1000074"

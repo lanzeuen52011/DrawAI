@@ -25,10 +25,10 @@ export default {
     const handleCommentLeave = () => {
       isComment.value = !isComment.value;
       let data = JSON.stringify({
-        _subtable_1000077: {
+        _subtable_1000079: {
           "-1": {
             1000072: `${commentAuthor.value}`,
-            1000076: `${commentContent.value}`,
+            1000078: `${commentContent.value}`,
           },
         },
       });
@@ -58,6 +58,7 @@ export default {
           .get(`https://ap9.ragic.com/lanziyun/convert2/1/${id}?api`)
           .then((res) => {
             gallery.data = res.data[id];
+            console.log(gallery.data);
           })
           .catch((error) => {
             console.log(error);
@@ -175,8 +176,6 @@ export default {
         .then((res) => {
           gallery.data = res.data[id];
           emojidata.data = res.data[id]._subtable_1000050;
-          commentArr.data = res.data[id]._subtable_1000077;
-          console.log(gallery.data);
           Object.values(emojidata.data).forEach((emoji) => {
             icon["0"].data = emoji.heart;
             icon["1"].data = emoji.laugh;
@@ -288,7 +287,7 @@ export default {
           <div class="comment__scroll">
             <article
               class="comment__each"
-              v-for="item in gallery.data._subtable_1000077"
+              v-for="item in gallery.data._subtable_1000079"
               :key="item"
             >
               <p class="comment__author">{{ item["author"] }}</p>

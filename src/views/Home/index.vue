@@ -51,7 +51,7 @@ export default {
     </div>
   </nav>
   <router-view />
-  <footer class="footer grid grid__c-auto">
+  <footer class="footer grid">
     <div class="footer__item list">
       <router-link class="About" to="/">
         <img
@@ -316,15 +316,16 @@ a {
 }
 .footer {
   background: #1a1b1e;
+  height: 60vh;
   padding: 10vh 10vw;
+  grid-template-columns: repeat(auto-fit, minmax(0px, 1fr));
   @media screen and (max-width: 768px) {
+    height: auto;
     grid-template-rows: repeat(auto-fit, minmax(0px, 1fr));
     grid-template-columns: 1fr;
     position: relative;
-    // padding-top: 7vh;
     padding-left: 5vw;
     padding-right: 5vw;
-    // padding-bottom: 20vh;
   }
   > .footer__item {
     flex-direction: column;
@@ -334,7 +335,8 @@ a {
       left: 6vw;
     }
     &.list {
-      justify-content: center;
+      margin-top: 3vh;
+      justify-content: start;
       @media screen and (max-width: 768px) {
         order: 10;
         left: 0;

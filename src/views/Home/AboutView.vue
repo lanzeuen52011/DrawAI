@@ -12,7 +12,7 @@ export default {
     <div id="aboutProfile">
       <h2>關於我</h2>
       <div class="about__profile">
-        <img class="profile__avatar" src="@/assets/avatar.webp" alt="" />
+        <img class="profile__avatar" src="@/assets/avatar.webp" alt="avatar" />
         <div class="profile__content">
           <p>
             嗨！我叫藍子耘，過去兩年曾在物流業、傳產業和服務業工作，但在這些領域我無法找到樂趣以及工作中最重要的成就感，因此萌生轉職念頭。
@@ -35,26 +35,45 @@ export default {
       <h2>網站構成工具</h2>
       <ul class="about__web">
         <li class="web__list__item-content">
-          <img class="web__img" src="@/assets/logo.png" alt="" />
+          <img class="web__img" src="@/assets/logo.png" alt="vue3_logo" />
           Vue3、
-          <img class="web__img" src="@/assets/scss.png" alt="" />SCSS
+          <img class="web__img" src="@/assets/scss.png" alt="scss_logo" />SCSS
         </li>
 
         <li class="web__list__item-content">
-          <img class="web__img" src="@/assets/GitHub.png" alt="" />GitHub
+          <img
+            class="web__img"
+            src="@/assets/GitHub.png"
+            alt="github_logo"
+          />GitHub
         </li>
         <li class="web__list__item-content">
-          <img class="web__img" src="@/assets/axios.png" alt="" />axios 、cors
-          anywhere
+          <img
+            class="web__img"
+            src="@/assets/axios.png"
+            alt="axios_logo"
+          />axios 、cors anywhere
         </li>
         <li class="web__list__item-content">
-          <img class="web__img" src="@/assets/PS.png" alt="" />PhotoShop、
-          <img class="web__img" src="@/assets/Canvas.png" alt="" />Canvas、
-          <img class="web__img" src="@/assets/sprite.png" alt="" />
+          <img
+            class="web__img"
+            src="@/assets/PS.png"
+            alt="photoshop_logo"
+          />PhotoShop、
+          <img
+            class="web__img"
+            src="@/assets/Canvas.png"
+            alt="canvas_logo"
+          />Canvas、
+          <img class="web__img" src="@/assets/sprite.png" alt="svgsprte_logo" />
           SVGSPRITE.ES
         </li>
         <li class="web__list__item-content">
-          <img class="web__img" src="@/assets/Ragic.png" alt="" />Ragic
+          <img
+            class="web__img"
+            src="@/assets/Ragic.png"
+            alt="ragic_logo"
+          />Ragic
         </li>
       </ul>
     </div>

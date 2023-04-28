@@ -29,14 +29,20 @@ export default {
 <template>
   <nav>
     <router-link class="Home Home__logo" to="/"
-      ><img class="logo__normal" src="./Gallery/drawailogo.png" alt="" />
-      <img class="logo__mini" src="./Gallery/drawailogomini.png" alt=""
+      ><img
+        class="logo__normal"
+        src="./Gallery/drawailogo.png"
+        alt="Draw.AI LOGO" />
+      <img
+        class="logo__mini"
+        src="./Gallery/drawailogomini.png"
+        alt="Draw.AI LOGO"
     /></router-link>
     <button
       @click="chevronToggle('nav')"
       :class="['collapse__btn', { active: nav }]"
     >
-      <img src="./Gallery/menu.png" alt="" />
+      <img src="./Gallery/menu.png" alt="Draw.AI MENU" />
     </button>
     <div :class="['flex', 'flex-row', { active: nav }]">
       <router-link class="About" to="/">總畫廊</router-link>
@@ -48,7 +54,11 @@ export default {
   <footer class="footer grid grid__c-auto">
     <div class="footer__item list">
       <router-link class="About" to="/">
-        <img class="footer__logo" src="./Gallery/drawailogo.png" alt="" />
+        <img
+          class="footer__logo"
+          src="./Gallery/drawailogo.png"
+          alt="Draw.AI LOGO"
+        />
         <p>Copyright 2023 LanZiYun</p>
       </router-link>
     </div>
@@ -111,7 +121,11 @@ export default {
       <ul :class="['list', 'footer__list', { chevronon: other }]">
         <li>
           <a href="https://let-him-cook.netlify.app/">
-            <img class="other__logo" src="./LetHimCook1.png" alt="" />
+            <img
+              class="other__logo"
+              src="./LetHimCook1.png"
+              alt="other_websit-1"
+            />
           </a>
         </li>
       </ul>

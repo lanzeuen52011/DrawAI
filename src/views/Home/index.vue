@@ -316,7 +316,7 @@ a {
 }
 .footer {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, 16vw);
   background: #1a1b1e;
   height: 60vh;
   padding: 10vh 10vw;

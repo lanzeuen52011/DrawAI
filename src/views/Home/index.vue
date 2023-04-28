@@ -54,11 +54,7 @@ export default {
   <footer class="footer">
     <div class="footer__item list">
       <router-link class="About" to="/">
-        <img
-          class="footer__logo"
-          src="./Gallery/drawailogo.png"
-          alt="Draw.AI LOGO"
-        />
+        <img src="./Gallery/drawailogo.png" alt="Draw.AI LOGO" />
         <p>Copyright 2023 LanZiYun</p>
       </router-link>
     </div>
@@ -418,6 +414,7 @@ a {
       > img {
         object-fit: contain;
         width: 80%;
+        height: auto;
       }
     }
     > ul {
@@ -456,6 +453,7 @@ a {
           }
           > .other__logo {
             width: 12vw;
+            height: auto;
             @media screen and (max-width: 768px) {
               width: 40vw;
             }

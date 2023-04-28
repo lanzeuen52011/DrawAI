@@ -545,7 +545,6 @@ export default {
                 :class="['item__picture']"
                 :src="[item.smallurl]"
                 :alt="[item.name]"
-                loading="lazy"
               />
               <p :class="['item__name']">{{ item.name }}</p>
               <div

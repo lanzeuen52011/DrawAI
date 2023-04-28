@@ -54,7 +54,11 @@ export default {
   <footer class="footer">
     <div class="footer__item list">
       <router-link class="About" to="/">
-        <img src="./Gallery/drawailogo.png" alt="Draw.AI LOGO" />
+        <img
+          class="footer__logo"
+          src="./Gallery/drawailogo.png"
+          alt="Draw.AI LOGO"
+        />
         <p>Copyright 2023 LanZiYun</p>
       </router-link>
     </div>
@@ -412,7 +416,6 @@ a {
         opacity: 0.7;
       }
       > img {
-        object-fit: contain;
         width: 80%;
         height: auto;
       }
@@ -452,14 +455,8 @@ a {
             opacity: 1;
           }
           > .other__logo {
-            width: 12vw;
+            width: 100%;
             height: auto;
-            @media screen and (max-width: 768px) {
-              width: 40vw;
-            }
-            @media screen and (max-width: 375px) {
-              width: 50vw;
-            }
           }
         }
       }

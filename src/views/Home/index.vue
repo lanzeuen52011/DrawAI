@@ -315,12 +315,11 @@ a {
   position: relative;
 }
 .footer {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   background: #1a1b1e;
   padding: 10vh 10vw;
   @media screen and (max-width: 768px) {
-    display: grid;
-    padding: 10vh 5vw;
     height: auto;
     grid-template-columns: 1fr;
     position: relative;
@@ -330,9 +329,7 @@ a {
   > .footer__item {
     flex-direction: column;
     justify-content: start;
-    width: 16vw;
     @media screen and (max-width: 768px) {
-      width: auto;
       position: relative;
       left: 6vw;
     }

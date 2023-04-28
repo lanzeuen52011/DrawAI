@@ -138,28 +138,6 @@ html {
   font-size: 62.5%;
 }
 
-@font-face {
-  font-family: "微軟正黑體";
-  font-style: normal;
-  font-weight: 400;
-  src: local("微軟正黑體"), local("微軟正黑體");
-  font-display: optional;
-}
-@font-face {
-  font-family: "uicons-solid-straight";
-  font-style: normal;
-  font-weight: 400;
-  src: url("~@/icon/uicons-solid-straight.woff2");
-  font-display: optional;
-}
-@font-face {
-  font-family: "uicons-solid-rounded";
-  font-style: normal;
-  font-weight: 400;
-  src: url("~@/icon/uicons-solid-rounded.woff2");
-  font-display: optional;
-}
-
 body {
   font-family: 微軟正黑體, Inter, Arial, Arial, Helvetica, sans-serif;
   font-size: 2rem;

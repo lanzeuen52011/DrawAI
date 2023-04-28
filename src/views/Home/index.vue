@@ -316,12 +316,11 @@ a {
 }
 .footer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(0px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   background: #1a1b1e;
   height: 60vh;
   padding: 10vh 10vw;
   @media screen and (max-width: 768px) {
-    grid-template-rows: repeat(auto-fit, minmax(0px, 1fr));
     height: auto;
     grid-template-columns: 1fr;
     position: relative;

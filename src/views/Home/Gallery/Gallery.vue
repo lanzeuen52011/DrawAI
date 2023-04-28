@@ -600,7 +600,7 @@ export default {
   right: 33vw;
   //search
   &.div {
-    @media screen and (max-height: 1600px) and (min-width: 1000px) {
+    @media screen and (max-height: 1600px) and (min-width: 1050px) {
       top: calc(50% - 50vh);
     }
     // @media screen and (max-height: 1600px) and (min-width: 1000px) {

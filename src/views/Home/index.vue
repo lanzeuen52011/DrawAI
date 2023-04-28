@@ -386,6 +386,9 @@ a {
         @media screen and (max-width: 768px) {
           font-size: 3rem;
         }
+        &:hover {
+          opacity: 1;
+        }
       }
       > .no__a {
         opacity: 1;
@@ -396,9 +399,6 @@ a {
         @media screen and (max-width: 768px) {
           opacity: 0.9;
           font-size: 3rem;
-        }
-        &:hover {
-          opacity: 1;
         }
       }
     }

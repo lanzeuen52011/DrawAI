@@ -136,6 +136,7 @@ body {
 *::after,
 *::before {
   box-sizing: border-box;
+  font-display: optional;
 }
 .container {
   max-width: 1300px;

@@ -69,7 +69,7 @@ export default {
         >
           <router-link :to="`/${item._ragicId}`">
             <div class="icon__gallery__container">
-              <img :class="['item__picture']" :src="[item.url]" />
+              <img :class="['item__picture']" :src="[item.smallurl]" />
               <p :class="['item__name']">{{ item.name }}</p>
               <div
                 class="like__number grid grid__c-auto"
@@ -128,7 +128,7 @@ export default {
         >
           <router-link :to="`/${item._ragicId}`">
             <div class="icon__gallery__container">
-              <img :class="['item__picture']" :src="[item.url]" />
+              <img :class="['item__picture']" :src="[item.smallurl]" />
               <p :class="['item__name']">{{ item.name }}</p>
               <div
                 class="like__number grid grid__c-auto"
@@ -187,7 +187,7 @@ export default {
         >
           <router-link :to="`/${item._ragicId}`">
             <div class="icon__gallery__container">
-              <img :class="['item__picture']" :src="[item.url]" />
+              <img :class="['item__picture']" :src="[item.smallurl]" />
               <p :class="['item__name']">{{ item.name }}</p>
               <div
                 class="like__number grid grid__c-auto"
@@ -246,7 +246,7 @@ export default {
         >
           <router-link :to="`/${item._ragicId}`">
             <div class="icon__gallery__container">
-              <img :class="['item__picture']" :src="[item.url]" />
+              <img :class="['item__picture']" :src="[item.smallurl]" />
               <p :class="['item__name']">{{ item.name }}</p>
               <div
                 class="like__number grid grid__c-auto"

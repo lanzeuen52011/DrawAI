@@ -119,3 +119,7 @@ span[class*="fi-sr-"]:before {
 .bx-x:before {
   content: "\ec8d";
 }
+
+.bxs-chevron-right:before {
+  content: "\ed3b";
+}

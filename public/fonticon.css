@@ -92,6 +92,7 @@ span[class*="fi-sr-"]:before {
     url("./boxicons.woff2") format("woff2"),
     url("./boxicons.woff") format("woff"),
     url("./boxicons.ttf") format("truetype");
+  font-display: swap;
 }
 .bx {
   font-family: boxicons !important;
@@ -101,7 +102,6 @@ span[class*="fi-sr-"]:before {
   line-height: 1;
   text-rendering: auto;
   text-transform: none;
-  speak: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

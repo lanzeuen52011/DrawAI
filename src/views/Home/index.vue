@@ -146,10 +146,17 @@ html {
   font-display: optional;
 }
 @font-face {
-  font-family: "Inter";
+  font-family: "uicons-solid-straight";
   font-style: normal;
   font-weight: 400;
-  src: local("Inter"), local("Inter");
+  src: url("~@/icon/uicons-solid-straight.woff2");
+  font-display: optional;
+}
+@font-face {
+  font-family: "uicons-solid-rounded";
+  font-style: normal;
+  font-weight: 400;
+  src: url("~@/icon/uicons-solid-rounded.woff2");
   font-display: optional;
 }
 

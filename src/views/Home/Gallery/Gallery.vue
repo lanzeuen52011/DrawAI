@@ -415,7 +415,11 @@ export default {
           @focus="handleFocus"
           @blur="handleFocus"
         />
-        <button class="search__button" @click="handleSearch">
+        <button
+          class="search__button"
+          @click="handleSearch"
+          aria-label="搜尋，直接打字在「搜尋你想找的大師之作」也可以"
+        >
           <svg class="search__icon">
             <use xlink:href="@/image/sprite.svg#search"></use>
           </svg>

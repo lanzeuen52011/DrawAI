@@ -316,9 +316,8 @@ a {
 }
 .footer {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   background: #1a1b1e;
-  height: 60vh;
   padding: 10vh 10vw;
   @media screen and (max-width: 768px) {
     height: auto;

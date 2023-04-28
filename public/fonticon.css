@@ -8,12 +8,9 @@
 
 @font-face {
   font-family: "uicons-solid-straight";
-  src: url("https://cdn-uicons.flaticon.com/uicons-solid-straight/webfonts/uicons-solid-straight.eot#iefix")
-      format("embedded-opentype"),
-    url("https://cdn-uicons.flaticon.com/uicons-solid-straight/webfonts/uicons-solid-straight.woff2")
-      format("woff2"),
-    url("https://cdn-uicons.flaticon.com/uicons-solid-straight/webfonts/uicons-solid-straight.woff")
-      format("woff");
+  src: url("./uicons-solid-straight.eot#iefix") format("embedded-opentype"),
+    url("./uicons-solid-straight.woff2") format("woff2"),
+    url("./uicons-solid-straight.woff") format("woff");
   font-display: swap;
 }
 
@@ -74,12 +71,9 @@ span[class*="fi-sr-"]:before {
 
 @font-face {
   font-family: "uicons-solid-rounded";
-  src: url("https://cdn-uicons.flaticon.com/uicons-solid-rounded/webfonts/uicons-solid-rounded.eot#iefix")
-      format("embedded-opentype"),
-    url("https://cdn-uicons.flaticon.com/uicons-solid-rounded/webfonts/uicons-solid-rounded.woff2")
-      format("woff2"),
-    url("https://cdn-uicons.flaticon.com/uicons-solid-rounded/webfonts/uicons-solid-rounded.woff")
-      format("woff");
+  src: url("./uicons-solid-rounded.eot#iefix") format("embedded-opentype"),
+    url("./uicons-solid-rounded.woff2") format("woff2"),
+    url("./uicons-solid-rounded.woff") format("woff");
   font-display: swap;
 }
 
@@ -94,14 +88,10 @@ span[class*="fi-sr-"]:before {
   font-family: boxicons;
   font-weight: 400;
   font-style: normal;
-  src: url(https://unpkg.com/boxicons@latest/fonts/boxicons.eot);
-  src: url(https://unpkg.com/boxicons@latest/fonts/boxicons.eot)
-      format("embedded-opentype"),
-    url(https://unpkg.com/boxicons@latest/fonts/boxicons.woff2) format("woff2"),
-    url(https://unpkg.com/boxicons@latest/fonts/boxicons.woff) format("woff"),
-    url(https://unpkg.com/boxicons@latest/fonts/boxicons.ttf) format("truetype"),
-    url(https://unpkg.com/boxicons@latest/fonts/boxicons.svg?#boxicons)
-      format("svg");
+  src: url("./boxicons.eot") format("embedded-opentype"),
+    url("./boxicons.woff2") format("woff2"),
+    url("./boxicons.woff") format("woff"),
+    url("./boxicons.ttf") format("truetype");
 }
 .bx {
   font-family: boxicons !important;

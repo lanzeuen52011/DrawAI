@@ -1,5 +1,6 @@
 <script>
-import { onMounted, reactive, ref, toRefs } from "vue";
+import axios from "axios";
+import { onMounted, reactive } from "vue";
 export default {
   setup() {
     const Arr = reactive({ data: [] });

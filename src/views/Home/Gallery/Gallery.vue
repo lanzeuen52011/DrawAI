@@ -1,4 +1,5 @@
 <script>
+import axios from "axios";
 import { onMounted, reactive, ref, watch } from "vue";
 export default {
   setup() {

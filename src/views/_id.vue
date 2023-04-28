@@ -1,6 +1,7 @@
 <script>
 import { onMounted, onUnmounted, reactive, ref } from "vue";
 import { useRoute, useRouter } from "vue-router"; //這個是從網址上找出id的參數。
+import axios from "axios";
 export default {
   setup() {
     const route = useRoute();

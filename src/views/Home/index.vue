@@ -416,8 +416,9 @@ a {
         opacity: 0.7;
       }
       > img {
-        width: 80%;
-        height: auto;
+        width: calc(80%);
+        height: calc(60%);
+        object-fit: contain;
       }
     }
     > ul {
@@ -455,8 +456,9 @@ a {
             opacity: 1;
           }
           > .other__logo {
-            width: 100%;
-            height: auto;
+            width: calc(100%);
+            height: calc(100%);
+            object-fit: contain;
           }
         }
       }

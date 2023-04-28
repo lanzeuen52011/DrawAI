@@ -124,6 +124,21 @@ html {
   font-size: 62.5%;
 }
 
+@font-face {
+  font-family: "微軟正黑體";
+  font-style: normal;
+  font-weight: 400;
+  src: local("微軟正黑體"), local("微軟正黑體");
+  font-display: optional;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Inter"), local("Inter");
+  font-display: optional;
+}
+
 body {
   font-family: 微軟正黑體, Inter, Arial, Arial, Helvetica, sans-serif;
   font-size: 2rem;
@@ -136,7 +151,6 @@ body {
 *::after,
 *::before {
   box-sizing: border-box;
-  font-display: optional;
 }
 .container {
   max-width: 1300px;

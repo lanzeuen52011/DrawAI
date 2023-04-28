@@ -115,7 +115,7 @@ export default {
     </div>
     <div class="footer__item" @click="chevronToggle('other')">
       <h3>
-        <a class="no__a">其他網站</a>
+        <p class="no__a">其他網站</p>
       </h3>
       <i :class="['bx', 'bxs-chevron-right', { active: other }]"></i>
       <ul :class="['list', 'footer__list', { chevronon: other }]">
@@ -386,11 +386,16 @@ a {
         @media screen and (max-width: 768px) {
           font-size: 3rem;
         }
-        &.no__a {
-          opacity: 1;
-          @media screen and (max-width: 768px) {
-            opacity: 0.9;
-          }
+      }
+      > .no__a {
+        opacity: 1;
+        color: #fff;
+        font-size: 2rem;
+        opacity: 0.9;
+        margin: 0;
+        @media screen and (max-width: 768px) {
+          opacity: 0.9;
+          font-size: 3rem;
         }
         &:hover {
           opacity: 1;

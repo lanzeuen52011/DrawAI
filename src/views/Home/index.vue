@@ -181,7 +181,7 @@ nav {
   position: fixed;
   width: 100%;
   top: 0;
-  height: 12vh;
+  height: 85px;
   z-index: 2000;
   align-items: center;
   @media screen and (max-width: 650px) {
@@ -236,12 +236,12 @@ nav {
     display: flex;
 
     img {
-      height: 8vh;
+      height: 63px;
       object-fit: contain;
-      width: 30vw;
+      // width: 30vw;
 
       @media screen and (max-width: 426px) {
-        height: 6vh;
+        height: 80px;
       }
       &.logo__normal {
         @media screen and (max-width: 426px) {
@@ -311,7 +311,7 @@ a {
   padding: 0;
 }
 .body {
-  margin-top: 15vh;
+  margin-top: 120px;
   position: relative;
 }
 .footer {

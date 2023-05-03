@@ -411,7 +411,7 @@ export default {
           aria-label="Domain"
           type="text"
           class="search__input"
-          placeholder="搜尋你想找的大師之作"
+          placeholder="搜尋你想找的大師之作，打字即搜尋"
           v-model="search.text"
           @focus="handleFocus"
           @blur="handleFocus"
@@ -419,6 +419,7 @@ export default {
         <button
           class="search__button"
           @click="handleSearch"
+          @keyup.enter="handleSearch"
           aria-label="搜尋，直接打字在「搜尋你想找的大師之作」也可以"
         >
           <svg class="search__icon">
@@ -607,7 +608,7 @@ export default {
   //search
   &.div {
     @media screen and (max-height: 1600px) and (min-width: 1050px) {
-      top: calc(50% - 50vh);
+      top: 15px;
     }
     // @media screen and (max-height: 1600px) and (min-width: 1000px) {
     //   top: -0.5vh;
@@ -683,7 +684,7 @@ export default {
   }
   @media screen and (max-width: 1050px) {
     position: fixed;
-    top: 9vh;
+    top: 100px;
     right: 0vw;
     z-index: 1500;
   }
@@ -703,17 +704,18 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: calc(-3% + 5vh) 0rem 0 0rem;
+    margin: 0;
+    // margin: calc(-3% + 5vh) 0rem 0 0rem;
     z-index: 3000;
-    @media screen and (max-height: 800px) and (min-width: 1000px) {
-      margin: calc(0% + 2vh) 0rem 0 0rem;
-    }
-    @media screen and (max-height: 650px) and (min-width: 1000px) {
-      margin: calc(0% + 1vh) 0rem 0 0rem;
-    }
-    @media screen and (max-height: 500px) and (min-width: 1000px) {
-      margin: calc(-3% + 2vh) 0rem 0 0rem;
-    }
+    // @media screen and (min-width: 1000px) {
+    //   margin: 0;
+    // }
+    // @media screen and (max-height: 650px) and (min-width: 1000px) {
+    //   margin: calc(0% + 1vh) 0rem 0 0rem;
+    // }
+    // @media screen and (max-height: 500px) and (min-width: 1000px) {
+    //   margin: calc(-3% + 2vh) 0rem 0 0rem;
+    // }
 
     @media screen and (max-width: 426px) {
       width: 95vw;
@@ -723,7 +725,7 @@ export default {
     }
     > .search__input {
       width: 33vw;
-      height: 6vh;
+      height: 50px;
       border-radius: 10px;
       padding-left: 1rem;
       font-size: 1.5rem;
@@ -778,9 +780,6 @@ export default {
     padding: 0.3rem 0rem 1rem 1rem;
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-    @media screen and (max-height: 400px) {
-      top: -3.5vh;
-    }
     @media screen and (max-width: 1024px) {
       width: 29vw;
     }

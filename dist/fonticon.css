@@ -11,7 +11,7 @@
 @font-face {
   font-family: "uicons-solid-straight";
   src: url("./uss.eot#iefix") format("embedded-opentype"),
-    url("./uss.woff2") format("woff2"), url("./uss.woff") format("woff");
+    url("./uss.woff2") format("woff2"), url("./usr.woff") format("woff");
   font-display: swap;
 }
 

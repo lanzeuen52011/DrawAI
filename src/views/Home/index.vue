@@ -206,6 +206,7 @@ header {
       }
       img {
         width: 80%;
+        height: 43px;
       }
     }
     .flex.flex-row {
@@ -244,12 +245,9 @@ header {
 
       img {
         height: 63px;
+        width: 100%;
         object-fit: contain;
         // width: 30vw;
-
-        @media screen and (max-width: 426px) {
-          height: 80px;
-        }
         &.logo__normal {
           @media screen and (max-width: 426px) {
             display: none;

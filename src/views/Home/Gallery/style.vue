@@ -59,8 +59,8 @@ export default {
 };
 </script>
 <template>
-  <div class="container body" id="app">
-    <div id="realistic">
+  <section class="container body" id="app">
+    <section id="realistic">
       <h2 class="style__h2">現實風</h2>
       <ul :class="['list', 'style__list', 'gap']">
         <li
@@ -123,8 +123,8 @@ export default {
           </router-link>
         </li>
       </ul>
-    </div>
-    <div id="anime">
+    </section>
+    <section id="anime">
       <h2 class="style__h2">動漫風</h2>
       <ul :class="['list', 'style__list', 'gap']" id="anime2">
         <li
@@ -187,8 +187,8 @@ export default {
           </router-link>
         </li>
       </ul>
-    </div>
-    <div id="male">
+    </section>
+    <section id="male">
       <h2 class="style__h2">男性</h2>
       <ul :class="['list', 'style__list', 'gap']">
         <li
@@ -251,8 +251,8 @@ export default {
           </router-link>
         </li>
       </ul>
-    </div>
-    <div id="female">
+    </section>
+    <section id="female">
       <h2 class="style__h2">女性</h2>
       <ul :class="['list', 'style__list', 'gap']">
         <li
@@ -315,8 +315,8 @@ export default {
           </router-link>
         </li>
       </ul>
-    </div>
-  </div>
+    </section>
+  </section>
 </template>
 <style lang="scss">
 #realistic,

@@ -6,11 +6,12 @@
   font-display: swap;
 }
 
+/* uicons-solid-straight */
+
 @font-face {
   font-family: "uicons-solid-straight";
-  src: url("./uicons-solid-straight.eot#iefix") format("embedded-opentype"),
-    url("./uicons-solid-straight.woff2") format("woff2"),
-    url("./uicons-solid-straight.woff") format("woff");
+  src: url("./uss.eot#iefix") format("embedded-opentype"),
+    url("./uss.woff2") format("woff2"), url("./uss.woff") format("woff");
   font-display: swap;
 }
 
@@ -69,11 +70,12 @@ span[class*="fi-sr-"]:before {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* uicons-solid-rounded */
+
 @font-face {
   font-family: "uicons-solid-rounded";
-  src: url("./uicons-solid-rounded.eot#iefix") format("embedded-opentype"),
-    url("./uicons-solid-rounded.woff2") format("woff2"),
-    url("./uicons-solid-rounded.woff") format("woff");
+  src: url("./usr.eot#iefix") format("embedded-opentype"),
+    url("./usr.woff2") format("woff2"), url("./usr.woff") format("woff");
   font-display: swap;
 }
 
@@ -84,14 +86,15 @@ span[class*="fi-sr-"]:before {
 }
 
 /* _id.vue的X */
+/* boxicons */
 @font-face {
   font-family: boxicons;
   font-weight: 400;
   font-style: normal;
-  src: url("./boxicons.eot") format("embedded-opentype"),
-    url("./boxicons.woff2") format("woff2"),
-    url("./boxicons.woff") format("woff"),
-    url("./boxicons.ttf") format("truetype");
+  src: url("./icon.eot") format("embedded-opentype"),
+    url("./icon.woff2") format("woff2"), url("./icon.woff") format("woff"),
+    url("./icon.ttf") format("truetype");
+  font-display: swap;
 }
 .bx {
   font-family: boxicons !important;
@@ -101,7 +104,6 @@ span[class*="fi-sr-"]:before {
   line-height: 1;
   text-rendering: auto;
   text-transform: none;
-  speak: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

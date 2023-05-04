@@ -405,7 +405,7 @@ export default {
 </script>
 <template>
   <section class="container body">
-    <div class="filterandsearch div">
+    <section class="filterandsearch div">
       <div class="search__container container">
         <input
           aria-label="Domain"
@@ -521,8 +521,8 @@ export default {
           </button>
         </div>
       </div>
-    </div>
-    <div>
+    </section>
+    <section>
       <h1>總畫廊</h1>
       <div class="select__container">
         <select class="select__sort" v-model="selected" @change="handleChange">
@@ -596,7 +596,7 @@ export default {
           </router-link>
         </li>
       </ul>
-    </div>
+    </section>
   </section>
 </template>
 <style lang="scss">

@@ -325,6 +325,7 @@ a {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   background: #1a1b1e;
   padding: 10vh 10vw;
+  width: 100%;
   @media screen and (max-width: 768px) {
     height: auto;
     grid-template-columns: 1fr;

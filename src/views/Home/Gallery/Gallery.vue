@@ -404,228 +404,226 @@ export default {
 };
 </script>
 <template>
-  <section class="container body">
-    <section class="filterandsearch div">
-      <div class="search__container container">
-        <input
-          aria-label="Domain"
-          type="text"
-          class="search__input"
-          placeholder="搜尋你想找的大師之作，打字即搜尋"
-          v-model="search.text"
-          @focus="handleFocus"
-          @blur="handleFocus"
-        />
+  <section class="filterandsearch div">
+    <div class="search__container container">
+      <input
+        aria-label="Domain"
+        type="text"
+        class="search__input"
+        placeholder="搜尋你想找的大師之作，打字即搜尋"
+        v-model="search.text"
+        @focus="handleFocus"
+        @blur="handleFocus"
+      />
+      <button
+        class="search__button"
+        @click="handleSearch"
+        @keyup.enter="handleSearch"
+        aria-label="搜尋，直接打字在「搜尋你想找的大師之作」也可以"
+      >
+        <svg class="search__icon">
+          <use xlink:href="@/image/sprite.svg#search"></use>
+        </svg>
+      </button>
+    </div>
+    <div :class="['filter__container', { show: isFocus }, { show: isKeep }]">
+      <!-- 篩選器 -->
+      <div class="flex filter__item-1">
+        <div>
+          <button class="filter__btn active filter__btn-fn" @click="resetAll">
+            一鍵清除篩選與搜尋
+          </button>
+          <button
+            class="filter__btn active filter__btn-fn"
+            @click="resetFilter"
+          >
+            清除篩選
+          </button>
+          <button
+            class="filter__btn active filter__btn-fn"
+            @click="resetSearch"
+          >
+            清除搜尋
+          </button>
+        </div>
         <button
-          class="search__button"
-          @click="handleSearch"
-          @keyup.enter="handleSearch"
-          aria-label="搜尋，直接打字在「搜尋你想找的大師之作」也可以"
+          :class="['filter__btn', { active: isKeep }, 'filter__btn-fn']"
+          @click="keepShow"
         >
-          <svg class="search__icon">
-            <use xlink:href="@/image/sprite.svg#search"></use>
-          </svg>
+          固定選單
         </button>
       </div>
-      <div :class="['filter__container', { show: isFocus }, { show: isKeep }]">
-        <!-- 篩選器 -->
-        <div class="flex filter__item-1">
-          <div>
-            <button class="filter__btn active filter__btn-fn" @click="resetAll">
-              一鍵清除篩選與搜尋
-            </button>
-            <button
-              class="filter__btn active filter__btn-fn"
-              @click="resetFilter"
-            >
-              清除篩選
-            </button>
-            <button
-              class="filter__btn active filter__btn-fn"
-              @click="resetSearch"
-            >
-              清除搜尋
-            </button>
-          </div>
-          <button
-            :class="['filter__btn', { active: isKeep }, 'filter__btn-fn']"
-            @click="keepShow"
-          >
-            固定選單
-          </button>
-        </div>
-        <div>
-          <!-- 風格 -->
-          <button
-            v-for="type in Object.keys(types.style)"
-            :key="type"
-            @click="() => toggleType('style', `${type}`)"
-            :class="['filter__btn', { active: types.style[type].Boolean }]"
-          >
-            {{ type }}
-          </button>
-        </div>
-        <div class="dress">
-          <!-- 服裝 -->
-          <button
-            v-for="type in Object.keys(types.dress)"
-            :key="type"
-            @click="() => toggleType('dress', `${type}`)"
-            :class="['filter__btn', { active: types.dress[type].Boolean }]"
-          >
-            {{ type }}
-          </button>
-        </div>
-        <div>
-          <!-- 種族 -->
-          <button
-            v-for="type in Object.keys(types.ethnicity)"
-            :key="type"
-            @click="() => toggleType('ethnicity', `${type}`)"
-            :class="['filter__btn', { active: types.ethnicity[type].Boolean }]"
-          >
-            {{ type }}
-          </button>
-        </div>
-        <div>
-          <!-- 數量 -->
-          <button
-            v-for="type in Object.keys(types.people)"
-            :key="type"
-            @click="() => toggleType('people', `${type}`)"
-            :class="['filter__btn', { active: types.people[type].Boolean }]"
-          >
-            {{ type }}
-          </button>
-        </div>
-        <div>
-          <!-- 性別 -->
-          <button
-            v-for="type in Object.keys(types.sex)"
-            :key="type"
-            @click="() => toggleType('sex', `${type}`)"
-            :class="['filter__btn', { active: types.sex[type].Boolean }]"
-          >
-            {{ type }}
-          </button>
-        </div>
-        <div>
-          <!-- 年齡 -->
-          <button
-            v-for="type in Object.keys(types.age)"
-            :key="type"
-            @click="() => toggleType('age', `${type}`)"
-            :class="['filter__btn', { active: types.age[type].Boolean }]"
-          >
-            {{ type }}
-          </button>
-        </div>
-      </div>
-    </section>
-    <section>
-      <h1>總畫廊</h1>
-      <div class="select__container">
-        <select class="select__sort" v-model="selected" @change="handleChange">
-          {{
-            selected
-          }}
-          <option
-            v-for="select in Object.keys(types.selects)"
-            :key="select"
-            :value="select"
-          >
-            {{ select }}
-          </option>
-        </select>
-        <p>幫您搜尋到的張數：{{ quantity }}</p>
-      </div>
-      <ul :class="['list', 'gap']">
-        <li
-          :class="['list__item']"
-          v-for="(item, index) in Arr.data"
-          :key="item.id"
+      <div>
+        <!-- 風格 -->
+        <button
+          v-for="type in Object.keys(types.style)"
+          :key="type"
+          @click="() => toggleType('style', `${type}`)"
+          :class="['filter__btn', { active: types.style[type].Boolean }]"
         >
-          <router-link :to="`/${item._ragicId}`">
-            <div class="icon__gallery__container">
-              <img
-                :class="['item__picture']"
-                :src="[item.smallurl]"
-                :alt="[item.name]"
-                :loading="[index <= 3 ? '' : 'lazy']"
-              />
-              <p :class="['item__name']">{{ item.name }}</p>
-              <div
-                class="like__number grid grid__c-auto"
-                v-for="number in item._subtable_1000050"
-                :key="number"
-              >
-                <span>
-                  <svg>
-                    <use
-                      class="fi icon__gallery icon__gallery-heart opacity"
-                      href="./spriteicon.svg#heart"
-                    ></use>
-                  </svg>
-                </span>
-                <p
-                  class="number__heart number opacity"
-                  v-formatNumber="number['heart']"
-                ></p>
-                <span>
-                  <svg>
-                    <use
-                      class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh opacity"
-                      href="./spriteicon.svg#laugh"
-                    ></use>
-                  </svg>
-                </span>
-                <p
-                  class="number__laugh number opacity"
-                  v-formatNumber="number['laugh']"
-                ></p>
-                <span>
-                  <svg>
-                    <use
-                      class="fi icon__gallery fi-sr-angry icon__gallery-angry opacity"
-                      href="./spriteicon.svg#angry"
-                    ></use>
-                  </svg>
-                </span>
-                <p
-                  class="number__angry number opacity"
-                  v-formatNumber="number['angry']"
-                ></p>
-                <span>
-                  <svg>
-                    <use
-                      class="fi icon__gallery fi-ss-surprise icon__gallery-wow opacity"
-                      href="./spriteicon.svg#surprise"
-                    ></use>
-                  </svg>
-                </span>
-                <p
-                  class="number__wow number opacity"
-                  v-formatNumber="number['wow']"
-                ></p>
-                <span>
-                  <svg>
-                    <use
-                      class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad opacity"
-                      href="./spriteicon.svg#sad"
-                    ></use>
-                  </svg>
-                </span>
-                <p
-                  class="number__sad number opacity"
-                  v-formatNumber="number['sad']"
-                ></p>
-              </div>
+          {{ type }}
+        </button>
+      </div>
+      <div class="dress">
+        <!-- 服裝 -->
+        <button
+          v-for="type in Object.keys(types.dress)"
+          :key="type"
+          @click="() => toggleType('dress', `${type}`)"
+          :class="['filter__btn', { active: types.dress[type].Boolean }]"
+        >
+          {{ type }}
+        </button>
+      </div>
+      <div>
+        <!-- 種族 -->
+        <button
+          v-for="type in Object.keys(types.ethnicity)"
+          :key="type"
+          @click="() => toggleType('ethnicity', `${type}`)"
+          :class="['filter__btn', { active: types.ethnicity[type].Boolean }]"
+        >
+          {{ type }}
+        </button>
+      </div>
+      <div>
+        <!-- 數量 -->
+        <button
+          v-for="type in Object.keys(types.people)"
+          :key="type"
+          @click="() => toggleType('people', `${type}`)"
+          :class="['filter__btn', { active: types.people[type].Boolean }]"
+        >
+          {{ type }}
+        </button>
+      </div>
+      <div>
+        <!-- 性別 -->
+        <button
+          v-for="type in Object.keys(types.sex)"
+          :key="type"
+          @click="() => toggleType('sex', `${type}`)"
+          :class="['filter__btn', { active: types.sex[type].Boolean }]"
+        >
+          {{ type }}
+        </button>
+      </div>
+      <div>
+        <!-- 年齡 -->
+        <button
+          v-for="type in Object.keys(types.age)"
+          :key="type"
+          @click="() => toggleType('age', `${type}`)"
+          :class="['filter__btn', { active: types.age[type].Boolean }]"
+        >
+          {{ type }}
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="container body">
+    <h1>總畫廊</h1>
+    <div class="select__container">
+      <select class="select__sort" v-model="selected" @change="handleChange">
+        {{
+          selected
+        }}
+        <option
+          v-for="select in Object.keys(types.selects)"
+          :key="select"
+          :value="select"
+        >
+          {{ select }}
+        </option>
+      </select>
+      <p>幫您搜尋到的張數：{{ quantity }}</p>
+    </div>
+    <ul :class="['list', 'gap']">
+      <li
+        :class="['list__item']"
+        v-for="(item, index) in Arr.data"
+        :key="item.id"
+      >
+        <router-link :to="`/${item._ragicId}`">
+          <div class="icon__gallery__container">
+            <img
+              :class="['item__picture']"
+              :src="[item.smallurl]"
+              :alt="[item.name]"
+              :loading="[index <= 3 ? '' : 'lazy']"
+            />
+            <p :class="['item__name']">{{ item.name }}</p>
+            <div
+              class="like__number grid grid__c-auto"
+              v-for="number in item._subtable_1000050"
+              :key="number"
+            >
+              <span>
+                <svg>
+                  <use
+                    class="fi icon__gallery icon__gallery-heart opacity"
+                    href="./spriteicon.svg#heart"
+                  ></use>
+                </svg>
+              </span>
+              <p
+                class="number__heart number opacity"
+                v-formatNumber="number['heart']"
+              ></p>
+              <span>
+                <svg>
+                  <use
+                    class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh opacity"
+                    href="./spriteicon.svg#laugh"
+                  ></use>
+                </svg>
+              </span>
+              <p
+                class="number__laugh number opacity"
+                v-formatNumber="number['laugh']"
+              ></p>
+              <span>
+                <svg>
+                  <use
+                    class="fi icon__gallery fi-sr-angry icon__gallery-angry opacity"
+                    href="./spriteicon.svg#angry"
+                  ></use>
+                </svg>
+              </span>
+              <p
+                class="number__angry number opacity"
+                v-formatNumber="number['angry']"
+              ></p>
+              <span>
+                <svg>
+                  <use
+                    class="fi icon__gallery fi-ss-surprise icon__gallery-wow opacity"
+                    href="./spriteicon.svg#surprise"
+                  ></use>
+                </svg>
+              </span>
+              <p
+                class="number__wow number opacity"
+                v-formatNumber="number['wow']"
+              ></p>
+              <span>
+                <svg>
+                  <use
+                    class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad opacity"
+                    href="./spriteicon.svg#sad"
+                  ></use>
+                </svg>
+              </span>
+              <p
+                class="number__sad number opacity"
+                v-formatNumber="number['sad']"
+              ></p>
             </div>
-            <div :class="['back']"></div>
-          </router-link>
-        </li>
-      </ul>
-    </section>
+          </div>
+          <div :class="['back']"></div>
+        </router-link>
+      </li>
+    </ul>
   </section>
 </template>
 <style lang="scss">

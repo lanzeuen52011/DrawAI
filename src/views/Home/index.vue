@@ -422,7 +422,8 @@ a {
       }
       > img {
         width: 80%;
-        height: auto;
+        height: 80px;
+        object-fit: contain;
       }
     }
     > ul {
@@ -461,7 +462,7 @@ a {
           }
           > .other__logo {
             width: 100%;
-            height: auto;
+            height: 60px;
           }
         }
       }

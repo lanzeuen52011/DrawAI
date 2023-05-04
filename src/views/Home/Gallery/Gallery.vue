@@ -545,7 +545,7 @@ export default {
             <div class="icon__gallery__container">
               <img
                 :class="['item__picture']"
-                v-lazy="[item.smallurl]"
+                :src="[item.smallurl]"
                 :alt="[item.name]"
               />
               <p :class="['item__name']">{{ item.name }}</p>

@@ -8,13 +8,6 @@
 
 /* uicons-solid-straight */
 
-@font-face {
-  font-family: "uicons-solid-straight";
-  src: url("./uss.eot#iefix") format("embedded-opentype"),
-    url("./uss.woff2") format("woff2"), url("./usr.woff") format("woff");
-  font-display: swap;
-}
-
 /* ss */
 
 i[class^="fi-ss-"]:before,
@@ -72,13 +65,6 @@ span[class*="fi-sr-"]:before {
 
 /* uicons-solid-rounded */
 
-@font-face {
-  font-family: "uicons-solid-rounded";
-  src: url("./usr.eot#iefix") format("embedded-opentype"),
-    url("./usr.woff2") format("woff2"), url("./usr.woff") format("woff");
-  font-display: swap;
-}
-
 /* angry face */
 
 .fi-sr-angry:before {
@@ -87,15 +73,7 @@ span[class*="fi-sr-"]:before {
 
 /* _id.vue的X */
 /* boxicons */
-@font-face {
-  font-family: boxicons;
-  font-weight: 400;
-  font-style: normal;
-  src: url("./icon.eot") format("embedded-opentype"),
-    url("./icon.woff2") format("woff2"), url("./icon.woff") format("woff"),
-    url("./icon.ttf") format("truetype");
-  font-display: swap;
-}
+
 .bx {
   font-family: boxicons !important;
   font-weight: 400;

@@ -241,7 +241,11 @@ export default {
   <div class="id__container">
     <div v-if="!isError" class="grid grid__2c container container-center">
       <button class="button__back" @click="back">
-        <i class="bx bx-x"></i>
+        <span>
+          <svg>
+            <use href="./spriteicon.svg#X"></use>
+          </svg>
+        </span>
       </button>
       <img :src="gallery.data.url" alt="" />
       <div class="picture__info">
@@ -503,26 +507,28 @@ export default {
     }
     > .button__back {
       //backward button
-
       position: fixed;
       right: 0;
       top: 0;
-      background: none;
-      color: white;
+      background: rgba(0, 0, 0, 0.2);
+      fill: white;
       cursor: pointer;
       border: 0;
       width: 50px;
       height: 50px;
-      > .bx-x {
-        content: "\ec8d";
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #e9ecef;
-        transform: scale(5);
-        width: 10px;
-        height: 10px;
-        margin: 0;
+      outline: 0;
+      > span {
+        > svg {
+          position: fixed;
+          right: 0;
+          top: 0;
+          background: none;
+          fill: white;
+          cursor: pointer;
+          border: 0;
+          width: 50px;
+          height: 50px;
+        }
       }
     }
     > img {

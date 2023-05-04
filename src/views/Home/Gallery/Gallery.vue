@@ -404,7 +404,7 @@ export default {
 };
 </script>
 <template>
-  <div class="container body" id="app">
+  <section class="container body" id="app">
     <div class="filterandsearch div forRWD">
       <div class="search__container container">
         <input
@@ -597,7 +597,7 @@ export default {
         </li>
       </ul>
     </div>
-  </div>
+  </section>
 </template>
 <style lang="scss">
 .filterandsearch {

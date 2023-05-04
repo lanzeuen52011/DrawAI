@@ -27,29 +27,31 @@ export default {
 </script>
 
 <template>
-  <nav>
-    <router-link class="Home Home__logo" to="/"
-      ><img
-        class="logo__normal"
-        src="./Gallery/drawailogo.png"
-        alt="Draw.AI LOGO" />
-      <img
-        class="logo__mini"
-        src="./Gallery/drawailogomini.png"
-        alt="Draw.AI LOGO"
-    /></router-link>
-    <button
-      @click="chevronToggle('nav')"
-      :class="['collapse__btn', { active: nav }]"
-    >
-      <img src="./Gallery/menu.png" alt="Draw.AI MENU" />
-    </button>
-    <div :class="['flex', 'flex-row', { active: nav }]">
-      <router-link class="About" to="/">總畫廊</router-link>
-      <router-link class="About" to="/style">風格導覽</router-link>
-      <router-link class="About" to="/about">關於我</router-link>
-    </div>
-  </nav>
+  <header>
+    <nav>
+      <router-link class="Home Home__logo" to="/"
+        ><img
+          class="logo__normal"
+          src="./Gallery/drawailogo.png"
+          alt="Draw.AI LOGO" />
+        <img
+          class="logo__mini"
+          src="./Gallery/drawailogomini.png"
+          alt="Draw.AI LOGO"
+      /></router-link>
+      <button
+        @click="chevronToggle('nav')"
+        :class="['collapse__btn', { active: nav }]"
+      >
+        <img src="./Gallery/menu.png" alt="Draw.AI MENU" />
+      </button>
+      <div :class="['flex', 'flex-row', { active: nav }]">
+        <router-link class="About" to="/">總畫廊</router-link>
+        <router-link class="About" to="/style">風格導覽</router-link>
+        <router-link class="About" to="/about">關於我</router-link>
+      </div>
+    </nav>
+  </header>
   <router-view />
   <footer class="footer">
     <div class="footer__item list">
@@ -173,91 +175,93 @@ h2 {
   text-align: center;
   color: #2c3e50;
 }
-nav {
-  padding: 20px;
-  background: #1a1b1e;
-  display: flex;
-  justify-content: space-between;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  height: 85px;
-  z-index: 2000;
-  align-items: center;
-  @media screen and (max-width: 650px) {
-    z-index: 4000;
-  }
-  .collapse__btn {
-    display: none;
+header {
+  nav {
+    padding: 20px;
+    background: #1a1b1e;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    height: 85px;
+    z-index: 2000;
+    align-items: center;
     @media screen and (max-width: 650px) {
-      display: inline-block;
-      background: none;
-      width: 65px;
-      border: 0;
-      opacity: 0.8;
+      z-index: 4000;
     }
-    &.active {
+    .collapse__btn {
+      display: none;
       @media screen and (max-width: 650px) {
-        opacity: 1;
+        display: inline-block;
+        background: none;
+        width: 65px;
+        border: 0;
+        opacity: 0.8;
+      }
+      &.active {
+        @media screen and (max-width: 650px) {
+          opacity: 1;
+        }
+      }
+      img {
+        width: 80%;
       }
     }
-    img {
-      width: 80%;
-    }
-  }
-  .flex.flex-row {
-    @media screen and (max-width: 650px) {
-      flex-direction: column;
-      height: 0;
-      overflow: hidden;
-      display: none;
-    }
-    &.active {
-      position: absolute;
-      display: flex;
-      height: auto;
-      top: 12vh;
-      right: 0vw;
-      background: #000;
+    .flex.flex-row {
+      @media screen and (max-width: 650px) {
+        flex-direction: column;
+        height: 0;
+        overflow: hidden;
+        display: none;
+      }
+      &.active {
+        position: absolute;
+        display: flex;
+        height: auto;
+        top: 12vh;
+        right: 0vw;
+        background: #000;
+      }
+      a {
+        @media screen and (max-width: 650px) {
+          border-bottom: 1px solid;
+          font-size: 2.5rem;
+        }
+        @media screen and (min-width: 1500px) {
+          font-size: calc(-7.5% + 1.4vw);
+        }
+      }
     }
     a {
-      @media screen and (max-width: 650px) {
-        border-bottom: 1px solid;
-        font-size: 2.5rem;
-      }
-      @media screen and (min-width: 1500px) {
-        font-size: calc(-7.5% + 1.4vw);
-      }
-    }
-  }
-  a {
-    font-weight: bold;
-    color: #c1c2c5;
-    display: flex;
+      font-weight: bold;
+      color: #c1c2c5;
+      display: flex;
 
-    img {
-      height: 63px;
-      object-fit: contain;
-      // width: 30vw;
+      img {
+        height: 63px;
+        object-fit: contain;
+        // width: 30vw;
 
-      @media screen and (max-width: 426px) {
-        height: 80px;
-      }
-      &.logo__normal {
         @media screen and (max-width: 426px) {
+          height: 80px;
+        }
+        &.logo__normal {
+          @media screen and (max-width: 426px) {
+            display: none;
+          }
+        }
+        &.logo__mini {
           display: none;
+          @media screen and (max-width: 426px) {
+            display: block;
+          }
         }
       }
-      &.logo__mini {
-        display: none;
-        @media screen and (max-width: 426px) {
-          display: block;
-        }
-      }
-    }
 
-    &.router-link-exact-active {
-      color: #fff;
+      &.router-link-exact-active {
+        color: #fff;
+      }
     }
   }
 }

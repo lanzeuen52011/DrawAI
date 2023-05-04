@@ -69,7 +69,9 @@ export default {
       <h3>
         <router-link class="About" to="/style">風格導覽</router-link>
       </h3>
-      <i :class="['bx', 'bxs-chevron-right', { active: style }]"></i>
+      <svg :class="[{ active: style }]">
+        <use :class="['bx', 'bxs-chevron-right']" href="./chev.svg#chev"></use>
+      </svg>
       <ul :class="['list', 'footer__list', { chevronon: style }]">
         <li>
           <router-link
@@ -99,7 +101,9 @@ export default {
       <h3>
         <router-link class="About" to="/about">關於我</router-link>
       </h3>
-      <i :class="['bx', 'bxs-chevron-right', { active: about }]"></i>
+      <svg :class="[{ active: about }]">
+        <use :class="['bx', 'bxs-chevron-right']" href="./chev.svg#chev"></use>
+      </svg>
       <ul :class="['list', 'footer__list', { chevronon: about }]">
         <li>
           <router-link
@@ -119,7 +123,9 @@ export default {
       <h3>
         <p class="no__a">其他網站</p>
       </h3>
-      <i :class="['bx', 'bxs-chevron-right', { active: other }]"></i>
+      <svg :class="[{ active: other }]">
+        <use :class="['bx', 'bxs-chevron-right']" href="./chev.svg#chev"></use>
+      </svg>
       <ul :class="['list', 'footer__list', { chevronon: other }]">
         <li>
           <a href="https://let-him-cook.netlify.app/">
@@ -349,16 +355,17 @@ a {
         padding-top: 5vh;
       }
     }
-    > i {
+    > svg {
       display: none;
       @media screen and (max-width: 768px) {
         display: inline-block;
         position: relative;
-        color: #fff;
         scale: 2;
         top: -4.5vh;
         right: -20vw;
         transition: all 0.15s;
+        width: 30px;
+        height: 30px;
       }
       &.active {
         @media screen and (max-width: 768px) {

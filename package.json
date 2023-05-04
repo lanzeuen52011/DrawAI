@@ -13,6 +13,8 @@
     "vue-router": "^4.0.3"
   },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^4.0.0",
+    "@fullhuman/vue-cli-plugin-purgecss": "~5.0.0",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-service": "~5.0.0",

@@ -404,8 +404,8 @@ export default {
 };
 </script>
 <template>
-  <section class="container body" id="app">
-    <div class="filterandsearch div forRWD">
+  <section class="container body">
+    <div class="filterandsearch div">
       <div class="search__container container">
         <input
           aria-label="Domain"

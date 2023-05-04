@@ -45,11 +45,11 @@ export default {
       >
         <img src="./Gallery/menu.png" alt="Draw.AI MENU" />
       </button>
-      <div :class="['flex', 'flex-row', { active: nav }]">
-        <router-link class="About" to="/">總畫廊</router-link>
-        <router-link class="About" to="/style">風格導覽</router-link>
-        <router-link class="About" to="/about">關於我</router-link>
-      </div>
+      <ul :class="['flex', 'flex-row', { active: nav }]">
+        <li><router-link class="About" to="/">總畫廊</router-link></li>
+        <li><router-link class="About" to="/style">風格導覽</router-link></li>
+        <li><router-link class="About" to="/about">關於我</router-link></li>
+      </ul>
     </nav>
   </header>
   <router-view />
@@ -209,6 +209,8 @@ header {
       }
     }
     .flex.flex-row {
+      margin: 0;
+      padding: 0;
       @media screen and (max-width: 650px) {
         flex-direction: column;
         height: 0;
@@ -219,17 +221,19 @@ header {
         position: absolute;
         display: flex;
         height: auto;
-        top: 12vh;
+        top: 85px;
         right: 0vw;
         background: #000;
       }
-      a {
-        @media screen and (max-width: 650px) {
-          border-bottom: 1px solid;
-          font-size: 2.5rem;
-        }
-        @media screen and (min-width: 1500px) {
-          font-size: calc(-7.5% + 1.4vw);
+      li {
+        a {
+          @media screen and (max-width: 650px) {
+            border-bottom: 1px solid;
+            font-size: 2.5rem;
+          }
+          @media screen and (min-width: 1500px) {
+            font-size: calc(-7.5% + 1.4vw);
+          }
         }
       }
     }

@@ -2,7 +2,6 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import { formatNumber } from "@/lib/tools.js";
-import VueLazyload from "vue3-lazyload";
 
 const app = createApp(App);
 
@@ -13,4 +12,4 @@ app.directive("formatNumber", {
   },
 });
 
-app.use(router).use(VueLazyload).mount("#app");
+app.use(router).mount("#app");

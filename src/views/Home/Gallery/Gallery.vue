@@ -559,37 +559,62 @@ export default {
                 v-for="number in item._subtable_1000050"
                 :key="number"
               >
-                <i
-                  class="fi icon__gallery fi-ss-heart icon__gallery-heart opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery icon__gallery-heart opacity"
+                      href="./spriteicon.svg#heart"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__heart number opacity"
                   v-formatNumber="number['heart']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh opacity"
+                      href="./spriteicon.svg#laugh"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__laugh number opacity"
                   v-formatNumber="number['laugh']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-sr-angry icon__gallery-angry opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-sr-angry icon__gallery-angry opacity"
+                      href="./spriteicon.svg#angry"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__angry number opacity"
                   v-formatNumber="number['angry']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-ss-surprise icon__gallery-wow opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-ss-surprise icon__gallery-wow opacity"
+                      href="./spriteicon.svg#surprise"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__wow number opacity"
                   v-formatNumber="number['wow']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad opacity"
+                      href="./spriteicon.svg#sad"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__sad number opacity"
                   v-formatNumber="number['sad']"
@@ -606,83 +631,10 @@ export default {
 <style lang="scss">
 .filterandsearch {
   position: fixed;
-  top: 0vh;
+  top: 15px;
   z-index: 3000;
   right: 33vw;
   //search
-  &.div {
-    @media screen and (max-height: 1600px) and (min-width: 1050px) {
-      top: 15px;
-    }
-    // @media screen and (max-height: 1600px) and (min-width: 1000px) {
-    //   top: -0.5vh;
-    // }
-    // @media screen and (max-height: 1400px) and (min-width: 1000px) {
-    //   top: -0.5vh;
-    // }
-    // @media screen and (max-height: 1280px) and (min-width: 1000px) {
-    //   top: -1vh;
-    // }
-
-    // @media screen and (max-height: 1100px) and (min-width: 1000px) {
-    //   top: -1.5vh;
-    // }
-    // @media screen and (max-height: 1000px) and (min-width: 1000px) {
-    //   top: -2.5vh;
-    // }
-    // @media screen and (max-height: 900px) and (min-width: 1000px) {
-    //   top: -3vh;
-    // }
-    // @media screen and (max-height: 850px) and (min-width: 1000px) {
-    //   top: -4vh;
-    // }
-    // @media screen and (max-height: 750px) and (min-width: 1000px) {
-    //   top: -4.5vh;
-    // }
-    // @media screen and (max-height: 700px) and (min-width: 1000px) {
-    //   top: -5vh;
-    // }
-    // @media screen and (max-height: 650px) and (min-width: 1000px) {
-    //   top: -6vh;
-    // }
-    // @media screen and (max-height: 600px) and (min-width: 1000px) {
-    //   top: -7vh;
-    // }
-    // @media screen and (max-height: 550px) and (min-width: 1000px) {
-    //   top: -9vh;
-    // }
-    // @media screen and (max-height: 500px) and (min-width: 1000px) {
-    //   top: -10vh;
-    // }
-    // @media screen and (max-height: 450px) and (min-width: 1000px) {
-    //   top: -11vh;
-    // }
-
-    // @media screen and (max-height: 400px) and (min-width: 1000px) {
-    //   top: -14vh;
-    // }
-    // @media screen and (max-height: 375px) and (min-width: 1000px) {
-    //   top: -16vh;
-    // }
-    // @media screen and (max-height: 325px) and (min-width: 1000px) {
-    //   top: -18vh;
-    // }
-    // @media screen and (max-height: 300px) and (min-width: 1000px) {
-    //   top: -20vh;
-    // }
-    // @media screen and (max-height: 275px) and (min-width: 1000px) {
-    //   top: -22vh;
-    // }
-    // @media screen and (max-height: 250px) and (min-width: 1000px) {
-    //   top: -24vh;
-    // }
-    // @media screen and (max-height: 225px) and (min-width: 1000px) {
-    //   top: -26vh;
-    // }
-    // @media screen and (max-height: 210px) and (min-width: 1000px) {
-    //   top: -28vh;
-    // }
-  }
   @media screen and (max-width: 1500px) {
     right: 30vw;
   }
@@ -959,9 +911,6 @@ export default {
     @media screen and (max-width: 900px) {
       top: 72%;
     }
-    @media screen and (max-width: 450px) {
-      top: 67%;
-    }
   }
   &:hover
     > a
@@ -969,6 +918,31 @@ export default {
     > .like__number.grid.grid__c-auto
     > .opacity {
     opacity: 0.8;
+  }
+  &:hover
+    > a
+    > .icon__gallery__container
+    > .like__number.grid.grid__c-auto
+    > span
+    > svg {
+    width: 20px;
+    height: 20px;
+    > .opacity {
+      opacity: 0.8;
+    }
+  }
+  > a
+    > .icon__gallery__container
+    > .like__number.grid.grid__c-auto
+    > span
+    > svg {
+    width: 20px;
+    height: 20px;
+    > .opacity {
+      @media screen and (max-width: 1300px) {
+        opacity: 0.8;
+      }
+    }
   }
   > a > .icon__gallery__container > .like__number.grid.grid__c-auto > .opacity {
     @media screen and (max-width: 1300px) {
@@ -1082,19 +1056,19 @@ export default {
         > .icon__gallery {
           justify-self: center;
           &.icon__gallery-heart {
-            color: rgb(255, 170, 184);
+            fill: rgb(255, 170, 184);
           }
           &.icon__gallery-laugh {
-            color: rgb(255, 255, 179);
+            fill: rgb(255, 255, 179);
           }
           &.icon__gallery-angry {
-            color: rgb(255, 103, 103);
+            fill: rgb(255, 103, 103);
           }
           &.icon__gallery-wow {
-            color: rgb(237, 251, 255);
+            fill: rgb(237, 251, 255);
           }
           &.icon__gallery-sad {
-            color: rgb(202, 202, 202);
+            fill: rgb(202, 202, 202);
           }
           &.opacity {
             opacity: 0;

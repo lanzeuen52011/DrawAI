@@ -82,37 +82,62 @@ export default {
                 v-for="number in item._subtable_1000050"
                 :key="number"
               >
-                <i
-                  class="fi icon__gallery fi-ss-heart icon__gallery-heart opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery icon__gallery-heart opacity"
+                      href="./spriteicon.svg#heart"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__heart number opacity"
                   v-formatNumber="number['heart']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh opacity"
+                      href="./spriteicon.svg#laugh"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__laugh number opacity"
                   v-formatNumber="number['laugh']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-sr-angry icon__gallery-angry opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-sr-angry icon__gallery-angry opacity"
+                      href="./spriteicon.svg#angry"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__angry number opacity"
                   v-formatNumber="number['angry']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-ss-surprise icon__gallery-wow opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-ss-surprise icon__gallery-wow opacity"
+                      href="./spriteicon.svg#surprise"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__wow number opacity"
                   v-formatNumber="number['wow']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad opacity"
+                      href="./spriteicon.svg#sad"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__sad number opacity"
                   v-formatNumber="number['sad']"
@@ -146,37 +171,62 @@ export default {
                 v-for="number in item._subtable_1000050"
                 :key="number"
               >
-                <i
-                  class="fi icon__gallery fi-ss-heart icon__gallery-heart opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery icon__gallery-heart opacity"
+                      href="./spriteicon.svg#heart"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__heart number opacity"
                   v-formatNumber="number['heart']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh opacity"
+                      href="./spriteicon.svg#laugh"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__laugh number opacity"
                   v-formatNumber="number['laugh']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-sr-angry icon__gallery-angry opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-sr-angry icon__gallery-angry opacity"
+                      href="./spriteicon.svg#angry"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__angry number opacity"
                   v-formatNumber="number['angry']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-ss-surprise icon__gallery-wow opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-ss-surprise icon__gallery-wow opacity"
+                      href="./spriteicon.svg#surprise"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__wow number opacity"
                   v-formatNumber="number['wow']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad opacity"
+                      href="./spriteicon.svg#sad"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__sad number opacity"
                   v-formatNumber="number['sad']"
@@ -210,37 +260,62 @@ export default {
                 v-for="number in item._subtable_1000050"
                 :key="number"
               >
-                <i
-                  class="fi icon__gallery fi-ss-heart icon__gallery-heart opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery icon__gallery-heart opacity"
+                      href="./spriteicon.svg#heart"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__heart number opacity"
                   v-formatNumber="number['heart']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh opacity"
+                      href="./spriteicon.svg#laugh"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__laugh number opacity"
                   v-formatNumber="number['laugh']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-sr-angry icon__gallery-angry opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-sr-angry icon__gallery-angry opacity"
+                      href="./spriteicon.svg#angry"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__angry number opacity"
                   v-formatNumber="number['angry']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-ss-surprise icon__gallery-wow opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-ss-surprise icon__gallery-wow opacity"
+                      href="./spriteicon.svg#surprise"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__wow number opacity"
                   v-formatNumber="number['wow']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad opacity"
+                      href="./spriteicon.svg#sad"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__sad number opacity"
                   v-formatNumber="number['sad']"
@@ -274,37 +349,62 @@ export default {
                 v-for="number in item._subtable_1000050"
                 :key="number"
               >
-                <i
-                  class="fi icon__gallery fi-ss-heart icon__gallery-heart opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery icon__gallery-heart opacity"
+                      href="./spriteicon.svg#heart"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__heart number opacity"
                   v-formatNumber="number['heart']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh opacity"
+                      href="./spriteicon.svg#laugh"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__laugh number opacity"
                   v-formatNumber="number['laugh']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-sr-angry icon__gallery-angry opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-sr-angry icon__gallery-angry opacity"
+                      href="./spriteicon.svg#angry"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__angry number opacity"
                   v-formatNumber="number['angry']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-ss-surprise icon__gallery-wow opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-ss-surprise icon__gallery-wow opacity"
+                      href="./spriteicon.svg#surprise"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__wow number opacity"
                   v-formatNumber="number['wow']"
                 ></p>
-                <i
-                  class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad opacity"
-                ></i>
+                <span>
+                  <svg>
+                    <use
+                      class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad opacity"
+                      href="./spriteicon.svg#sad"
+                    ></use>
+                  </svg>
+                </span>
                 <p
                   class="number__sad number opacity"
                   v-formatNumber="number['sad']"
@@ -372,6 +472,31 @@ export default {
     &.style__list__item {
       flex-shrink: 0;
       margin-right: 20px;
+      &:hover
+        > a
+        > .icon__gallery__container
+        > .like__number.grid.grid__c-auto
+        > span
+        > svg {
+        width: 20px;
+        height: 20px;
+        > .opacity {
+          opacity: 0.8;
+        }
+      }
+      > a
+        > .icon__gallery__container
+        > .like__number.grid.grid__c-auto
+        > span
+        > svg {
+        width: 20px;
+        height: 20px;
+        > .opacity {
+          @media screen and (max-width: 1300px) {
+            opacity: 0.8;
+          }
+        }
+      }
       > a {
         > .icon__gallery__container {
           width: 100%;
@@ -457,19 +582,19 @@ export default {
 .icon__gallery {
   justify-self: center;
   &.icon__gallery-heart {
-    color: rgb(255, 170, 184);
+    fill: rgb(255, 170, 184);
   }
   &.icon__gallery-laugh {
-    color: rgb(255, 255, 179);
+    fill: rgb(255, 255, 179);
   }
   &.icon__gallery-angry {
-    color: rgb(255, 103, 103);
+    fill: rgb(255, 103, 103);
   }
   &.icon__gallery-wow {
-    color: rgb(237, 251, 255);
+    fill: rgb(237, 251, 255);
   }
   &.icon__gallery-sad {
-    color: rgb(202, 202, 202);
+    fill: rgb(202, 202, 202);
   }
   &.opacity {
     opacity: 0;

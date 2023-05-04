@@ -92,19 +92,20 @@ a {
 
 //scrollbar
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 3px;
 }
 ::-webkit-scrollbar-button {
   background: transparent;
-  border-radius: 4px;
+  border-radius: 20px;
 }
 ::-webkit-scrollbar-track-piece {
-  background: transparent;
+  background: #494b53;
+  border-radius: 20px;
 }
 ::-webkit-scrollbar-thumb {
-  border-radius: 4px;
+  border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.4);
-  border: 1px solid slategrey;
+  border: 1px solid #898989;
 }
 ::-webkit-scrollbar-track {
   box-shadow: transparent;

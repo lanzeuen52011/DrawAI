@@ -74,25 +74,35 @@ export default {
         class: "fi-ss-heart",
         data: "",
         isClicked: false,
+        href: "heart",
         color: "pink",
       },
       1: {
         class: "fi-sr-grin-squint-tears",
         data: "",
         isClicked: false,
+        href: "laugh",
         color: "yellow",
       },
-      2: { class: "fi-sr-angry", data: "", isClicked: false, color: "red" },
+      2: {
+        class: "fi-sr-angry",
+        data: "",
+        isClicked: false,
+        href: "angry",
+        color: "red",
+      },
       3: {
         class: "fi-ss-surprise",
         data: "",
         isClicked: false,
+        href: "surprise",
         color: "lightblue",
       },
       4: {
         class: "fi-ss-sad-tear",
         data: "",
         isClicked: false,
+        href: "sad",
         color: "gray",
       },
     });
@@ -252,14 +262,18 @@ export default {
             :key="item['class']"
             class="icon__container__box"
           >
-            <i
-              :class="[
-                'fi',
-                item['class'],
-                item['isClicked'] ? item.color : '',
-              ]"
-              @click="toggleEmotion(item.class)"
-            ></i>
+            <span @click="toggleEmotion(item.class)">
+              <svg>
+                <use
+                  :class="[
+                    'fi',
+                    item['class'],
+                    item['isClicked'] ? item.color : '',
+                  ]"
+                  :href="[`/img/spriteicon.c567c937.svg#${item.href}`]"
+                ></use>
+              </svg>
+            </span>
             <p>{{ item["data"] }}</p>
           </div>
         </div>
@@ -370,7 +384,7 @@ export default {
         text-align: left;
         letter-spacing: 0.2rem;
         margin: 5% 10%;
-        height: 22.7vh;
+        height: 310px;
         overflow-y: overlay;
         font-size: 1.6rem;
         width: 80%;
@@ -391,9 +405,13 @@ export default {
         border-radius: 10px;
         justify-content: center;
         align-items: center;
-        @media screen and (min-width: 1600px) {
+        @media screen and (min-width: 1700px) {
           align-items: center;
           font-size: 3rem;
+          height: 100px;
+        }
+        @media screen and (min-width: 600px) {
+          min-width: 500px;
         }
         @media screen and (max-width: 1300px) and (min-height: 800px) {
           font-size: 3rem;
@@ -402,6 +420,7 @@ export default {
           font-size: 1.5rem;
         }
         @media screen and (max-width: 600px) {
+          height: auto;
           flex-direction: column;
           font-size: 1.5rem;
         }
@@ -412,6 +431,7 @@ export default {
         > .icon__container__box {
           display: flex;
           width: 100%;
+          align-items: center;
           .pink,
           .yellow,
           .red,
@@ -420,26 +440,59 @@ export default {
             animation-name: isClicked;
             animation-duration: 0.3s;
           }
-          > .fi {
-            color: #fff;
+          > span {
             padding: 1.3rem 2rem 1rem;
-            cursor: pointer;
-            &.pink {
-              color: pink;
-            }
-            &.yellow {
-              color: yellow;
-            }
-            &.red {
-              color: red;
-            }
-            &.gray {
-              color: gray;
-            }
-            &.lightblue {
-              color: lightblue;
+            align-items: center;
+            display: flex;
+            > svg {
+              cursor: pointer;
+              width: 2rem;
+              height: 3rem;
+              fill: #fff;
+              @media screen and (min-width: 1700px) {
+                width: 3rem;
+              }
+              @media screen and (max-width: 1300px) and (min-height: 800px) {
+                width: 3rem;
+                height: 3rem;
+              }
+              @media screen and (max-width: 800px) and (min-height: 800px) {
+                width: 1.5rem;
+                height: 1.5rem;
+              }
+              @media screen and (max-width: 600px) {
+                flex-direction: column;
+                width: 1.5rem;
+                height: 1.5rem;
+              }
+              > .fi {
+                // color: #fff;
+                // padding: 1.3rem 2rem 1rem;
+                // cursor: pointer;
+                @media screen and (min-width: 1600px) {
+                  align-items: center;
+                  font-size: 3rem;
+                }
+
+                &.pink {
+                  fill: pink;
+                }
+                &.yellow {
+                  fill: yellow;
+                }
+                &.red {
+                  fill: red;
+                }
+                &.gray {
+                  fill: gray;
+                }
+                &.lightblue {
+                  fill: lightblue;
+                }
+              }
             }
           }
+
           > p {
             margin: 1rem;
             color: #fff;
@@ -578,8 +631,11 @@ export default {
     overflow-y: overlay;
     height: 34vh;
     width: 100%;
-    @media screen and (max-width: 850px) and (max-height: 400px) {
-      height: 90vh;
+    @media screen and (max-width: 1700px) {
+      height: 200px;
+    }
+    @media screen and (max-width: 1300px) {
+      height: 50vh;
     }
     // max-width: 36vw;
     > .comment__each {

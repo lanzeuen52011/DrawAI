@@ -5,17 +5,6 @@
   src: local("微軟正黑體"), local("微軟正黑體");
   font-display: swap;
 }
-
-@font-face {
-  font-family: "uicons-solid-straight";
-  src: url("./uss.woff2") format("woff2"), url("./usr.woff") format("woff");
-  font-display: swap;
-}
-@font-face {
-  font-family: "uicons-solid-rounded";
-  src: url("./usr.woff2") format("woff2"), url("./usr.woff") format("woff");
-  font-display: swap;
-}
 @font-face {
   font-family: boxicons;
   font-weight: 400;
@@ -23,71 +12,6 @@
   src: url("./icon.woff2") format("woff2"), url("./icon.woff") format("woff"),
     url("./icon.ttf") format("truetype");
   font-display: swap;
-}
-
-/* uicons-solid-straight */
-
-/* ss */
-
-i[class^="fi-ss-"]:before,
-i[class*=" fi-ss-"]:before,
-span[class^="fi-ss-"]:before,
-span[class*="fi-ss-"]:before {
-  font-family: uicons-solid-straight !important;
-  font-style: normal;
-  font-weight: normal !important;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* wow */
-
-.fi-ss-surprise:before {
-  content: "\f73a";
-}
-
-/* sad */
-
-.fi-ss-sad-tear:before {
-  content: "\f686";
-}
-
-/* heart */
-
-.fi-ss-heart:before {
-  content: "\f4bb";
-}
-
-/* happy face */
-.fi-sr-grin-squint-tears:before {
-  content: "\f462";
-}
-
-/* sr */
-
-i[class^="fi-sr-"]:before,
-i[class*=" fi-sr-"]:before,
-span[class^="fi-sr-"]:before,
-span[class*="fi-sr-"]:before {
-  font-family: uicons-solid-rounded !important;
-  font-style: normal;
-  font-weight: normal !important;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* uicons-solid-rounded */
-
-/* angry face */
-
-.fi-sr-angry:before {
-  content: "\f138";
 }
 
 /* _id.vue的X */

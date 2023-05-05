@@ -447,7 +447,12 @@ export default {
           </button>
         </div>
         <button
-          :class="['filter__btn', { active: isKeep }, 'filter__btn-fn']"
+          :class="[
+            'filter__btn',
+            'filter__btn-fixed',
+            { active: isKeep },
+            'filter__btn-fn',
+          ]"
           @click="keepShow"
         >
           固定選單
@@ -652,199 +657,207 @@ export default {
   @media screen and (max-width: 372px) {
     right: -12vw;
   }
-  .search__container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    // margin: calc(-3% + 5vh) 0rem 0 0rem;
-    z-index: 3000;
-    // @media screen and (min-width: 1000px) {
-    //   margin: 0;
-    // }
-    // @media screen and (max-height: 650px) and (min-width: 1000px) {
-    //   margin: calc(0% + 1vh) 0rem 0 0rem;
-    // }
-    // @media screen and (max-height: 500px) and (min-width: 1000px) {
-    //   margin: calc(-3% + 2vh) 0rem 0 0rem;
-    // }
+}
 
-    @media screen and (max-width: 426px) {
-      width: 95vw;
-    }
-    // @media screen and (max-width: 373px) {
-    //   width: 100%;
-    // }
-    > .search__input {
-      width: 33vw;
-      height: 50px;
-      border-radius: 10px;
-      padding-left: 1rem;
-      font-size: 1.5rem;
-      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-      @media screen and (max-width: 1024px) {
-        width: 29vw;
-      }
-      @media screen and (max-width: 960px) {
-        width: 35vw;
-      }
-      @media screen and (max-width: 650px) {
-        width: 53.5vw;
-      }
-      @media screen and (max-width: 426px) {
-        width: 83vw;
-      }
-    }
-    > .search__button {
-      width: 3.5rem;
-      height: 5.5rem;
-      padding: 4px;
-      background: none;
-      outline: 0;
-      border: 0;
-      opacity: 0.5;
-      margin: 0 1rem;
-      @media screen and (max-width: 1050px) {
-        width: 4.5rem;
-        height: 4.5rem;
-        border-radius: 10px;
-        background: #303030;
-        margin: 0;
-        margin-right: 1rem;
-        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-      }
-      &:hover {
-        opacity: 1;
-      }
-      > .search__icon {
-        width: 100%;
-        height: 100%;
-        fill: #fff;
-        @media screen and (max-width: 426px) {
-          display: none;
-        }
-      }
-    }
+//filter
+.filter__container {
+  position: relative;
+  top: 0;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  width: 33vw;
+  z-index: 3000;
+  background: #3e3e3e;
+  padding: 0.3rem 0rem 1rem 1rem;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  @media screen and (max-width: 1024px) {
+    width: 29vw;
+  }
+  @media screen and (max-width: 960px) {
+    width: 34.5vw;
+  }
+  @media screen and (max-width: 650px) {
+    width: 50.5vw;
+  }
+  @media screen and (max-width: 426px) {
+    width: 82.5vw;
+  }
+  @media screen and (max-width: 373px) {
+    width: 78vw;
   }
 
-  //filter
-  .filter__container {
-    position: relative;
-    top: 0;
-    right: 0;
-    display: none;
-    flex-direction: column;
-    align-items: start;
-    justify-content: center;
-    width: 33vw;
-    z-index: 3000;
-    background: #3e3e3e;
-    padding: 0.3rem 0rem 1rem 1rem;
-    border-radius: 10px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-    @media screen and (max-width: 1024px) {
-      width: 29vw;
-    }
+  &:hover {
+    display: flex;
+  }
+  &.show {
+    display: flex;
+  }
+}
 
-    @media screen and (max-width: 960px) {
-      width: 34.5vw;
+//篩選器的按鈕
+div {
+  // @media screen and (max-width: 1024px) {
+  //   position: relative;
+  // }
+  &.dress .filter__btn:first-child {
+    @media screen and (max-width: 325px) {
+      position: relative;
+      left: -7.3vw;
     }
-    @media screen and (max-width: 650px) {
-      width: 50.5vw;
-    }
-    @media screen and (max-width: 426px) {
-      width: 82.5vw;
-    }
-    @media screen and (max-width: 373px) {
-      width: 78vw;
-    }
+    //   @media screen and (max-width: 1024px) {
+    //     position: relative;
+    //     left: -1.1vw;
+    //   }
+    //   @media screen and (max-width: 768px) {
+    //     left: -3px;
+    //   }
+  }
 
-    &:hover {
-      display: flex;
+  > .filter__btn {
+    background: none;
+    border: 0;
+    color: #bdbdbd;
+    &.active {
+      background: #000;
+      transition: background 0.15s;
+      color: #fff;
     }
-    &.show {
-      display: flex;
-    }
-    > div {
-      // @media screen and (max-width: 1024px) {
-      //   position: relative;
-      // }
-      &.dress .filter__btn:first-child {
-        @media screen and (max-width: 325px) {
-          position: relative;
-          left: -7.3vw;
-        }
-        //   @media screen and (max-width: 1024px) {
-        //     position: relative;
-        //     left: -1.1vw;
-        //   }
-        //   @media screen and (max-width: 768px) {
-        //     left: -3px;
-        //   }
-      }
-
-      > .filter__btn {
-        background: none;
-        border: 0;
-        color: #bdbdbd;
-        &.active {
-          background: #000;
-          transition: background 0.15s;
-          color: #fff;
-        }
-      }
-      &.filter__item-1 {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-right: 2rem;
-        width: 100%;
-        @media screen and (max-width: 768px) {
-          padding-right: 0;
-        }
-        > .filter__btn-fn {
-          margin: 0 0.5rem;
-          @media screen and (max-width: 1024px) {
-            width: 80px;
-          }
-          &.filter__btn {
-            background: none;
-            border: 0;
-            color: #bdbdbd;
-            background: #000;
-            opacity: 0.5;
-          }
-          &.active {
-            transition: background 0.15s;
-            color: #fff;
-            opacity: 1;
-          }
-          &:hover {
-            transition: background 0.15s;
-            color: #fff;
-            opacity: 1;
-          }
-        }
-        > div {
-          > .filter__btn-fn {
-            margin: 0 0.5rem;
-            &.filter__btn {
-              background: none;
-              border: 0;
-              color: #bdbdbd;
-            }
-            &.active {
-              background: #000;
-              transition: background 0.15s;
-              color: #fff;
-            }
-          }
-        }
-      }
+  }
+  &.filter__item-1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 2rem;
+    width: 100%;
+    @media screen and (max-width: 768px) {
+      padding-right: 0;
     }
   }
 }
+
+//篩選器第一排特殊功能的按鈕
+div {
+  > .filter__btn-fn {
+    margin: 0 0.5rem;
+    &.filter__btn {
+      background: none;
+      border: 0;
+      color: #bdbdbd;
+    }
+    &.active {
+      background: #000;
+      transition: background 0.15s;
+      color: #fff;
+    }
+  }
+}
+
+.filter__btn-fn {
+  margin: 0 0.5rem;
+  @media screen and (max-width: 1024px) {
+    width: 80px;
+  }
+  &.filter__btn {
+    border: 0;
+    color: #bdbdbd;
+    background: #000;
+    opacity: 0.5;
+    &.filter__btn-fixed {
+      border: 0;
+      color: #bdbdbd;
+      background: #000;
+      &.active {
+        background: #000;
+        transition: background 0.15s;
+        color: #fff;
+      }
+    }
+  }
+  &.active {
+    transition: background 0.15s;
+    color: #fff;
+    opacity: 1;
+  }
+  &:hover {
+    transition: background 0.15s;
+    color: #fff;
+    opacity: 1;
+  }
+}
+
+//搜尋功能
+.search__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  z-index: 3000;
+  @media screen and (max-width: 426px) {
+    width: 95vw;
+  }
+}
+
+//搜尋功能-輸入區塊
+.search__input {
+  width: 33vw;
+  height: 50px;
+  border-radius: 10px;
+  padding-left: 1rem;
+  font-size: 1.5rem;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  @media screen and (max-width: 1024px) {
+    width: 29vw;
+  }
+  @media screen and (max-width: 960px) {
+    width: 35vw;
+  }
+  @media screen and (max-width: 650px) {
+    width: 53.5vw;
+  }
+  @media screen and (max-width: 426px) {
+    width: 83vw;
+  }
+}
+
+//搜尋功能-按鈕
+.search__button {
+  width: 3.5rem;
+  height: 5.5rem;
+  padding: 4px;
+  background: none;
+  outline: 0;
+  border: 0;
+  opacity: 0.5;
+  margin: 0 1rem;
+  @media screen and (max-width: 1050px) {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 10px;
+    background: #303030;
+    margin: 0;
+    margin-right: 1rem;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  }
+  &:hover {
+    opacity: 1;
+  }
+}
+
+//搜尋功能-icon
+.search__icon {
+  width: 100%;
+  height: 100%;
+  fill: #fff;
+  @media screen and (max-width: 426px) {
+    display: none;
+  }
+}
+
 //select
 .select__container {
   display: flex;
@@ -860,30 +873,31 @@ export default {
     padding-top: 4rem;
     margin: 0;
   }
-  > .select__sort {
-    text-align: start;
-    padding: 0;
-    color: #e9ecef;
-    background: #25262b;
-    outline: 0;
-    border: 0;
-    font-size: 3rem;
-    cursor: pointer;
-    margin: 4rem 0;
-    display: block;
-    font-weight: 600;
-    @media screen and (max-width: 1024px) {
-      margin: 2rem 0;
-    }
-    @media screen and (max-width: 620px) {
-      font-size: 2rem;
-    }
-  }
   > p {
     color: #fff;
     @media screen and (max-width: 620px) {
       font-size: 1.7rem;
     }
+  }
+}
+
+.select__sort {
+  text-align: start;
+  padding: 0;
+  color: #e9ecef;
+  background: #25262b;
+  outline: 0;
+  border: 0;
+  font-size: 3rem;
+  cursor: pointer;
+  margin: 4rem 0;
+  display: block;
+  font-weight: 600;
+  @media screen and (max-width: 1024px) {
+    margin: 2rem 0;
+  }
+  @media screen and (max-width: 620px) {
+    font-size: 2rem;
   }
 }
 
@@ -905,6 +919,9 @@ export default {
     color: white;
     z-index: 1000;
     letter-spacing: 0.3rem;
+    @media screen and (max-width: 900px) {
+      top: 72%;
+    }
   }
   > a > .icon__gallery__container > .item__name {
     @media screen and (max-width: 1300px) {
@@ -1041,66 +1058,65 @@ export default {
       top: 0;
     }
   }
-  > a {
-    > .icon__gallery__container {
-      width: 100%;
-      > .item__picture {
-        width: 300px;
-        height: 300px;
-        object-fit: contain;
-        backdrop-filter: blur(10px);
-        /* background: #e6ebee; */
+}
+
+.icon__gallery__container {
+  width: 100%;
+  > .item__picture {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+    backdrop-filter: blur(10px);
+    /* background: #e6ebee; */
+  }
+  > .like__number {
+    position: absolute;
+    top: 90%;
+    z-index: 1000;
+    width: inherit;
+    scale: 0.6;
+    > .icon__gallery {
+      justify-self: center;
+      &.icon__gallery-heart {
+        fill: rgb(255, 170, 184);
       }
-      > .like__number {
-        position: absolute;
-        top: 90%;
-        z-index: 1000;
-        width: inherit;
-        scale: 0.6;
-        > .icon__gallery {
-          justify-self: center;
-          &.icon__gallery-heart {
-            fill: rgb(255, 170, 184);
-          }
-          &.icon__gallery-laugh {
-            fill: rgb(255, 255, 179);
-          }
-          &.icon__gallery-angry {
-            fill: rgb(255, 103, 103);
-          }
-          &.icon__gallery-wow {
-            fill: rgb(237, 251, 255);
-          }
-          &.icon__gallery-sad {
-            fill: rgb(202, 202, 202);
-          }
-          &.opacity {
-            opacity: 0;
-          }
-        }
-        > .number {
-          margin: 0;
-          color: #fff;
-          justify-self: center;
-          &.number__heart {
-            right: 80%;
-          }
-          &.number__laugh {
-            right: 60%;
-          }
-          &.number__angry {
-            right: 40%;
-          }
-          &.number__wow {
-            right: 20%;
-          }
-          &.number__sad {
-            right: 0%;
-          }
-          &.opacity {
-            opacity: 0;
-          }
-        }
+      &.icon__gallery-laugh {
+        fill: rgb(255, 255, 179);
+      }
+      &.icon__gallery-angry {
+        fill: rgb(255, 103, 103);
+      }
+      &.icon__gallery-wow {
+        fill: rgb(237, 251, 255);
+      }
+      &.icon__gallery-sad {
+        fill: rgb(202, 202, 202);
+      }
+      &.opacity {
+        opacity: 0;
+      }
+    }
+    > .number {
+      margin: 0;
+      color: #fff;
+      justify-self: center;
+      &.number__heart {
+        right: 80%;
+      }
+      &.number__laugh {
+        right: 60%;
+      }
+      &.number__angry {
+        right: 40%;
+      }
+      &.number__wow {
+        right: 20%;
+      }
+      &.number__sad {
+        right: 0%;
+      }
+      &.opacity {
+        opacity: 0;
       }
     }
   }

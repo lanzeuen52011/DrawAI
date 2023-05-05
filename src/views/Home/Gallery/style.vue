@@ -328,7 +328,7 @@ export default {
       <h2 class="style__h2">女性</h2>
       <ul :class="['list', 'style__list', 'gap']">
         <li
-          :class="['list__item', 'style__list__item']"
+          :class="['style__list__item']"
           v-for="item in femaleArr.data"
           :key="item.id"
         >
@@ -352,55 +352,46 @@ export default {
                     href="./spriteicon.svg#heart"
                   ></use>
                 </svg>
-
                 <p
                   class="number__heart number opacity"
                   v-formatNumber="number['heart']"
                 ></p>
-
                 <svg>
                   <use
                     class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh opacity"
                     href="./spriteicon.svg#laugh"
                   ></use>
                 </svg>
-
                 <p
                   class="number__laugh number opacity"
                   v-formatNumber="number['laugh']"
                 ></p>
-
                 <svg>
                   <use
                     class="fi icon__gallery fi-sr-angry icon__gallery-angry opacity"
                     href="./spriteicon.svg#angry"
                   ></use>
                 </svg>
-
                 <p
                   class="number__angry number opacity"
                   v-formatNumber="number['angry']"
                 ></p>
-
                 <svg>
                   <use
                     class="fi icon__gallery fi-ss-surprise icon__gallery-wow opacity"
                     href="./spriteicon.svg#surprise"
                   ></use>
                 </svg>
-
                 <p
                   class="number__wow number opacity"
                   v-formatNumber="number['wow']"
                 ></p>
-
                 <svg>
                   <use
                     class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad opacity"
                     href="./spriteicon.svg#sad"
                   ></use>
                 </svg>
-
                 <p
                   class="number__sad number opacity"
                   v-formatNumber="number['sad']"
@@ -456,120 +447,100 @@ export default {
       height: auto;
     }
   }
-  > .list__item {
-    width: 300px;
-    height: 300px;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-    transition: scale 0.15s;
-    cursor: pointer;
-    position: relative;
-    &.style__list__item {
-      flex-shrink: 0;
-      margin-right: 20px;
-      &:hover
-        > a
-        > .icon__gallery__container
-        > .like__number.grid.grid__c-auto
-        > svg {
-        width: 20px;
-        height: 20px;
-        margin-left: 0.5rem;
-        > .opacity {
-          opacity: 0.8;
-        }
-      }
-      > a > .icon__gallery__container > .like__number.grid.grid__c-auto > svg {
-        width: 20px;
-        height: 20px;
-        margin-left: 0.5rem;
-        > .opacity {
-          @media screen and (max-width: 1300px) {
-            opacity: 0.8;
-          }
-        }
-      }
-      > a {
-        > .icon__gallery__container {
-          width: 100%;
-          > .item__picture {
-            width: 300px;
-            height: 300px;
-            object-fit: contain;
-            backdrop-filter: blur(10px);
-          }
-          > .like__number {
-            position: absolute;
-            top: 90%;
-            z-index: 1000;
-            width: inherit;
-            scale: 0.6;
-          }
-        }
-      }
-    }
-    &:hover .item__name {
-      position: absolute;
-      top: 75%;
-      width: 100%; //置中
-      color: white;
-      z-index: 1000;
-      letter-spacing: 0.3rem;
-      // text-shadow: -1px -1px 0 #dddddd, 1px -1px 0 #dddddd, -1px 1px 0 #dddddd,
-      //   1px 1px 0 #dddddd;
-    }
-    &:hover .opacity {
+}
+
+.style__list__item {
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  transition: scale 0.15s;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  margin-right: 20px;
+  &:hover
+    > a
+    > .icon__gallery__container
+    > .like__number.grid.grid__c-auto
+    > svg {
+    width: 20px;
+    height: 20px;
+    margin-left: 0.5rem;
+    > .opacity {
       opacity: 0.8;
     }
-    &:hover {
-      scale: 1.05;
+  }
+  > a > .icon__gallery__container > .like__number.grid.grid__c-auto > svg {
+    width: 20px;
+    height: 20px;
+    margin-left: 0.5rem;
+    > .opacity {
       @media screen and (max-width: 1300px) {
-        scale: 1;
+        opacity: 0.8;
       }
     }
-    &:hover .back {
-      background-image: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0.2) 0,
-        rgba(0, 0, 0, 0.19) 3.5%,
-        rgba(0, 0, 0, 0.18) 7%,
-        rgba(0, 0, 0, 0.17) 10.35%,
-        rgba(0, 0, 0, 0.16) 13.85%,
-        rgba(0, 0, 0, 0.15) 17.35%,
-        rgba(0, 0, 0, 0.14) 20.85%,
-        rgba(0, 0, 0, 0.13) 24.35%,
-        rgba(0, 0, 0, 0.12) 27.85%,
-        rgba(0, 0, 0, 0.11) 31.35%,
-        rgba(0, 0, 0, 0.1) 34.85%,
-        rgba(0, 0, 0, 0.126) 38.35%,
-        rgba(0, 0, 0, 0.112) 41.85%,
-        rgba(0, 0, 0, 0.103) 45.35%,
-        #0000001a 48.85%,
-        rgba(0, 0, 0, 0.103) 52.35%,
-        rgba(0, 0, 0, 0.112) 55.85%,
-        rgba(0, 0, 0, 0.126) 59.35%,
-        rgba(0, 0, 0, 0.144) 62.85%,
-        rgba(0, 0, 0, 0.165) 66.35%,
-        rgba(0, 0, 0, 0.188) 69.85%,
-        rgba(0, 0, 0, 0.4) 73.35%,
-        rgba(0, 0, 0, 0.45) 76.85%,
-        rgba(0, 0, 0, 0.5) 80.35%,
-        rgba(0, 0, 0, 0.55) 83.85%,
-        rgba(0, 0, 0, 0.6) 87.35%,
-        rgba(0, 0, 0, 0.65) 90.85%,
-        rgba(0, 0, 0, 0.7) 94.35%,
-        rgba(0, 0, 0, 0.75) 97.85%,
-        rgba(0, 0, 0, 0.8)
-      );
-      bottom: 0;
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
+  }
+  &:hover .item__name {
+    position: absolute;
+    top: 75%;
+    width: 100%; //置中
+    color: white;
+    z-index: 1000;
+    letter-spacing: 0.3rem;
+  }
+  &:hover .opacity {
+    opacity: 0.8;
+  }
+  &:hover {
+    scale: 1.05;
+    @media screen and (max-width: 1300px) {
+      scale: 1;
     }
   }
+  &:hover .back {
+    background-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.2) 0,
+      rgba(0, 0, 0, 0.19) 3.5%,
+      rgba(0, 0, 0, 0.18) 7%,
+      rgba(0, 0, 0, 0.17) 10.35%,
+      rgba(0, 0, 0, 0.16) 13.85%,
+      rgba(0, 0, 0, 0.15) 17.35%,
+      rgba(0, 0, 0, 0.14) 20.85%,
+      rgba(0, 0, 0, 0.13) 24.35%,
+      rgba(0, 0, 0, 0.12) 27.85%,
+      rgba(0, 0, 0, 0.11) 31.35%,
+      rgba(0, 0, 0, 0.1) 34.85%,
+      rgba(0, 0, 0, 0.126) 38.35%,
+      rgba(0, 0, 0, 0.112) 41.85%,
+      rgba(0, 0, 0, 0.103) 45.35%,
+      #0000001a 48.85%,
+      rgba(0, 0, 0, 0.103) 52.35%,
+      rgba(0, 0, 0, 0.112) 55.85%,
+      rgba(0, 0, 0, 0.126) 59.35%,
+      rgba(0, 0, 0, 0.144) 62.85%,
+      rgba(0, 0, 0, 0.165) 66.35%,
+      rgba(0, 0, 0, 0.188) 69.85%,
+      rgba(0, 0, 0, 0.4) 73.35%,
+      rgba(0, 0, 0, 0.45) 76.85%,
+      rgba(0, 0, 0, 0.5) 80.35%,
+      rgba(0, 0, 0, 0.55) 83.85%,
+      rgba(0, 0, 0, 0.6) 87.35%,
+      rgba(0, 0, 0, 0.65) 90.85%,
+      rgba(0, 0, 0, 0.7) 94.35%,
+      rgba(0, 0, 0, 0.75) 97.85%,
+      rgba(0, 0, 0, 0.8)
+    );
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
 }
+
 //icon 不放進.item__list的SCSS內是因為，當list__item:hover時，.back跟.opacity會有效果，
 //如果把這個引入進去，會失效，因為權重不一
 .icon__gallery {

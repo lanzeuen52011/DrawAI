@@ -359,183 +359,193 @@ export default {
         grid-template-rows: 40% 60%;
       }
     }
-    > .picture__info {
-      //picture
-      background: #25262b;
-      display: flex;
-      flex-direction: column;
-      @media screen and (min-width: 1500px) {
-        display: grid;
-        grid-template-columns: auto;
-      }
-      @media screen and (max-width: 1300px) {
-        width: 100vw;
-      }
-      > .picture__name {
-        color: #f7f7f7;
-        letter-spacing: 0.3rem;
-        padding: 20px;
-        display: block;
-        @media screen and (max-width: 700px) {
-          padding: 0 20px 20px;
-        }
-        @media screen and (max-width: 500px) {
-          font-size: 3rem;
-        }
-      }
-      > .picture__discri {
-        color: #f7f7f7;
-        text-align: left;
-        letter-spacing: 0.2rem;
-        margin: 5% 10%;
-        height: 310px;
-        overflow-y: overlay;
-        font-size: 1.6rem;
-        width: 80%;
-        word-wrap: break-word;
-        > h2 {
-          padding: 0;
-        }
-        > p {
-          padding-left: 2rem;
-          text-indent: 2rem;
-        }
-      }
-      .icon__container {
-        //icon
-        display: flex;
-        margin: 1rem 4rem;
-        border: 1px solid #fff;
-        border-radius: 10px;
-        justify-content: center;
-        align-items: center;
-        @media screen and (min-width: 1700px) {
-          align-items: center;
-          font-size: 3rem;
-          height: 100px;
-        }
-        @media screen and (min-width: 600px) {
-          min-width: 500px;
-        }
-        @media screen and (max-width: 1300px) and (min-height: 800px) {
-          font-size: 3rem;
-        }
-        @media screen and (max-width: 800px) and (min-height: 800px) {
-          font-size: 1.5rem;
-        }
-        @media screen and (max-width: 600px) {
-          height: auto;
-          flex-direction: column;
-          font-size: 1.5rem;
-        }
-        @media screen and (max-width: 374px) {
-          font-size: 0.5rem;
-        }
-
-        > .icon__container__box {
-          display: flex;
-          width: 100%;
-          align-items: center;
-          .pink,
-          .yellow,
-          .red,
-          .gray,
-          .lightblue {
-            animation-name: isClicked;
-            animation-duration: 0.3s;
-          }
-          > span {
-            padding: 1.3rem 2rem 1rem;
-            align-items: center;
-            display: flex;
-            > svg {
-              cursor: pointer;
-              width: 2rem;
-              height: 3rem;
-              fill: #fff;
-              @media screen and (min-width: 1700px) {
-                width: 3rem;
-              }
-              @media screen and (max-width: 1300px) and (min-height: 800px) {
-                width: 3rem;
-                height: 3rem;
-              }
-              @media screen and (max-width: 800px) and (min-height: 800px) {
-                width: 1.5rem;
-                height: 1.5rem;
-              }
-              @media screen and (max-width: 600px) {
-                flex-direction: column;
-                width: 1.5rem;
-                height: 1.5rem;
-              }
-              > .fi {
-                // color: #fff;
-                // padding: 1.3rem 2rem 1rem;
-                // cursor: pointer;
-                @media screen and (min-width: 1600px) {
-                  align-items: center;
-                  font-size: 3rem;
-                }
-
-                &.pink {
-                  fill: pink;
-                }
-                &.yellow {
-                  fill: yellow;
-                }
-                &.red {
-                  fill: red;
-                }
-                &.gray {
-                  fill: gray;
-                }
-                &.lightblue {
-                  fill: lightblue;
-                }
-              }
-            }
-          }
-
-          > p {
-            margin: 1rem;
-            color: #fff;
-            margin-left: 0;
-          }
-        }
-      }
-    }
-    > .button__back {
-      //backward button
-      position: fixed;
-      right: 0;
-      top: 0;
-      background: rgba(0, 0, 0, 0.2);
-      fill: white;
-      cursor: pointer;
-      border: 0;
-      width: 50px;
-      height: 50px;
-      outline: 0;
-      > span {
-        > svg {
-          position: fixed;
-          right: 0;
-          top: 0;
-          background: none;
-          fill: white;
-          cursor: pointer;
-          border: 0;
-          width: 50px;
-          height: 50px;
-        }
-      }
-    }
     > img {
       height: 100%;
       width: 100%;
       object-fit: contain;
     }
+  }
+}
+
+//照片資訊
+.picture__info {
+  //picture
+  background: #25262b;
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 1500px) {
+    display: grid;
+    grid-template-columns: auto;
+  }
+  @media screen and (max-width: 1300px) {
+    width: 100vw;
+  }
+}
+
+//照片標題
+.picture__name {
+  color: #f7f7f7;
+  letter-spacing: 0.3rem;
+  padding: 20px;
+  display: block;
+  @media screen and (max-width: 700px) {
+    padding: 0 20px 20px;
+  }
+  @media screen and (max-width: 500px) {
+    font-size: 3rem;
+  }
+}
+
+//照片描述
+.picture__discri {
+  color: #f7f7f7;
+  text-align: left;
+  letter-spacing: 0.2rem;
+  margin: 5% 10%;
+  height: 310px;
+  overflow-y: overlay;
+  font-size: 1.6rem;
+  width: 80%;
+  word-wrap: break-word;
+  > h2 {
+    padding: 0;
+  }
+  > p {
+    padding-left: 2rem;
+    text-indent: 2rem;
+  }
+}
+
+//右上角的"X"，回到上一頁
+.button__back {
+  //backward button
+  position: fixed;
+  right: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.2);
+  fill: white;
+  cursor: pointer;
+  border: 0;
+  width: 50px;
+  height: 50px;
+  outline: 0;
+  > span {
+    > svg {
+      position: fixed;
+      right: 0;
+      top: 0;
+      background: none;
+      fill: white;
+      cursor: pointer;
+      border: 0;
+      width: 50px;
+      height: 50px;
+    }
+  }
+}
+
+//全部的讚與讚數
+.icon__container {
+  //icon
+  display: flex;
+  margin: 1rem 4rem;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  @media screen and (min-width: 1700px) {
+    align-items: center;
+    font-size: 3rem;
+    height: 100px;
+  }
+  @media screen and (min-width: 600px) {
+    min-width: 500px;
+  }
+  @media screen and (max-width: 1300px) and (min-height: 800px) {
+    font-size: 3rem;
+  }
+  @media screen and (max-width: 800px) and (min-height: 800px) {
+    font-size: 1.5rem;
+  }
+  @media screen and (max-width: 600px) {
+    height: auto;
+    flex-direction: column;
+    font-size: 1.5rem;
+  }
+  @media screen and (max-width: 374px) {
+    font-size: 0.5rem;
+  }
+}
+//各個讚與讚數
+.icon__container__box {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  .pink,
+  .yellow,
+  .red,
+  .gray,
+  .lightblue {
+    animation-name: isClicked;
+    animation-duration: 0.3s;
+  }
+  > span {
+    padding: 1.3rem 2rem 1rem;
+    align-items: center;
+    display: flex;
+    > svg {
+      cursor: pointer;
+      width: 2rem;
+      height: 3rem;
+      fill: #fff;
+      @media screen and (min-width: 1700px) {
+        width: 3rem;
+      }
+      @media screen and (max-width: 1300px) and (min-height: 800px) {
+        width: 3rem;
+        height: 3rem;
+      }
+      @media screen and (max-width: 800px) and (min-height: 800px) {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+      @media screen and (max-width: 600px) {
+        flex-direction: column;
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+  }
+  > p {
+    margin: 1rem;
+    color: #fff;
+    margin-left: 0;
+  }
+}
+
+.fi {
+  // color: #fff;
+  // padding: 1.3rem 2rem 1rem;
+  // cursor: pointer;
+  @media screen and (min-width: 1600px) {
+    align-items: center;
+    font-size: 3rem;
+  }
+
+  &.pink {
+    fill: pink;
+  }
+  &.yellow {
+    fill: yellow;
+  }
+  &.red {
+    fill: red;
+  }
+  &.gray {
+    fill: gray;
+  }
+  &.lightblue {
+    fill: lightblue;
   }
 }
 
@@ -553,7 +563,7 @@ export default {
   }
 }
 
-//comment
+//整塊留言區域
 .comment {
   // height: 100%;
   max-width: 100%;
@@ -565,106 +575,113 @@ export default {
   @media screen and (max-width: 850px) and (min-height: 400px) {
     height: 50%;
   }
-  > div {
-    &.comment__name__container {
-      display: flex;
-      margin: 2rem 0 0 3rem;
-      width: 100%;
-      padding: 0;
-      padding-left: 2rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.9);
-      position: relative;
-      > .comment__name {
-        margin: 0;
-      }
-      > .comment__leave__container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        > button {
-          border-radius: 25%;
-          border: 0;
-          outline: 0;
-          cursor: pointer;
-          opacity: 0.8;
-          margin: 0 2rem;
-          color: #e9ecef;
-          background: #000;
-          padding: 0.5rem 1rem;
-          &.active {
-            color: #fff;
-            opacity: 1;
-          }
-          &:hover {
-            color: #fff;
-            opacity: 1;
-          }
-        }
-        > .comment__leave {
-          display: none;
-          &.show {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            top: 100%;
-            left: 20%;
-            @media screen and (max-width: 500px) {
-              left: 10%;
-            }
-          }
-          > input,
-          button {
-            padding-left: 1rem;
-            outline: 0;
-            border: 0;
-            border-radius: 10px;
-            &.leave__author {
-              width: 10rem;
-            }
-            &.comment__submit {
-              &:hover {
-                background: #ccc;
-              }
-            }
-          }
-        }
+}
+
+//"留言版"
+.comment__name__container {
+  display: flex;
+  margin: 2rem 0 0 3rem;
+  width: 100%;
+  padding: 0;
+  padding-left: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+  position: relative;
+  > .comment__name {
+    margin: 0;
+  }
+}
+
+//"我要留言"按鈕與其功能
+.comment__leave__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > button {
+    border-radius: 25%;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    opacity: 0.8;
+    margin: 0 2rem;
+    color: #e9ecef;
+    background: #000;
+    padding: 0.5rem 1rem;
+    &.active {
+      color: #fff;
+      opacity: 1;
+    }
+    &:hover {
+      color: #fff;
+      opacity: 1;
+    }
+  }
+}
+
+//"我要留言"按鈕與其功能
+.comment__leave {
+  display: none;
+  &.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 100%;
+    left: 20%;
+    @media screen and (max-width: 500px) {
+      left: 10%;
+    }
+  }
+  > input,
+  button {
+    padding-left: 1rem;
+    outline: 0;
+    border: 0;
+    border-radius: 10px;
+    &.leave__author {
+      width: 10rem;
+    }
+    &.comment__submit {
+      &:hover {
+        background: #ccc;
       }
     }
   }
+}
 
-  .comment__scroll {
-    overflow-y: overlay;
-    height: 34vh;
-    width: 100%;
-    @media screen and (max-width: 1700px) {
-      height: 200px;
-    }
-    @media screen and (max-width: 1300px) {
-      height: 50vh;
-    }
-    // max-width: 36vw;
-    > .comment__each {
-      border: 1px solid #fff;
-      border-radius: 30px;
-      margin: 5% 5% 5% 10%;
-      > .comment__author {
-        color: #f7f7f7;
-        letter-spacing: 0.3rem;
-        margin: 3% 7% 1%;
-        text-align: left;
-        font-size: 1.6rem;
-        border-bottom: 1px solid;
-        width: fit-content;
-      }
-      > .comment__paragraph {
-        color: #f7f7f7;
-        text-align: left;
-        letter-spacing: 0.2rem;
-        margin: 1% 8% 3% 9%;
-        font-size: 1rem;
-      }
-    }
+//查看各則留言的面積
+.comment__scroll {
+  overflow-y: overlay;
+  height: 34vh;
+  width: 100%;
+  @media screen and (max-width: 1700px) {
+    height: 200px;
+  }
+  @media screen and (max-width: 1300px) {
+    height: 50vh;
+  }
+  // max-width: 36vw;
+}
+
+//每則留言
+.comment__each {
+  border: 1px solid #fff;
+  border-radius: 30px;
+  margin: 5% 5% 5% 10%;
+  > .comment__author {
+    color: #f7f7f7;
+    letter-spacing: 0.3rem;
+    margin: 3% 7% 1%;
+    text-align: left;
+    font-size: 1.6rem;
+    border-bottom: 1px solid;
+    width: fit-content;
+  }
+  > .comment__paragraph {
+    color: #f7f7f7;
+    text-align: left;
+    letter-spacing: 0.2rem;
+    margin: 1% 8% 3% 9%;
+    font-size: 1rem;
   }
 }
 </style>

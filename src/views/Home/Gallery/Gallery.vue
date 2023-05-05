@@ -26,6 +26,21 @@ export default {
       return false;
     }
 
+    const scrollingdown = ref(false);
+    let prevScrollPos = window.pageYOffset;
+    window.addEventListener("scroll", () => {
+      const currentScrollPos = window.pageYOffset;
+      if (prevScrollPos < currentScrollPos) {
+        // 向下滾動
+        scrollingdown.value = true;
+      }
+      if (prevScrollPos > currentScrollPos) {
+        // 向下滾動
+        scrollingdown.value = false;
+      }
+      prevScrollPos = currentScrollPos;
+    });
+
     //有打字就搜尋
     watch(
       () => search.text,
@@ -399,12 +414,13 @@ export default {
       handleFocus,
       keepShow,
       isKeep,
+      scrollingdown,
     };
   },
 };
 </script>
 <template>
-  <section class="filterandsearch div">
+  <section :class="['filterandsearch', 'div', { up: scrollingdown }]">
     <div class="search__container container">
       <input
         aria-label="Domain"
@@ -636,7 +652,13 @@ export default {
   top: 15px;
   z-index: 3000;
   right: 33vw;
+  transition: top 0.3s;
   //search
+  &.up {
+    @media screen and (max-width: 650px) {
+      top: 35px;
+    }
+  }
   @media screen and (max-width: 1500px) {
     right: 30vw;
   }
@@ -842,6 +864,10 @@ div {
     margin: 0;
     margin-right: 1rem;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  }
+  @media screen and (max-width: 426px) {
+    background: none;
+    box-shadow: 0;
   }
   &:hover {
     opacity: 1;

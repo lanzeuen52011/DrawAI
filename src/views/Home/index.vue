@@ -7,6 +7,7 @@ export default {
     const about = ref(false);
     const other = ref(false);
     const nav = ref(false);
+    const scrollingdown = ref(false);
     const chevronToggle = (element) => {
       if (element === "style") {
         style.value = !style.value;
@@ -21,15 +22,28 @@ export default {
         nav.value = !nav.value;
       }
     };
-    return { chevronToggle, style, about, other, nav };
+    let prevScrollPos = window.pageYOffset;
+    window.addEventListener("scroll", () => {
+      const currentScrollPos = window.pageYOffset;
+      if (prevScrollPos < currentScrollPos) {
+        // 向下滾動
+        scrollingdown.value = true;
+      }
+      if (prevScrollPos > currentScrollPos) {
+        // 向下滾動
+        scrollingdown.value = false;
+      }
+      prevScrollPos = currentScrollPos;
+    });
+    return { chevronToggle, style, about, other, nav, scrollingdown };
   },
 };
 </script>
 
 <template>
   <header>
-    <nav>
-      <router-link class="Home Home__logo" to="/"
+    <nav :class="[{ hide: scrollingdown }]">
+      <router-link class="Home Home__logo" to="/" @click="nav = false"
         ><img
           class="logo__normal"
           src="./Gallery/drawailogo.png"
@@ -46,9 +60,21 @@ export default {
         <img src="./Gallery/menu.png" alt="Draw.AI MENU" />
       </button>
       <ul :class="['flex', 'flex-row', { active: nav }]">
-        <li><router-link class="About" to="/">總畫廊</router-link></li>
-        <li><router-link class="About" to="/style">風格導覽</router-link></li>
-        <li><router-link class="About" to="/about">關於我</router-link></li>
+        <li>
+          <router-link class="About" to="/" @click="chevronToggle('nav')"
+            >總畫廊</router-link
+          >
+        </li>
+        <li>
+          <router-link class="About" to="/style" @click="chevronToggle('nav')"
+            >風格導覽</router-link
+          >
+        </li>
+        <li>
+          <router-link class="About" to="/about" @click="chevronToggle('nav')"
+            >關於我</router-link
+          >
+        </li>
       </ul>
     </nav>
   </header>
@@ -196,8 +222,16 @@ header {
     height: 85px;
     z-index: 2000;
     align-items: center;
+    transition: height 0.3s;
     @media screen and (max-width: 650px) {
       z-index: 4000;
+    }
+    &.hide {
+      @media screen and (max-width: 650px) {
+        height: 0;
+        overflow: hidden;
+        padding: 0 20px;
+      }
     }
     .collapse__btn {
       display: none;

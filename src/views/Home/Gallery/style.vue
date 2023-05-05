@@ -59,7 +59,7 @@ export default {
 };
 </script>
 <template>
-  <section class="container body" id="app">
+  <section class="container body content" id="app">
     <section id="realistic">
       <h2 class="style__h2">現實風</h2>
       <ul :class="['list', 'style__list', 'gap']">

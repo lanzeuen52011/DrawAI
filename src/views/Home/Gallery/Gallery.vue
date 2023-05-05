@@ -521,7 +521,7 @@ export default {
       </div>
     </div>
   </section>
-  <section class="container body">
+  <section class="container body content">
     <h1>總畫廊</h1>
     <div class="select__container">
       <select class="select__sort" v-model="selected" @change="handleChange">

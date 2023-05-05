@@ -166,6 +166,9 @@ body {
     max-width: 100%;
   }
 }
+.content {
+  min-height: 1000px;
+}
 h1 {
   margin: 0;
 }

@@ -673,15 +673,16 @@ export default {
     @media screen and (max-width: 426px) {
       width: 95vw;
     }
-    @media screen and (max-width: 373px) {
-      width: 100%;
-    }
+    // @media screen and (max-width: 373px) {
+    //   width: 100%;
+    // }
     > .search__input {
       width: 33vw;
       height: 50px;
       border-radius: 10px;
       padding-left: 1rem;
       font-size: 1.5rem;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
       @media screen and (max-width: 1024px) {
         width: 29vw;
       }
@@ -704,6 +705,15 @@ export default {
       border: 0;
       opacity: 0.5;
       margin: 0 1rem;
+      @media screen and (max-width: 1050px) {
+        width: 4.5rem;
+        height: 4.5rem;
+        border-radius: 10px;
+        background: #303030;
+        margin: 0;
+        margin-right: 1rem;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+      }
       &:hover {
         opacity: 1;
       }
@@ -747,7 +757,7 @@ export default {
       width: 82.5vw;
     }
     @media screen and (max-width: 373px) {
-      right: -2vw;
+      width: 78vw;
     }
 
     &:hover {

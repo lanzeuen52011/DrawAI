@@ -465,6 +465,12 @@ a {
       transition: all 0.5s;
       border-bottom: 1px solid #7a7a7a;
       width: 300px;
+      @media screen and (max-width: 450px) {
+        width: 200px;
+      }
+      @media screen and (max-width: 320px) {
+        width: 60vw;
+      }
       @media screen and (min-width: 768px) {
         margin-top: 0.5rem;
 

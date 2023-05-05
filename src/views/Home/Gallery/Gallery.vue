@@ -931,6 +931,7 @@ export default {
   > a > .icon__gallery__container > .like__number.grid.grid__c-auto > svg {
     width: 20px;
     height: 20px;
+    margin-left: 0.5rem;
     > .opacity {
       @media screen and (max-width: 1300px) {
         opacity: 0.8;

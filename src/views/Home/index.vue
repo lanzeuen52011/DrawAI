@@ -28,6 +28,7 @@ export default {
       if (prevScrollPos < currentScrollPos) {
         // 向下滾動
         scrollingdown.value = true;
+        nav.value = false;
       }
       if (prevScrollPos > currentScrollPos) {
         // 向下滾動

@@ -223,7 +223,7 @@ header {
     height: 85px;
     z-index: 2000;
     align-items: center;
-    transition: height 0.3s;
+    transition: height 0.15s;
     @media screen and (max-width: 650px) {
       z-index: 4000;
     }

@@ -652,7 +652,7 @@ export default {
   top: 15px;
   z-index: 3000;
   right: 33vw;
-  transition: top 0.3s;
+  transition: top 0.15s;
   //search
   &.up {
     @media screen and (max-width: 650px) {

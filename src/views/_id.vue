@@ -48,10 +48,10 @@ export default {
       axios
         .request(config)
         .then((response) => {
-          console.log(response, JSON.stringify(response.data));
+          // console.log(response, JSON.stringify(response.data));
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
         });
       let timer = null;
       setTimeout(() => {
@@ -59,10 +59,10 @@ export default {
           .get(`https://ap9.ragic.com/lanziyun/convert2/1/${id}?api`)
           .then((res) => {
             gallery.data = res.data[id];
-            console.log(gallery.data);
+            // console.log(gallery.data);
           })
           .catch((error) => {
-            console.log(error);
+            // console.log(error);
           });
         commentAuthor.value = "";
         commentContent.value = "";
@@ -160,7 +160,7 @@ export default {
           )
           .then((res) => {
             //此可以確認是否回傳成功，但此處為按讚，因此不需要特別動作。
-            console.log(res, dataCollect.data);
+            // console.log(res, dataCollect.data);
           })
           .catch((error) => {
             console.error(error.response.data.error_message);
@@ -206,7 +206,7 @@ export default {
             // router.push({ path: "/gallery" }); //精確寫法，不影響事情的成敗，但會較為推薦此，因可以物件形式帶多項參數。把客戶推向"/gallery"
             // router.push("/gallery"); //簡短寫法，不影響事情的成敗，把客戶推向"/gallery"
           }, 3000);
-          console.log(error.response.data);
+          // console.log(error.response.data);
         }); //只要訊息不是200，全都會被catch接住。
     });
 

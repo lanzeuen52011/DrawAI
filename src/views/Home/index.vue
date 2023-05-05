@@ -54,16 +54,6 @@ export default {
   </header>
   <router-view />
   <footer class="footer">
-    <div class="footer__item list">
-      <router-link class="About" to="/">
-        <img
-          class="footer__logo"
-          src="./Gallery/drawailogo.png"
-          alt="Draw.AI LOGO"
-        />
-        <p>Copyright 2023 LanZiYun</p>
-      </router-link>
-    </div>
     <div class="footer__item"></div>
     <div class="footer__item" @click="chevronToggle('style')">
       <h3>
@@ -137,6 +127,16 @@ export default {
           </a>
         </li>
       </ul>
+    </div>
+    <div class="footer__item list">
+      <router-link class="About" to="/">
+        <img
+          class="footer__logo"
+          src="./Gallery/drawailogo.png"
+          alt="Draw.AI LOGO"
+        />
+        <p>Copyright 2023 LanZiYun</p>
+      </router-link>
     </div>
   </footer>
 </template>
@@ -330,50 +330,61 @@ a {
   position: relative;
 }
 .footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  height: auto;
   background: #1a1b1e;
-  padding: 10vh 10vw;
+  padding: 7rem 2rem;
   width: 100%;
-  @media screen and (max-width: 768px) {
-    height: auto;
-    grid-template-columns: 1fr;
+  @media screen and (max-width: 600px) {
+    justify-items: center;
+  }
+  @media screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     position: relative;
-    padding-left: 5vw;
-    padding-right: 5vw;
+    padding: 10vh 10vw;
   }
   > .footer__item {
     flex-direction: column;
     justify-content: start;
-    @media screen and (max-width: 768px) {
-      position: relative;
-      left: 6vw;
+    position: relative;
+    left: 30px;
+    @media screen and (max-width: 321px) {
+      left: 25px;
+    }
+    @media screen and (min-width: 425px) {
+      padding-left: 5rem;
+    }
+    @media screen and (min-width: 630px) {
+      padding-left: 10rem;
+    }
+    @media screen and (min-width: 768px) {
+      left: 0;
+      padding-left: 0;
     }
     &.list {
-      margin-top: 3vh;
-      justify-content: start;
-      @media screen and (max-width: 768px) {
-        order: 10;
-        left: 0;
-        padding-top: 5vh;
+      order: 10;
+      left: 0;
+      padding-top: 35px;
+      margin-top: 20px;
+      @media screen and (min-width: 768px) {
+        order: -1;
+        justify-content: start;
       }
     }
     > svg {
-      display: none;
-      @media screen and (max-width: 768px) {
-        display: inline-block;
-        position: relative;
-        scale: 2;
-        top: -4.5vh;
-        right: -20vw;
-        transition: all 0.15s;
-        width: 30px;
-        height: 30px;
+      display: inline-block;
+      position: relative;
+      scale: 2;
+      top: -4.5vh;
+      right: -20vw;
+      transition: all 0.15s;
+      width: 30px;
+      height: 30px;
+      @media screen and (min-width: 768px) {
+        display: none;
       }
       &.active {
-        @media screen and (max-width: 768px) {
-          rotate: 90deg;
-        }
+        rotate: 90deg;
       }
     }
     > p {
@@ -390,33 +401,36 @@ a {
     > h3 {
       margin: 0;
       text-align: left;
-      font-size: 2rem;
+      font-size: 3rem;
+
       margin-top: 0;
       color: #fff;
-      @media screen and (max-width: 768px) {
-        font-size: 3rem;
+      @media screen and (min-width: 768px) {
+        font-size: 2rem;
       }
 
       > a {
         color: #fff;
-        font-size: 2rem;
+        font-size: 3rem;
+
         opacity: 0.9;
-        @media screen and (max-width: 768px) {
-          font-size: 3rem;
+        @media screen and (min-width: 768px) {
+          font-size: 2rem;
         }
         &:hover {
-          opacity: 1;
+          @media screen and (min-width: 768px) {
+            opacity: 1;
+          }
         }
       }
       > .no__a {
-        opacity: 1;
-        color: #fff;
-        font-size: 2rem;
         opacity: 0.9;
+        font-size: 3rem;
+        color: #fff;
         margin: 0;
-        @media screen and (max-width: 768px) {
-          opacity: 0.9;
-          font-size: 3rem;
+
+        @media screen and (min-width: 768px) {
+          font-size: 2rem;
         }
       }
     }
@@ -438,22 +452,27 @@ a {
       }
     }
     > ul {
+      position: relative;
+      overflow: hidden;
       flex-direction: column;
       justify-content: start;
       align-items: start;
-      margin: 0.5rem 2.5rem 0;
-      @media screen and (max-width: 768px) {
-        display: flex;
-        flex-direction: column;
-        height: 0;
-        opacity: 0;
-        margin-top: 0;
-        position: relative;
-        overflow: hidden;
-        top: -3vh;
-        transition: all 0.5s;
-        border-bottom: 1px solid #7a7a7a;
-        width: 50vw;
+      opacity: 0.7;
+      height: 0;
+      opacity: 0;
+      margin: 0rem 2.5rem 0;
+      top: -30px;
+      transition: all 0.5s;
+      border-bottom: 1px solid #7a7a7a;
+      width: 300px;
+      @media screen and (min-width: 768px) {
+        margin-top: 0.5rem;
+
+        top: 0;
+        border: 0;
+        width: auto;
+        height: auto;
+        opacity: 1;
       }
       &.chevronon {
         height: auto;
@@ -463,21 +482,193 @@ a {
         > a {
           color: #fff;
           justify-content: start;
-          font-size: 1.6rem;
+          font-size: 2rem;
           opacity: 0.7;
-          @media screen and (max-width: 768px) {
-            font-size: 2rem;
+          @media screen and (min-width: 768px) {
+            font-size: 1.6rem;
           }
           &:hover {
             opacity: 1;
           }
           > .other__logo {
             width: 100%;
+            min-width: 100px;
             height: 60px;
+            object-fit: contain;
           }
         }
       }
     }
   }
 }
+// .flex {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding-right: 5rem;
+//   @media screen and (max-width: 1200px) {
+//     padding-right: 0;
+//   }
+// }
+// .flex a {
+//   padding: 0 2rem;
+// }
+// .Home {
+//   padding: 0;
+// }
+// .body {
+//   margin-top: 120px;
+//   position: relative;
+// }
+// .footer {
+//   display: grid;
+//   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+//   background: #1a1b1e;
+//   padding: 10vh 10vw;
+//   width: 100%;
+//   @media screen and (max-width: 768px) {
+//     height: auto;
+//     grid-template-columns: 1fr;
+//     position: relative;
+//     padding-left: 5vw;
+//     padding-right: 5vw;
+//   }
+//   > .footer__item {
+//     flex-direction: column;
+//     justify-content: start;
+//     @media screen and (max-width: 768px) {
+//       position: relative;
+//       left: 6vw;
+//     }
+//     &.list {
+//       margin-top: 3vh;
+//       justify-content: start;
+//       @media screen and (max-width: 768px) {
+//         order: 10;
+//         left: 0;
+//         padding-top: 5vh;
+//       }
+//     }
+//     > svg {
+//       display: none;
+//       @media screen and (max-width: 768px) {
+//         display: inline-block;
+//         position: relative;
+//         scale: 2;
+//         top: -4.5vh;
+//         right: -20vw;
+//         transition: all 0.15s;
+//         width: 30px;
+//         height: 30px;
+//       }
+//       &.active {
+//         @media screen and (max-width: 768px) {
+//           rotate: 90deg;
+//         }
+//       }
+//     }
+//     > p {
+//       margin: 0;
+//       font-size: 1.6rem;
+//       color: #fff;
+//       opacity: 0.7;
+//     }
+//     > img {
+//       width: 70%;
+//       object-fit: contain;
+//       height: 40%;
+//     }
+//     > h3 {
+//       margin: 0;
+//       text-align: left;
+//       font-size: 2rem;
+//       margin-top: 0;
+//       color: #fff;
+//       @media screen and (max-width: 768px) {
+//         font-size: 3rem;
+//       }
+
+//       > a {
+//         color: #fff;
+//         font-size: 2rem;
+//         opacity: 0.9;
+//         @media screen and (max-width: 768px) {
+//           font-size: 3rem;
+//         }
+//         &:hover {
+//           opacity: 1;
+//         }
+//       }
+//       > .no__a {
+//         opacity: 1;
+//         color: #fff;
+//         font-size: 2rem;
+//         opacity: 0.9;
+//         margin: 0;
+//         @media screen and (max-width: 768px) {
+//           opacity: 0.9;
+//           font-size: 3rem;
+//         }
+//       }
+//     }
+//     > a {
+//       opacity: 0.9;
+//       &:hover {
+//         opacity: 1;
+//       }
+//       > p {
+//         margin: 0;
+//         font-size: 1.6rem;
+//         color: #fff;
+//         opacity: 0.7;
+//       }
+//       > img {
+//         width: 80%;
+//         height: 80px;
+//         object-fit: contain;
+//       }
+//     }
+//     > ul {
+//       flex-direction: column;
+//       justify-content: start;
+//       align-items: start;
+//       margin: 0.5rem 2.5rem 0;
+//       @media screen and (max-width: 768px) {
+//         display: flex;
+//         flex-direction: column;
+//         height: 0;
+//         opacity: 0;
+//         margin-top: 0;
+//         position: relative;
+//         overflow: hidden;
+//         top: -3vh;
+//         transition: all 0.5s;
+//         border-bottom: 1px solid #7a7a7a;
+//         width: 50vw;
+//       }
+//       &.chevronon {
+//         height: auto;
+//         opacity: 1;
+//       }
+//       > li {
+//         > a {
+//           color: #fff;
+//           justify-content: start;
+//           font-size: 1.6rem;
+//           opacity: 0.7;
+//           @media screen and (max-width: 768px) {
+//             font-size: 2rem;
+//           }
+//           &:hover {
+//             opacity: 1;
+//           }
+//           > .other__logo {
+//             width: 100%;
+//             height: 60px;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 </style>

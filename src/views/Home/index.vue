@@ -44,7 +44,7 @@ export default {
 <template>
   <header>
     <nav :class="[{ hide: scrollingdown }]">
-      <router-link class="Home Home__logo" to="/" @click="nav = false"
+      <a class="Home Home__logo" href="/" @click="nav = false"
         ><img
           class="logo__normal"
           src="./Gallery/drawailogo.png"
@@ -53,7 +53,7 @@ export default {
           class="logo__mini"
           src="./Gallery/drawailogomini.png"
           alt="Draw.AI LOGO"
-      /></router-link>
+      /></a>
       <button
         @click="chevronToggle('nav')"
         :class="['collapse__btn', { active: nav }]"

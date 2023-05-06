@@ -18,7 +18,7 @@ export default {
     const commentAuthor = ref("");
     const commentContent = ref("");
     const commentArr = reactive({ data: {} });
-    const corsURL = "https://cors-anywhere.herokuapp.com/"; // use cors-anywhere to fetch api data
+    const corsURL = "https://lzu-cors.onrender.com/"; // use cors-anywhere to fetch api data 曾經是用這個https://cors-anywhere.herokuapp.com/，現在是用render.com架站，是自己的。
 
     const handleComment = () => {
       isComment.value = !isComment.value;

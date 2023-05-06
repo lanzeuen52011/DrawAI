@@ -263,12 +263,14 @@ header {
         display: none;
       }
       &.active {
-        position: absolute;
-        display: flex;
-        height: auto;
-        top: 85px;
-        right: 0vw;
-        background: #000;
+        @media screen and (max-width: 650px) {
+          position: absolute;
+          display: flex;
+          height: auto;
+          top: 85px;
+          right: 0vw;
+          background: #000;
+        }
       }
       li {
         a {

@@ -654,8 +654,8 @@ export default {
 </template>
 <style lang="scss">
 .gallery__loading-img {
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 75px;
 }
 .gallery__loading-container {
   margin-top: 50px;

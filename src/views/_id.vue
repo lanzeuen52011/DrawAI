@@ -17,6 +17,7 @@ export default {
     const isComment = ref(false);
     const commentAuthor = ref("");
     const commentContent = ref("");
+    const isLoad = ref(false);
     const commentArr = reactive({ data: {} });
     const corsURL = "https://lzu-cors.onrender.com/"; // use cors-anywhere to fetch api data 曾經是用這個https://cors-anywhere.herokuapp.com/，現在是用render.com架站，是自己的。
 
@@ -196,6 +197,7 @@ export default {
           });
           //因為計算讚數的收集(icon)與連結下來的資料gallery、emojidata放置方式不一樣，
           //是因為要使用Foreach的方式渲染，因此需額外多一個動作將值放為gallery再回傳，才有辦法修改。
+          isLoad.value = true;
         })
         .catch((error) => {
           isError.value = true;
@@ -233,6 +235,7 @@ export default {
       handleCommentLeave,
       commentAuthor,
       commentContent,
+      isLoad,
     };
   },
 };
@@ -247,7 +250,14 @@ export default {
           </svg>
         </span>
       </button>
-      <img :src="gallery.data.url" alt="" />
+      <div v-if="!isLoad" class="id__loading">
+        <img
+          style="width: 60px; height: 60px"
+          src="./Home/Gallery/Spinner-0.6s-200px.gif"
+          alt=""
+        />
+      </div>
+      <img v-if="isLoad" :src="gallery.data.url" alt="" />
       <div class="picture__info">
         <h1 class="picture__name">{{ gallery["data"].name }}</h1>
         <div class="picture__discri">
@@ -327,6 +337,16 @@ export default {
   </div>
 </template>
 <style lang="scss" scoped>
+.id__loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 1300px) {
+    justify-content: center;
+  }
+}
+
 //body contanier
 .id__container {
   background: #25262b;

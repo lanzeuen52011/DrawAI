@@ -1,6 +1,6 @@
 <script>
 import axios from "axios";
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, ref } from "vue";
 export default {
   setup() {
     const Arr = reactive({ data: [] });
@@ -8,6 +8,7 @@ export default {
     const RealArr = reactive({ data: [] });
     const maleArr = reactive({ data: [] });
     const femaleArr = reactive({ data: [] });
+    const isLoad = ref(false);
 
     onMounted(() => {
       if (window.location.hash) {
@@ -45,6 +46,7 @@ export default {
             .filter((item) => item.sex === "female")
             .sort((a, b) => b.popular - a.popular);
           // console.log("female", femaleArr.data);
+          isLoad.value = true;
         });
     });
 
@@ -54,6 +56,7 @@ export default {
       RealArr,
       maleArr,
       femaleArr,
+      isLoad,
     };
   },
 };
@@ -62,7 +65,10 @@ export default {
   <section class="container body content" id="app">
     <section id="realistic">
       <h2 class="style__h2">現實風</h2>
-      <ul :class="['list', 'style__list', 'gap']">
+      <div v-if="!isLoad" class="style__loading-container">
+        <img class="style__loading-img" src="./Spinner-0.6s-200px.gif" alt="" />
+      </div>
+      <ul :class="['list', 'style__list', 'gap']" v-if="isLoad">
         <li
           :class="['list__item', 'style__list__item']"
           v-for="item in RealArr.data"
@@ -150,7 +156,10 @@ export default {
     </section>
     <section id="anime">
       <h2 class="style__h2">動漫風</h2>
-      <ul :class="['list', 'style__list', 'gap']" id="anime2">
+      <div v-if="!isLoad" class="style__loading-container">
+        <img class="style__loading-img" src="./Spinner-0.6s-200px.gif" alt="" />
+      </div>
+      <ul :class="['list', 'style__list', 'gap']" id="anime2" v-if="isLoad">
         <li
           :class="['list__item', 'style__list__item']"
           v-for="item in AniArr.data"
@@ -238,7 +247,10 @@ export default {
     </section>
     <section id="male">
       <h2 class="style__h2">男性</h2>
-      <ul :class="['list', 'style__list', 'gap']">
+      <div v-if="!isLoad" class="style__loading-container">
+        <img class="style__loading-img" src="./Spinner-0.6s-200px.gif" alt="" />
+      </div>
+      <ul :class="['list', 'style__list', 'gap']" v-if="isLoad">
         <li
           :class="['list__item', 'style__list__item']"
           v-for="item in maleArr.data"
@@ -326,7 +338,10 @@ export default {
     </section>
     <section id="female">
       <h2 class="style__h2">女性</h2>
-      <ul :class="['list', 'style__list', 'gap']">
+      <div v-if="!isLoad" class="style__loading-container">
+        <img class="style__loading-img" src="./Spinner-0.6s-200px.gif" alt="" />
+      </div>
+      <ul :class="['list', 'style__list', 'gap']" v-if="isLoad">
         <li
           :class="['style__list__item']"
           v-for="item in femaleArr.data"
@@ -406,6 +421,13 @@ export default {
   </section>
 </template>
 <style lang="scss">
+.style__loading-img {
+  width: 75px;
+  height: 75px;
+}
+.style__loading-container {
+  margin-top: 50px;
+}
 #realistic,
 #anime,
 #male,

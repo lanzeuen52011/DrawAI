@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home/index.vue";
-import AboutView from "../views/Home/AboutView.vue";
+// import AboutView from "../views/Home/AboutView.vue";
 import Gallery from "@/views/Home/Gallery/Gallery.vue";
-import Style from "@/views/Home/Gallery/style.vue";
-import id from "@/views/_id.vue";
+// import Style from "@/views/Home/Gallery/style.vue";
+// import id from "@/views/_id.vue";
 
 const routes = [
   {
@@ -19,12 +19,12 @@ const routes = [
       {
         //此處為點入About時，首先載入的嵌套內容。
         path: "/style",
-        component: Style,
+        component: () => import("@/views/Home/Gallery/style.vue"),
       },
       {
         path: "/about",
         name: "about",
-        component: AboutView,
+        component: () => import("../views/Home/AboutView.vue"),
       },
     ],
   },
@@ -32,7 +32,7 @@ const routes = [
   {
     path: "/:id",
     name: "picture",
-    component: id,
+    component: () => import("@/views/_id.vue"),
   },
 ];
 

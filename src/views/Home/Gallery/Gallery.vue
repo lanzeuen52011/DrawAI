@@ -14,6 +14,7 @@ export default {
     const quantity = ref("");
     const isFocus = ref(false);
     const isKeep = ref(false);
+    const isLoad = ref(false);
     const handleFocus = () => {
       isFocus.value = !isFocus.value;
     };
@@ -393,6 +394,7 @@ export default {
           //人氣由小到大
           Arr.data = Arr.data.sort((a, b) => b.popular - a.popular);
           quantity.value = Arr.data.length;
+          isLoad.value = true;
         });
     });
 
@@ -415,6 +417,7 @@ export default {
       keepShow,
       isKeep,
       scrollingdown,
+      isLoad,
     };
   },
 };
@@ -559,7 +562,10 @@ export default {
       </select>
       <p>幫您搜尋到的張數：{{ quantity }}</p>
     </div>
-    <ul :class="['list', 'gap']">
+    <div v-if="!isLoad" class="gallery__loading-container">
+      <img class="gallery__loading-img" src="./Spinner-0.6s-200px.gif" alt="" />
+    </div>
+    <ul :class="['list', 'gap']" v-if="isLoad">
       <li
         :class="['list__item']"
         v-for="(item, index) in Arr.data"
@@ -647,6 +653,13 @@ export default {
   </section>
 </template>
 <style lang="scss">
+.gallery__loading-img {
+  width: 100px;
+  height: 100px;
+}
+.gallery__loading-container {
+  margin-top: 50px;
+}
 .filterandsearch {
   position: fixed;
   top: 15px;

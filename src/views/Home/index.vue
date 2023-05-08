@@ -714,4 +714,53 @@ a {
 //     }
 //   }
 // }
+
+//icon 不放進.item__list的SCSS內是因為，當list__item:hover時，.back跟.opacity會有效果，
+//如果把這個引入進去，會失效，因為權重不一
+.icon__gallery {
+  justify-self: center;
+  &.icon__gallery-heart {
+    fill: rgb(255, 170, 184);
+  }
+  &.icon__gallery-laugh {
+    fill: rgb(255, 255, 179);
+  }
+  &.icon__gallery-angry {
+    fill: rgb(255, 103, 103);
+  }
+  &.icon__gallery-wow {
+    fill: rgb(237, 251, 255);
+  }
+  &.icon__gallery-sad {
+    fill: rgb(202, 202, 202);
+  }
+  &.opacity {
+    opacity: 0;
+  }
+}
+//number 不放進.item__list的SCSS內是因為，當list__item:hover時，.back跟.opacity會有效果，
+//如果把這個引入進去，會失效，因為權重不一
+.number {
+  margin: 0;
+  color: #fff;
+  justify-self: center;
+  &.opacity {
+    opacity: 0;
+  }
+  &.number__heart {
+    right: 80%;
+  }
+  &.number__laugh {
+    right: 60%;
+  }
+  &.number__angry {
+    right: 40%;
+  }
+  &.number__wow {
+    right: 20%;
+  }
+  &.number__sad {
+    right: 0%;
+  }
+}
 </style>

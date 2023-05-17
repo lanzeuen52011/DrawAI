@@ -63,6 +63,7 @@ export default {
 </script>
 <template>
   <section class="container body content" id="app">
+    <h1>風格導覽</h1>
     <section id="realistic">
       <h2 class="style__h2">現實風</h2>
       <div v-if="!isLoad" class="style__loading-container">
@@ -74,7 +75,7 @@ export default {
           v-for="item in RealArr.data"
           :key="item.id"
         >
-          <router-link :to="`/${item._ragicId}`">
+          <router-link :to="`/img/${item._ragicId}`">
             <div class="icon__gallery__container">
               <img
                 :class="['item__picture']"
@@ -165,7 +166,7 @@ export default {
           v-for="item in AniArr.data"
           :key="item.id"
         >
-          <router-link :to="`/${item._ragicId}`">
+          <router-link :to="`/img/${item._ragicId}`">
             <div class="icon__gallery__container">
               <img
                 :class="['item__picture']"
@@ -256,7 +257,7 @@ export default {
           v-for="item in maleArr.data"
           :key="item.id"
         >
-          <router-link :to="`/${item._ragicId}`">
+          <router-link :to="`/img/${item._ragicId}`">
             <div class="icon__gallery__container">
               <img
                 :class="['item__picture']"
@@ -347,7 +348,7 @@ export default {
           v-for="item in femaleArr.data"
           :key="item.id"
         >
-          <router-link :to="`/${item._ragicId}`">
+          <router-link :to="`/img/${item._ragicId}`">
             <div class="icon__gallery__container">
               <img
                 :class="['item__picture']"

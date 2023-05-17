@@ -28,11 +28,14 @@ const routes = [
       },
     ],
   },
-
   {
-    path: "/:id",
+    path: "/img/:id",
     name: "picture",
     component: () => import("@/views/_id.vue"),
+  },
+  {
+    path: "/:pathMatch(.*)",
+    component: () => import("@/views/NotFoundComponent.vue"),
   },
 ];
 

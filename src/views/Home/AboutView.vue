@@ -7,7 +7,7 @@ export default {
 </script>
 
 <template>
-  <div class="about container body" id="app">
+  <section class="about container body" id="app">
     <h1>關於</h1>
     <div id="aboutProfile">
       <h2>關於我</h2>
@@ -77,7 +77,7 @@ export default {
         </li>
       </ul>
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss">

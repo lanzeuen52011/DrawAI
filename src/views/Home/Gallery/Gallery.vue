@@ -571,7 +571,7 @@ export default {
         v-for="(item, index) in Arr.data"
         :key="item.id"
       >
-        <router-link :to="`/${item._ragicId}`">
+        <router-link :to="`/img/${item._ragicId}`">
           <div class="icon__gallery__container">
             <img
               :class="['item__picture']"

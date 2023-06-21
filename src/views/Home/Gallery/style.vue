@@ -9,6 +9,7 @@ export default {
     const maleArr = reactive({ data: [] });
     const femaleArr = reactive({ data: [] });
     const isLoad = ref(false);
+    const Token = process.env.VUE_APP_TOKEN;
 
     onMounted(() => {
       if (window.location.hash) {
@@ -19,10 +20,9 @@ export default {
           behavior: "smooth",
         });
       }
+
       axios
-        .get(
-          "https://ap9.ragic.com/lanziyun/convert2/1?api&APIKey=MFd4YlZuOEZ0eWNTa2Z6ek1GUVdLYS9rVTFWMUt1S01BdHNlVW1XZWNJK2ZpRFdVN1RyKzlUSDlwdzdJUzlSd2hEVlJvLzlMZy9rPQ=="
-        )
+        .get(`https://ap9.ragic.com/lanziyun/convert2/1?api&APIKey=${Token}`)
         .then((res) => {
           Arr.data = res.data;
           Arr.data = Object.keys(Arr.data).map((key) => Arr.data[key]);

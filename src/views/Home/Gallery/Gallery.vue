@@ -15,6 +15,7 @@ export default {
     const isFocus = ref(false);
     const isKeep = ref(false);
     const isLoad = ref(false);
+    const Token = process.env.VUE_APP_TOKEN;
     const handleFocus = () => {
       isFocus.value = !isFocus.value;
     };
@@ -381,9 +382,7 @@ export default {
 
     onMounted(() => {
       axios
-        .get(
-          "https://ap9.ragic.com/lanziyun/convert2/1?api&APIKey=MFd4YlZuOEZ0eWNTa2Z6ek1GUVdLYS9rVTFWMUt1S01BdHNlVW1XZWNJK2ZpRFdVN1RyKzlUSDlwdzdJUzlSd2hEVlJvLzlMZy9rPQ=="
-        )
+        .get(`https://ap9.ragic.com/lanziyun/convert2/1?api&APIKey=${Token}`)
         .then((res) => {
           Arr.data = res.data;
           storeArr.data = res.data;

@@ -19,6 +19,7 @@ export default {
     const commentContent = ref("");
     const isLoad = ref(false);
     const commentArr = reactive({ data: {} });
+    const Token = process.env.VUE_APP_TOKEN;
     const corsURL = "https://lzu-cors.onrender.com/"; // use cors-anywhere to fetch api data 曾經是用這個https://cors-anywhere.herokuapp.com/，現在是用render.com架站，是自己的。
 
     const handleComment = () => {
@@ -38,7 +39,7 @@ export default {
       let config = {
         method: "post",
         maxBodyLength: Infinity,
-        url: `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=OGZiV2psUTdxVkxKVTk3NXRmeUxtYS9sZHdocDVXTkU1cG85TEtvWU1rN0xVS01xMFZBaFdYTGU2OUthV082TQ==`,
+        url: `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=${Token}`,
         headers: {
           "Content-Type": "application/json",
           withCredentials: true,
@@ -152,11 +153,12 @@ export default {
         _index_: gallery.data._index_,
         _seq: gallery.data._seq,
       };
+
       delete (
         //將回傳的資料post回去給資料庫
         axios
           .post(
-            `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=OGZiV2psUTdxVkxKVTk3NXRmeUxtYS9sZHdocDVXTkU1cG85TEtvWU1rN0xVS01xMFZBaFdYTGU2OUthV082TQ==`,
+            `${corsURL}https://ap9.ragic.com/lanziyun/convert2/1/${id}?api&APIKey=${Token}`,
             dataCollect.data
           )
           .then((res) => {

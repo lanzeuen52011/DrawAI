@@ -35,9 +35,10 @@ export default {
       <h2>網站構成工具</h2>
       <ul class="about__web">
         <li class="web__list__item-content">
-          <img class="web__img" src="@/assets/logo.png" alt="vue3_logo" />
+          <img class="web__img" src="@/assets/logo.png" alt="vue3_logo" />&nbsp;
           Vue3、
-          <img class="web__img" src="@/assets/scss.png" alt="scss_logo" />SCSS
+          <img class="web__img" src="@/assets/scss.png" alt="scss_logo" />&nbsp;
+          SCSS
         </li>
 
         <li class="web__list__item-content">
@@ -45,35 +46,29 @@ export default {
             class="web__img"
             src="@/assets/GitHub.png"
             alt="github_logo"
-          />GitHub
+          />&nbsp; GitHub
         </li>
         <li class="web__list__item-content">
-          <img
-            class="web__img"
-            src="@/assets/axios.png"
-            alt="axios_logo"
-          />axios 、cors anywhere
+          <img class="web__img" src="@/assets/axios.png" alt="axios_logo" />
+          &nbsp;axios 、 &nbsp;cors anywhere
         </li>
         <li class="web__list__item-content">
           <img
             class="web__img"
             src="@/assets/PS.png"
             alt="photoshop_logo"
-          />PhotoShop、
+          />&nbsp; PhotoShop、
           <img
             class="web__img"
             src="@/assets/Canvas.png"
             alt="canvas_logo"
-          />Canvas、
+          />&nbsp; Canvas、
           <img class="web__img" src="@/assets/sprite.png" alt="svgsprte_logo" />
-          SVGSPRITE.ES
+          &nbsp; SVGSPRITE.ES
         </li>
         <li class="web__list__item-content">
-          <img
-            class="web__img"
-            src="@/assets/Ragic.png"
-            alt="ragic_logo"
-          />Ragic
+          <img class="web__img" src="@/assets/Ragic.png" alt="ragic_logo" />
+          &nbsp; Ragic
         </li>
       </ul>
     </div>
@@ -88,10 +83,15 @@ export default {
   align-items: flex-start;
   background: #54555a;
   border-radius: 20px;
-  padding-top: 1.5rem;
   padding-top: 3rem;
   padding-bottom: 3rem;
   margin: 0px 10rem;
+  @media screen and (min-width: 1600px) {
+    border-radius: 1.388vw;
+    padding-top: 2.0833vw;
+    padding-bottom: 2.0833vw;
+    margin: 0 7vw;
+  }
   @media screen and (max-width: 730px) {
     flex-direction: column;
     margin: 0px 2rem;
@@ -106,6 +106,12 @@ export default {
     display: flex;
     margin: 0px 5rem;
     border: 5px solid #cacaca;
+    @media screen and (min-width: 1600px) {
+      width: 9.0277vw;
+      border-radius: 50%;
+      margin: 0px 3.4722vw;
+      border: 0.34722vw solid #cacaca;
+    }
   }
   > .profile__content {
     display: grid;
@@ -113,6 +119,10 @@ export default {
     grid-template-columns: 1fr;
     grid-template-rows: 0.7fr 1fr 50px;
     margin-top: 3rem;
+    @media screen and (min-width: 1600px) {
+      grid-template-rows: 0.7fr 1fr 3.4722vw;
+      margin-top: 2.0833vw;
+    }
     @media screen and (max-width: 730px) {
       display: flex;
     }
@@ -121,6 +131,11 @@ export default {
       text-align: left;
       margin: 0 5rem 0 0;
       text-indent: 2rem;
+      @media screen and (min-width: 1600px) {
+        font-size: 1.111vw;
+        margin: 0 3.4722vw 0 0;
+        text-indent: 1.388vw;
+      }
       @media screen and (max-width: 1000px) {
         margin: 0 3rem 0 0;
       }
@@ -135,6 +150,10 @@ export default {
       align-items: center;
       font-size: 1.6rem;
       padding-top: 5rem;
+      @media screen and (min-width: 1600px) {
+        font-size: 1.11vw;
+        padding-top: 3.4722vw;
+      }
       @media screen and (max-width: 730px) {
         margin-left: 2rem;
       }
@@ -159,6 +178,13 @@ export default {
   padding-top: 3rem;
   padding-bottom: 3rem;
   margin: 0px 10rem 5rem;
+  @media screen and (min-width: 1600px) {
+    border-radius: 1.388vw;
+    padding-top: 1.04166vw;
+    padding-top: 2.0833vw;
+    padding-bottom: 2.0833vw;
+    margin: 0px 7vw 3.4722vw;
+  }
   @media screen and (max-width: 730px) {
     flex-direction: column;
     margin: 0px 2rem;
@@ -168,12 +194,18 @@ export default {
     color: #f7f7f7;
     &.web__list__item-content {
       padding: 1rem 0 0.5rem 4rem;
+      @media screen and (min-width: 1600px) {
+        padding: 0.7vw 0 0.34722vw 2.77vw;
+      }
       @media screen and (max-width: 730px) {
         padding: 1rem 0 0.5rem 1rem;
       }
     }
     > .web__img {
       height: 2rem;
+      @media screen and (min-width: 1600px) {
+        height: 1.388vw;
+      }
     }
   }
 }

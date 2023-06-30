@@ -84,7 +84,9 @@ export default {
     <div class="footer__item"></div>
     <div class="footer__item" @click="chevronToggle('style')">
       <h3>
-        <router-link class="About" to="/style">風格導覽</router-link>
+        <router-link class="About forRWD__footer__item-a" to="/style"
+          >風格導覽</router-link
+        >
       </h3>
       <svg :class="[{ active: style }]">
         <use :class="['bx', 'bxs-chevron-right']" href="./chev.svg#chev"></use>
@@ -92,23 +94,29 @@ export default {
       <ul :class="['list', 'footer__list', { chevronon: style }]">
         <li>
           <router-link
-            class="About"
+            class="About forRWD__footer__list-a"
             :to="{ path: '/style', hash: '#realistic' }"
             >現實風</router-link
           >
         </li>
         <li>
-          <router-link class="About" :to="{ path: '/style', hash: '#anime' }"
+          <router-link
+            class="About forRWD__footer__list-a"
+            :to="{ path: '/style', hash: '#anime' }"
             >動漫風</router-link
           >
         </li>
         <li>
-          <router-link class="About" :to="{ path: '/style', hash: '#male' }"
+          <router-link
+            class="About forRWD__footer__list-a"
+            :to="{ path: '/style', hash: '#male' }"
             >男性</router-link
           >
         </li>
         <li>
-          <router-link class="About" :to="{ path: '/style', hash: '#female' }"
+          <router-link
+            class="About forRWD__footer__list-a"
+            :to="{ path: '/style', hash: '#female' }"
             >女性</router-link
           >
         </li>
@@ -116,7 +124,9 @@ export default {
     </div>
     <div class="footer__item" @click="chevronToggle('about')">
       <h3>
-        <router-link class="About" to="/about">關於我</router-link>
+        <router-link class="About forRWD__footer__item-a" to="/about"
+          >關於我</router-link
+        >
       </h3>
       <svg :class="[{ active: about }]">
         <use :class="['bx', 'bxs-chevron-right']" href="./chev.svg#chev"></use>
@@ -124,13 +134,15 @@ export default {
       <ul :class="['list', 'footer__list', { chevronon: about }]">
         <li>
           <router-link
-            class="About"
+            class="About forRWD__footer__list-a"
             :to="{ path: '/about', hash: '#aboutProfile' }"
             >關於我</router-link
           >
         </li>
         <li>
-          <router-link class="About" :to="{ path: '/about', hash: '#aboutWeb' }"
+          <router-link
+            class="About forRWD__footer__list-a"
+            :to="{ path: '/about', hash: '#aboutWeb' }"
             >關於網站</router-link
           >
         </li>
@@ -138,14 +150,17 @@ export default {
     </div>
     <div class="footer__item" @click="chevronToggle('other')">
       <h3>
-        <p class="no__a">其他網站</p>
+        <p class="no__a forRWD__footer__item-a">其他網站</p>
       </h3>
       <svg :class="[{ active: other }]">
         <use :class="['bx', 'bxs-chevron-right']" href="./chev.svg#chev"></use>
       </svg>
       <ul :class="['list', 'footer__list', { chevronon: other }]">
         <li>
-          <a href="https://let-him-cook.netlify.app/">
+          <a
+            class="forRWD__footer__list-a"
+            href="https://let-him-cook.netlify.app/"
+          >
             <img
               class="other__logo"
               src="./LetHimCook1.png"
@@ -180,6 +195,9 @@ body {
   margin: 0;
   background: #25262b;
   color: #e9ecef;
+  @media screen and (min-width: 1600px) {
+    font-size: 1.388vw;
+  }
 }
 *,
 *::after,
@@ -190,11 +208,15 @@ body {
   max-width: 1300px;
   margin: 0 auto;
   @media screen and (min-width: 1600px) {
-    max-width: 100%;
+    max-width: 90.277vw;
   }
 }
 .content {
+  // 載入時會閃爍，以此來撐開content的內容，使使用者在使用時不會體驗到閃爍畫面
   min-height: 1000px;
+  @media screen and (min-height: 1400px) {
+    min-height: 70vh;
+  }
 }
 h1 {
   margin: 0;
@@ -203,6 +225,9 @@ h2 {
   text-align: start;
   padding-left: 20px;
   color: #e9ecef;
+  @media screen and (min-width: 1600px) {
+    padding-left: 1.388vw;
+  }
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -224,6 +249,10 @@ header {
     z-index: 2000;
     align-items: center;
     transition: height 0.15s;
+    @media screen and (min-width: 1600px) {
+      padding: 1.388vw;
+      height: 5.9027vw;
+    }
     @media screen and (max-width: 650px) {
       z-index: 4000;
     }
@@ -294,6 +323,9 @@ header {
         width: 100%;
         object-fit: contain;
         // width: 30vw;
+        @media screen and (min-width: 1600px) {
+          height: 4.375vw;
+        }
         &.logo__normal {
           @media screen and (max-width: 426px) {
             display: none;
@@ -352,12 +384,18 @@ a {
   justify-content: center;
   align-items: center;
   padding-right: 5rem;
+  @media screen and (min-width: 1600px) {
+    padding-right: 3.4722vw;
+  }
   @media screen and (max-width: 1200px) {
     padding-right: 0;
   }
 }
 .flex a {
   padding: 0 2rem;
+  @media screen and (min-width: 1600px) {
+    padding: 0 1.388vw;
+  }
 }
 .Home {
   padding: 0;
@@ -365,12 +403,18 @@ a {
 .body {
   margin-top: 120px;
   position: relative;
+  @media screen and (min-width: 1600px) {
+    margin-top: 8.333vw;
+  }
 }
 .footer {
   height: auto;
   background: #1a1b1e;
   padding: 7rem 2rem;
   width: 100%;
+  @media screen and (min-width: 1600px) {
+    padding: 4.8611vw 1.388vw;
+  }
   @media screen and (max-width: 600px) {
     justify-items: center;
   }
@@ -385,6 +429,9 @@ a {
     justify-content: start;
     position: relative;
     left: 30px;
+    @media screen and (min-width: 1600px) {
+      left: 2.0833vw;
+    }
     @media screen and (max-width: 321px) {
       left: 25px;
     }
@@ -403,6 +450,10 @@ a {
       left: 0;
       padding-top: 35px;
       margin-top: 20px;
+      @media screen and (min-width: 1600px) {
+        padding-top: 2.4305vw;
+        margin-top: 1.388vw;
+      }
       @media screen and (min-width: 768px) {
         order: -1;
         justify-content: start;
@@ -417,6 +468,10 @@ a {
       transition: all 0.15s;
       width: 30px;
       height: 30px;
+      @media screen and (min-width: 1600px) {
+        width: 2.0833vw;
+        height: 2.0833vw;
+      }
       @media screen and (min-width: 768px) {
         display: none;
       }
@@ -429,6 +484,9 @@ a {
       font-size: 1.6rem;
       color: #fff;
       opacity: 0.7;
+      @media screen and (min-width: 1600px) {
+        font-size: 1.111vw;
+      }
     }
     > img {
       width: 70%;
@@ -439,18 +497,24 @@ a {
       margin: 0;
       text-align: left;
       font-size: 3rem;
-
       margin-top: 0;
       color: #fff;
       @media screen and (min-width: 768px) {
         font-size: 2rem;
       }
+      .forRWD__footer__item-a {
+        @media screen and (min-width: 1600px) {
+          font-size: 2.0833vw;
+        }
+      }
 
       > a {
         color: #fff;
         font-size: 3rem;
-
         opacity: 0.9;
+        @media screen and (min-width: 1600px) {
+          font-size: 2.0833vw;
+        }
         @media screen and (min-width: 768px) {
           font-size: 2rem;
         }
@@ -465,9 +529,13 @@ a {
         font-size: 3rem;
         color: #fff;
         margin: 0;
-
         @media screen and (min-width: 768px) {
           font-size: 2rem;
+        }
+        &.forRWD__footer__item-a {
+          @media screen and (min-width: 1600px) {
+            font-size: 1.388vw;
+          }
         }
       }
     }
@@ -481,11 +549,17 @@ a {
         font-size: 1.6rem;
         color: #fff;
         opacity: 0.7;
+        @media screen and (min-width: 1600px) {
+          font-size: 1.11vw;
+        }
       }
       > img {
         width: 80%;
         height: 80px;
         object-fit: contain;
+        @media screen and (min-width: 1600px) {
+          width: 12.79944vw;
+        }
       }
     }
     > ul {
@@ -502,6 +576,12 @@ a {
       transition: all 0.5s;
       border-bottom: 1px solid #7a7a7a;
       width: 300px;
+      @media screen and (min-width: 1600px) {
+        margin: 0rem 1.73611vw 0;
+        top: -2.0833vw;
+        border-bottom: 0.07vw solid #7a7a7a;
+        width: 20.833vw;
+      }
       @media screen and (max-width: 450px) {
         width: 200px;
       }
@@ -530,6 +610,11 @@ a {
           @media screen and (min-width: 768px) {
             font-size: 1.6rem;
           }
+          &.forRWD__footer__list-a {
+            @media screen and (min-width: 1600px) {
+              font-size: 1.11vw;
+            }
+          }
           &:hover {
             opacity: 1;
           }
@@ -538,6 +623,10 @@ a {
             min-width: 100px;
             height: 60px;
             object-fit: contain;
+            @media screen and (min-width: 1600px) {
+              min-width: 7vw;
+              height: 4.166vw;
+            }
           }
         }
       }

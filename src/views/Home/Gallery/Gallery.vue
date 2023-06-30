@@ -447,9 +447,9 @@ export default {
     <div :class="['filter__container', { show: isFocus }, { show: isKeep }]">
       <!-- 篩選器 -->
       <div class="flex filter__item-1">
-        <div>
+        <div class="filter__item-1_itembox">
           <button class="filter__btn active filter__btn-fn" @click="resetAll">
-            一鍵清除篩選與搜尋
+            一鍵清除
           </button>
           <button
             class="filter__btn active filter__btn-fn"
@@ -655,9 +655,16 @@ export default {
 .gallery__loading-img {
   width: 75px;
   height: 75px;
+  @media screen and (min-width: 1600px) {
+    width: 5.20833vw;
+    height: 5.20833vw;
+  }
 }
 .gallery__loading-container {
   margin-top: 50px;
+  @media screen and (min-width: 1600px) {
+    margin-top: 3.4722vw;
+  }
 }
 .filterandsearch {
   position: fixed;
@@ -666,6 +673,9 @@ export default {
   right: 33vw;
   transition: top 0.15s;
   //search
+  @media screen and (min-width: 1600px) {
+    top: 1.04166vw;
+  }
   &.up {
     @media screen and (max-width: 650px) {
       top: 35px;
@@ -708,6 +718,11 @@ export default {
   padding: 0.3rem 0rem 1rem 1rem;
   border-radius: 10px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  @media screen and (min-width: 1600px) {
+    padding: 0.20833vw 0rem 0.7vw 0.7vw;
+    border-radius: 0.7vw;
+    box-shadow: 0.34722vw 0.34722vw 0.7vw rgba(0, 0, 0, 0.2);
+  }
   @media screen and (max-width: 1024px) {
     width: 29vw;
   }
@@ -737,24 +752,19 @@ div {
   // @media screen and (max-width: 1024px) {
   //   position: relative;
   // }
-  &.dress .filter__btn:first-child {
-    @media screen and (max-width: 325px) {
-      position: relative;
-      left: -7.3vw;
-    }
-    //   @media screen and (max-width: 1024px) {
-    //     position: relative;
-    //     left: -1.1vw;
-    //   }
-    //   @media screen and (max-width: 768px) {
-    //     left: -3px;
-    //   }
+  &.dress {
+    display: flex;
+    flex-wrap: wrap;
   }
 
   > .filter__btn {
     background: none;
     border: 0;
     color: #bdbdbd;
+    @media screen and (min-width: 1600px) {
+      padding: 0.07vw 0.4166vw;
+      font-size: 0.9259027vw;
+    }
     &.active {
       background: #000;
       transition: background 0.15s;
@@ -767,8 +777,15 @@ div {
     align-items: center;
     padding-right: 2rem;
     width: 100%;
+    @media screen and (min-width: 1600px) {
+      padding-right: 1.3888vw;
+    }
     @media screen and (max-width: 768px) {
       padding-right: 0;
+    }
+    .filter__item-1_itembox {
+      display: flex;
+      width: 75%;
     }
   }
 }
@@ -777,10 +794,17 @@ div {
 div {
   > .filter__btn-fn {
     margin: 0 0.5rem;
+    @media screen and (min-width: 1600px) {
+      margin: 0 0.34722vw;
+    }
     &.filter__btn {
       background: none;
       border: 0;
       color: #bdbdbd;
+      @media screen and (min-width: 1600px) {
+        padding: 0.07vw 0.4166vw;
+        font-size: 0.9259027vw;
+      }
     }
     &.active {
       background: #000;
@@ -792,6 +816,9 @@ div {
 
 .filter__btn-fn {
   margin: 0 0.5rem;
+  @media screen and (min-width: 1600px) {
+    margin: 0 0.34722vw;
+  }
   @media screen and (max-width: 1024px) {
     width: 80px;
   }
@@ -800,6 +827,10 @@ div {
     color: #bdbdbd;
     background: #000;
     opacity: 0.5;
+    @media screen and (min-width: 1600px) {
+      padding: 0.07vw 0.4166vw;
+      font-size: 0.9259027vw;
+    }
     &.filter__btn-fixed {
       border: 0;
       color: #bdbdbd;
@@ -844,6 +875,11 @@ div {
   padding-left: 1rem;
   font-size: 1.5rem;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  @media screen and (min-width: 1600px) {
+    height: 3.47vw;
+    border-radius: 0.7vw;
+    font-size: 1.04166vw;
+  }
   @media screen and (max-width: 1024px) {
     width: 29vw;
   }
@@ -868,6 +904,12 @@ div {
   border: 0;
   opacity: 0.5;
   margin: 0 1rem;
+  @media screen and (min-width: 1600px) {
+    width: 2.43055vw;
+    height: 3.81944vw;
+    padding: 0.2777vw;
+    margin: 0 0.7vw;
+  }
   @media screen and (max-width: 1050px) {
     width: 4.5rem;
     height: 4.5rem;
@@ -931,6 +973,10 @@ div {
   margin: 4rem 0;
   display: block;
   font-weight: 600;
+  @media screen and (min-width: 1600px) {
+    font-size: 2.08vw;
+    margin: 2.77vw 0;
+  }
   @media screen and (max-width: 1024px) {
     margin: 2rem 0;
   }
@@ -950,6 +996,12 @@ div {
   transition: scale 0.15s;
   cursor: pointer;
   position: relative;
+  @media screen and (min-width: 1600px) {
+    width: 20.833vw;
+    height: 20.833vw;
+    border-radius: 0.7vw;
+    box-shadow: 0.34722vw 0.34722vw 0.7vw rgba(0, 0, 0, 0.2);
+  }
   &:hover > a > .icon__gallery__container > .item__name {
     position: absolute;
     top: 75%;
@@ -957,6 +1009,9 @@ div {
     color: white;
     z-index: 1000;
     letter-spacing: 0.3rem;
+    @media screen and (min-width: 1600px) {
+      letter-spacing: 0.20833vw;
+    }
     @media screen and (max-width: 900px) {
       top: 72%;
     }
@@ -989,6 +1044,11 @@ div {
     width: 20px;
     height: 20px;
     margin-left: 0.5rem;
+    @media screen and (min-width: 1600px) {
+      width: 1.388vw;
+      height: 1.388vw;
+      margin-left: 0.34722vw;
+    }
     > .opacity {
       opacity: 0.8;
     }
@@ -997,6 +1057,11 @@ div {
     width: 20px;
     height: 20px;
     margin-left: 0.5rem;
+    @media screen and (min-width: 1600px) {
+      width: 1.388vw;
+      height: 1.388vw;
+      margin-left: 0.34722vw;
+    }
     > .opacity {
       @media screen and (max-width: 1300px) {
         opacity: 0.8;
@@ -1105,6 +1170,11 @@ div {
     height: 300px;
     object-fit: contain;
     backdrop-filter: blur(10px);
+    @media screen and (min-width: 1600px) {
+      width: 20.833vw;
+      height: 20.833vw;
+      // backdrop-filter: blur(10px);
+    }
     /* background: #e6ebee; */
   }
   > .like__number {

@@ -425,9 +425,16 @@ export default {
 .style__loading-img {
   width: 75px;
   height: 75px;
+  @media screen and (min-width: 1600px) {
+    width: 5.20833vw;
+    height: 5.20833vw;
+  }
 }
 .style__loading-container {
   margin-top: 50px;
+  @media screen and (min-width: 1600px) {
+    margin-top: 3.4722vw;
+  }
 }
 #realistic,
 #anime,
@@ -448,7 +455,7 @@ export default {
   margin: 3rem 0 0rem 0;
   padding: 0;
   @media screen and (min-width: 1600px) {
-    margin: 3rem 0 0rem 5vw;
+    margin: 2.0833vw 0 0rem 0;
   }
 }
 .style__list {
@@ -464,7 +471,8 @@ export default {
     margin: 0 auto;
     width: 85vw;
     @media screen and (min-height: 1100px) {
-      height: 30vh;
+      // height: 30vh;
+      height: 21.944vw;
     }
     @media screen and (max-width: 1300px) {
       height: auto;
@@ -483,6 +491,13 @@ export default {
   position: relative;
   flex-shrink: 0;
   margin-right: 20px;
+  @media screen and (min-width: 1600px) {
+    width: 20.833vw;
+    height: 20.833vw;
+    border-radius: 0.7vw;
+    box-shadow: 0.34722vw 0.34722vw 0.7vw rgba(0, 0, 0, 0.2);
+    margin-right: 1.388vw;
+  }
   &:hover
     > a
     > .icon__gallery__container
@@ -491,6 +506,11 @@ export default {
     width: 20px;
     height: 20px;
     margin-left: 0.5rem;
+    @media screen and (min-width: 1600px) {
+      width: 1.388vw;
+      height: 1.388vw;
+      margin-left: 0.34722vw;
+    }
     > .opacity {
       opacity: 0.8;
     }
@@ -499,6 +519,11 @@ export default {
     width: 20px;
     height: 20px;
     margin-left: 0.5rem;
+    @media screen and (min-width: 1600px) {
+      width: 1.388vw;
+      height: 1.388vw;
+      margin-left: 0.34722vw;
+    }
     > .opacity {
       @media screen and (max-width: 1300px) {
         opacity: 0.8;

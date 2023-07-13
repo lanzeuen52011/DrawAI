@@ -730,8 +730,13 @@ export default {
   }
 }
 
+.swiper {
+  display: flex; //正式站需要
+}
+
 .swiper-wrapper {
   align-items: center;
+  display: flex; //正式站需要
 }
 
 .swiper-slide.style__list__item {

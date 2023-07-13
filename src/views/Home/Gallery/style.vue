@@ -6,7 +6,7 @@ import { onMounted, onUnmounted, reactive, ref } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 
 // Import Swiper styles
-import "swiper/css";
+// import "swiper/css";
 
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -732,6 +732,8 @@ export default {
 
 .swiper {
   display: flex; //正式站需要
+  overflow: clip;
+  position: relative;
 }
 
 div.swiper-wrapper {
@@ -824,5 +826,27 @@ div.swiper-wrapper {
   > a > .icon__gallery__container > .like__number.grid.grid__c-auto > .opacity {
     opacity: 0.8;
   }
+}
+
+.swiper-horizontal > .swiper-scrollbar,
+.swiper-scrollbar.swiper-scrollbar-horizontal {
+  position: absolute;
+  left: var(--swiper-scrollbar-sides-offset, 1%);
+  bottom: var(--swiper-scrollbar-bottom, 4px);
+  top: var(--swiper-scrollbar-top, auto);
+  z-index: 50;
+  height: var(--swiper-scrollbar-size, 4px);
+  width: calc(100% - 2 * var(--swiper-scrollbar-sides-offset, 1%));
+}
+
+.swiper-vertical > .swiper-scrollbar,
+.swiper-scrollbar.swiper-scrollbar-vertical {
+  position: absolute;
+  left: var(--swiper-scrollbar-left, auto);
+  right: var(--swiper-scrollbar-right, 4px);
+  top: var(--swiper-scrollbar-sides-offset, 1%);
+  z-index: 50;
+  width: var(--swiper-scrollbar-size, 4px);
+  height: calc(100% - 2 * var(--swiper-scrollbar-sides-offset, 1%));
 }
 </style>

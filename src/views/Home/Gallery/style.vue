@@ -734,7 +734,7 @@ export default {
   display: flex; //正式站需要
 }
 
-.swiper-wrapper {
+div.swiper-wrapper {
   align-items: center;
   display: flex; //正式站需要
 }

@@ -734,7 +734,7 @@ export default {
   display: flex; //正式站需要
   overflow: clip;
   position: relative;
-  > div.swiper-wrapper {
+  > div {
     align-items: center;
     display: flex; //正式站需要
   }

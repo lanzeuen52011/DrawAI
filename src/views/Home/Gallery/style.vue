@@ -1,6 +1,6 @@
 <script>
 import axios from "axios";
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, onUnmounted, reactive, ref } from "vue";
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -35,8 +35,27 @@ export default {
     const femaleArr = reactive({ data: [] });
     const isLoad = ref(false);
     const Token = process.env.VUE_APP_TOKEN;
+    const slidesPerView = ref("");
+    const handleResize = () => {
+      if (window.screen.availWidth < 580) {
+        slidesPerView.value = 1;
+        return slidesPerView.value;
+      } else if (window.screen.availWidth < 768) {
+        slidesPerView.value = 2;
+        return slidesPerView.value;
+      } else if (window.screen.availWidth < 1200) {
+        slidesPerView.value = 3;
+        return slidesPerView.value;
+      } else {
+        slidesPerView.value = 4;
+        return slidesPerView.value;
+      }
+    };
 
     onMounted(() => {
+      handleResize();
+      window.addEventListener("resize", handleResize); // Swipertest
+
       if (window.location.hash) {
         console.log(window.location.hash);
         const element = document.querySelector(window.location.hash);
@@ -74,6 +93,9 @@ export default {
           isLoad.value = true;
         });
     });
+    onUnmounted(() => {
+      window.removeEventListener("resize", handleResize);
+    });
 
     return {
       Arr,
@@ -83,6 +105,8 @@ export default {
       femaleArr,
       isLoad,
       modules: [Navigation, Pagination, Scrollbar, A11y, Autoplay],
+      slidesPerView,
+      handleResize,
     };
   },
 };
@@ -96,7 +120,7 @@ export default {
         <img class="style__loading-img" src="./Spinner-0.6s-200px.gif" alt="" />
       </div>
       <swiper
-        :slidesPerView="'4'"
+        :slidesPerView="handleResize()"
         :centeredSlides="true"
         :spaceBetween="30"
         :modules="modules"
@@ -198,7 +222,7 @@ export default {
         <img class="style__loading-img" src="./Spinner-0.6s-200px.gif" alt="" />
       </div>
       <swiper
-        :slidesPerView="'4'"
+        :slidesPerView="handleResize()"
         :centeredSlides="true"
         :spaceBetween="30"
         :modules="modules"
@@ -297,7 +321,7 @@ export default {
         <img class="style__loading-img" src="./Spinner-0.6s-200px.gif" alt="" />
       </div>
       <swiper
-        :slidesPerView="'2'"
+        :slidesPerView="handleResize()"
         :centeredSlides="true"
         :spaceBetween="30"
         :modules="modules"
@@ -396,7 +420,7 @@ export default {
         <img class="style__loading-img" src="./Spinner-0.6s-200px.gif" alt="" />
       </div>
       <swiper
-        :slidesPerView="'4'"
+        :slidesPerView="handleResize()"
         :centeredSlides="true"
         :spaceBetween="30"
         :modules="modules"
@@ -544,9 +568,6 @@ export default {
     @media screen and (min-width: 1600px) {
       // height: 30vh;
       height: 27.77vw;
-    }
-    @media screen and (max-width: 1300px) {
-      height: auto;
     }
   }
 }
@@ -722,7 +743,7 @@ export default {
   position: relative;
   z-index: 1;
   scale: 1;
-  @media screen and (max-width: 1300px) {
+  @media screen and (max-width: 580px) {
     scale: 1;
   }
 }
@@ -730,7 +751,7 @@ export default {
   position: relative;
   z-index: 2;
   scale: 1.15;
-  @media screen and (max-width: 1300px) {
+  @media screen and (max-width: 580px) {
     scale: 1;
   }
   .item__name {

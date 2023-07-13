@@ -40,7 +40,6 @@ export default {
           <img class="web__img" src="@/assets/scss.png" alt="scss_logo" />&nbsp;
           SCSS
         </li>
-
         <li class="web__list__item-content">
           <img
             class="web__img"
@@ -65,6 +64,8 @@ export default {
           />&nbsp; Canvas、
           <img class="web__img" src="@/assets/sprite.png" alt="svgsprte_logo" />
           &nbsp; SVGSPRITE.ES
+          <img class="web__img" src="@/assets/swiper.png" alt="svgsprte_logo" />
+          &nbsp; Swiper-vue
         </li>
         <li class="web__list__item-content">
           <img class="web__img" src="@/assets/Ragic.png" alt="ragic_logo" />

@@ -184,6 +184,7 @@ export default {
 </template>
 
 <style lang="scss">
+@import "../../css/reset.css";
 :root {
   --swiper-scrollbar-border-radius: 10px;
   --swiper-scrollbar-top: auto;

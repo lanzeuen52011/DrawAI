@@ -734,11 +734,10 @@ export default {
   display: flex; //正式站需要
   overflow: clip;
   position: relative;
-}
-
-div.swiper-wrapper {
-  align-items: center;
-  display: flex; //正式站需要
+  > div.swiper-wrapper {
+    align-items: center;
+    display: flex; //正式站需要
+  }
 }
 
 .swiper-slide.style__list__item {

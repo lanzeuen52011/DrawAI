@@ -126,17 +126,17 @@ export default {
         :modules="modules"
         :class="['list', 'style__list', 'gap']"
         :loop="true"
-        :autoplay="{
-          delay: 3000,
-          pauseOnMouseEnter: true,
-          disableOnInteraction: false,
-        }"
         v-if="isLoad"
         :scrollbar="{
           hide: true,
         }"
         :watchSlidesProgress="true"
       >
+        <!-- :autoplay="{
+          delay: 3000,
+          pauseOnMouseEnter: true,
+          disableOnInteraction: false,
+        }" -->
         <!-- :watchSlidesProgress="true" 是表示在用滑鼠滑動時，swiper-slide-active等class也會跟著變動
         要找到能夠用甚麼屬性的話，可以到"import { Swiper, SwiperSlide } from "swiper/vue";"，Ctrl+左鍵
         點選"swiper"，會到(node_modules/swiper/swiper-vue.d.ts)，即可找到所有可用屬性 -->
@@ -735,6 +735,7 @@ export default {
   overflow: clip;
   position: relative;
   > div {
+    // 因.swiper-wrapper不會被npm run build轉譯，因此改成.swiper>div
     align-items: center;
     display: flex; //正式站需要
   }

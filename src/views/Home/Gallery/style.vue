@@ -730,6 +730,9 @@ export default {
   }
 }
 
+// Swiper有個大重點就是不要使用會去除無用CSS的外掛如：PurgeCSS，因Swiper是component跑完才會用到CSS，會導致外掛判斷Swiper的Class都是無用的
+// PurgeCSS：https://ithelp.ithome.com.tw/articles/10269456
+
 .swiper {
   display: flex; //正式站需要
   overflow: clip;

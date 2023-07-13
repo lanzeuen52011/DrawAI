@@ -90,12 +90,13 @@ export default {
 <template>
   <section class="container body content" id="app">
     <h1>風格導覽</h1>
+    <button></button>
     <section id="realistic">
       <h2 class="style__h2">現實風</h2>
       <div v-if="!isLoad" class="style__loading-container">
         <img class="style__loading-img" src="./Spinner-0.6s-200px.gif" alt="" />
       </div>
-      <swiper
+      <!-- <swiper
         :slidesPerView="'4'"
         :centeredSlides="true"
         :spaceBetween="30"
@@ -113,9 +114,9 @@ export default {
         }"
         :watchSlidesProgress="true"
       >
-        <!-- :watchSlidesProgress="true" 是表示在用滑鼠滑動時，swiper-slide-active等class也會跟著變動
+        :watchSlidesProgress="true" 是表示在用滑鼠滑動時，swiper-slide-active等class也會跟著變動
         要找到能夠用甚麼屬性的話，可以到"import { Swiper, SwiperSlide } from "swiper/vue";"，Ctrl+左鍵
-        點選"swiper"，會到(node_modules/swiper/swiper-vue.d.ts)，即可找到所有可用屬性 -->
+        點選"swiper"，會到(node_modules/swiper/swiper-vue.d.ts)，即可找到所有可用屬性
         <swiper-slide
           :class="['list__item', 'style__list__item']"
           v-for="item in RealArr.data"
@@ -190,32 +191,91 @@ export default {
             <div :class="['back']"></div>
           </router-link>
         </swiper-slide>
-      </swiper>
+      </swiper> -->
+      <ul :class="['list', 'style__list', 'gap']" v-if="isLoad">
+        <li
+          :class="['list__item', 'style__list__item']"
+          v-for="item in RealArr.data"
+          :key="item.id"
+        >
+          <router-link :to="`/img/${item._ragicId}`">
+            <div class="icon__gallery__container">
+              <img
+                :class="['item__picture']"
+                :src="[item.smallurl]"
+                :alt="[item.name]"
+                loading="lazy"
+              />
+              <p :class="['item__name']">{{ item.name }}</p>
+              <div
+                class="like__number grid grid__c-auto"
+                v-for="number in item._subtable_1000050"
+                :key="number"
+              >
+                <svg>
+                  <use
+                    class="fi icon__gallery icon__gallery-heart opacity"
+                    href="./spriteicon.svg#heart"
+                  ></use>
+                </svg>
+                <p
+                  class="number__heart number opacity"
+                  v-formatNumber="number['heart']"
+                ></p>
+                <svg>
+                  <use
+                    class="fi icon__gallery fi-sr-grin-squint-tears icon__gallery-laugh opacity"
+                    href="./spriteicon.svg#laugh"
+                  ></use>
+                </svg>
+                <p
+                  class="number__laugh number opacity"
+                  v-formatNumber="number['laugh']"
+                ></p>
+                <svg>
+                  <use
+                    class="fi icon__gallery fi-sr-angry icon__gallery-angry opacity"
+                    href="./spriteicon.svg#angry"
+                  ></use>
+                </svg>
+                <p
+                  class="number__angry number opacity"
+                  v-formatNumber="number['angry']"
+                ></p>
+                <svg>
+                  <use
+                    class="fi icon__gallery fi-ss-surprise icon__gallery-wow opacity"
+                    href="./spriteicon.svg#surprise"
+                  ></use>
+                </svg>
+                <p
+                  class="number__wow number opacity"
+                  v-formatNumber="number['wow']"
+                ></p>
+                <svg>
+                  <use
+                    class="fi icon__gallery fi-ss-sad-tear icon__gallery-sad opacity"
+                    href="./spriteicon.svg#sad"
+                  ></use>
+                </svg>
+                <p
+                  class="number__sad number opacity"
+                  v-formatNumber="number['sad']"
+                ></p>
+              </div>
+            </div>
+            <div :class="['back']"></div>
+          </router-link>
+        </li>
+      </ul>
     </section>
     <section id="anime">
       <h2 class="style__h2">動漫風</h2>
       <div v-if="!isLoad" class="style__loading-container">
         <img class="style__loading-img" src="./Spinner-0.6s-200px.gif" alt="" />
       </div>
-      <swiper
-        :slidesPerView="'4'"
-        :centeredSlides="true"
-        :spaceBetween="30"
-        :modules="modules"
-        :class="['list', 'style__list', 'gap']"
-        :loop="true"
-        :autoplay="{
-          delay: 3000,
-          pauseOnMouseEnter: true,
-          disableOnInteraction: false,
-        }"
-        v-if="isLoad"
-        :scrollbar="{
-          hide: true,
-        }"
-        :watchSlidesProgress="true"
-      >
-        <swiper-slide
+      <ul :class="['list', 'style__list', 'gap']" id="anime2" v-if="isLoad">
+        <li
           :class="['list__item', 'style__list__item']"
           v-for="item in AniArr.data"
           :key="item.id"
@@ -288,33 +348,16 @@ export default {
             </div>
             <div :class="['back']"></div>
           </router-link>
-        </swiper-slide>
-      </swiper>
+        </li>
+      </ul>
     </section>
     <section id="male">
       <h2 class="style__h2">男性</h2>
       <div v-if="!isLoad" class="style__loading-container">
         <img class="style__loading-img" src="./Spinner-0.6s-200px.gif" alt="" />
       </div>
-      <swiper
-        :slidesPerView="'2'"
-        :centeredSlides="true"
-        :spaceBetween="30"
-        :modules="modules"
-        :class="['list', 'style__list', 'gap']"
-        :loop="true"
-        :autoplay="{
-          delay: 3000,
-          pauseOnMouseEnter: true,
-          disableOnInteraction: false,
-        }"
-        v-if="isLoad"
-        :scrollbar="{
-          hide: true,
-        }"
-        :watchSlidesProgress="true"
-      >
-        <swiper-slide
+      <ul :class="['list', 'style__list', 'gap']" v-if="isLoad">
+        <li
           :class="['list__item', 'style__list__item']"
           v-for="item in maleArr.data"
           :key="item.id"
@@ -387,34 +430,17 @@ export default {
             </div>
             <div :class="['back']"></div>
           </router-link>
-        </swiper-slide>
-      </swiper>
+        </li>
+      </ul>
     </section>
     <section id="female">
       <h2 class="style__h2">女性</h2>
       <div v-if="!isLoad" class="style__loading-container">
         <img class="style__loading-img" src="./Spinner-0.6s-200px.gif" alt="" />
       </div>
-      <swiper
-        :slidesPerView="'4'"
-        :centeredSlides="true"
-        :spaceBetween="30"
-        :modules="modules"
-        :class="['list', 'style__list', 'gap']"
-        :loop="true"
-        :autoplay="{
-          delay: 3000,
-          pauseOnMouseEnter: true,
-          disableOnInteraction: false,
-        }"
-        v-if="isLoad"
-        :scrollbar="{
-          hide: true,
-        }"
-        :watchSlidesProgress="true"
-      >
-        <swiper-slide
-          :class="['list__item', 'style__list__item']"
+      <ul :class="['list', 'style__list', 'gap']" v-if="isLoad">
+        <li
+          :class="['style__list__item']"
           v-for="item in femaleArr.data"
           :key="item.id"
         >
@@ -486,8 +512,8 @@ export default {
             </div>
             <div :class="['back']"></div>
           </router-link>
-        </swiper-slide>
-      </swiper>
+        </li>
+      </ul>
     </section>
   </section>
 </template>

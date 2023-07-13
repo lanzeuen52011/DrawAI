@@ -34,6 +34,11 @@ const routes = [
     component: () => import("@/views/_id.vue"),
   },
   {
+    path: "/sitemap.xml",
+    name: "sitemap",
+    component: () => import("../../public/sitemap.xml"),
+  },
+  {
     path: "/:pathMatch(.*)",
     component: () => import("@/views/NotFoundComponent.vue"),
   },

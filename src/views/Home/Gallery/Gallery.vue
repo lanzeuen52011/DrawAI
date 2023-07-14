@@ -1,12 +1,13 @@
 <script>
 import axios from "axios";
-import { onMounted, reactive, ref, watch } from "vue";
+import { onBeforeUnmount, onMounted, reactive, ref, watch } from "vue";
 export default {
   setup() {
     const Arr = reactive({ data: [] });
     const storeArr = reactive({ data: [] });
     const AniArr = reactive({ data: [] });
     const RealArr = reactive({ data: [] });
+    const ImageArr = reactive({ data: [] });
     const search = reactive({ text: [] });
     const searchSpilt = reactive({ text: [] });
     const test = reactive({ data: [] });
@@ -381,6 +382,7 @@ export default {
     };
 
     onMounted(() => {
+      window.addEventListener("scroll", handleScroll);
       axios
         .get(`https://ap9.ragic.com/lanziyun/convert2/1?api&APIKey=${Token}`)
         .then((res) => {
@@ -392,10 +394,52 @@ export default {
           );
           //人氣由小到大
           Arr.data = Arr.data.sort((a, b) => b.popular - a.popular);
+          ImageArr.data = Arr.data.filter((e, index) => {
+            // 將資料全數下載下來後，先載入前十個圖片
+            if (index <= 11) {
+              return e;
+            }
+          });
           quantity.value = Arr.data.length;
           isLoad.value = true;
         });
     });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener("scroll", handleScroll);
+    });
+
+    const handleScroll = () => {
+      const scrollHeight = document.documentElement.scrollHeight;
+      const scrollBottom = window.pageYOffset + window.innerHeight;
+      // 以下註解為測試用
+      // console.log("總長度：", scrollHeight, "現在位置：", scrollBottom);
+      if (scrollBottom / scrollHeight >= 0.6) {
+        // 螢幕底部超過整個DOM長度的60%時，載入新圖片
+        loadImages();
+        //以下註解為測試用
+        // console.log(
+        //   "觸發後的總長度：",
+        //   scrollHeight,
+        //   "觸發後的現在位置：",
+        //   scrollBottom
+        // );
+      }
+    };
+    const loadImages = () => {
+      const batchSize = 10; // 每次載入的圖片數量
+      const remainingImages = Arr.data.slice(ImageArr.data.length); // 從剩餘的圖片中獲取要載入的圖片
+      console.log("切片", remainingImages);
+
+      // 檢查是否還有要載入的圖片
+      if (remainingImages.length > 0) {
+        const imagesToLoad = remainingImages.slice(0, batchSize); // 取前 batchSize 張圖片
+
+        // 將要載入的圖片添加到已載入的圖片數組中
+        ImageArr.data = ImageArr.data.concat(imagesToLoad);
+        console.log("載入", ImageArr.data);
+      }
+    };
 
     return {
       Arr, //將網路上的資料下載下來的陣列
@@ -417,6 +461,7 @@ export default {
       isKeep,
       scrollingdown,
       isLoad,
+      ImageArr,
     };
   },
 };
@@ -567,7 +612,7 @@ export default {
     <ul :class="['list', 'gap']" v-if="isLoad">
       <li
         :class="['list__item']"
-        v-for="(item, index) in Arr.data"
+        v-for="(item, index) in ImageArr.data"
         :key="item.id"
       >
         <router-link :to="`/img/${item._ragicId}`">

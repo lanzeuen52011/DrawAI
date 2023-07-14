@@ -8,17 +8,17 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 // Import Swiper styles
 // import "swiper/css";
 
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import "swiper/css/autoplay";
+// import "swiper/css/navigation";
+// import "swiper/css/pagination";
+// import "swiper/css/scrollbar";
+// import "swiper/css/autoplay";
 
 // import required modules
 import {
-  Navigation,
-  Pagination,
+  // Navigation,
+  // Pagination,
   Scrollbar,
-  A11y,
+  // A11y,
   Autoplay,
 } from "swiper/modules";
 
@@ -104,7 +104,11 @@ export default {
       maleArr,
       femaleArr,
       isLoad,
-      modules: [Navigation, Pagination, Scrollbar, A11y, Autoplay],
+      modules: [
+        // Navigation, Pagination,  A11y,
+        Scrollbar,
+        Autoplay,
+      ],
       slidesPerView,
       handleResize,
     };
@@ -730,7 +734,8 @@ export default {
   }
 }
 
-// Swiper有個大重點就是不要使用會去除無用CSS的外掛如：PurgeCSS，因Swiper是component跑完才會用到CSS，會導致外掛判斷Swiper的Class都是無用的
+// Swiper有個大重點就是假如使用會去除無用CSS的外掛如：PurgeCSS，因Swiper是component跑完才會用到CSS，
+//    會導致外掛判斷Swiper的Class都是無用的，因此需在他們的白名單或者安全名單新增"/^swiper-.*$/,"，才不會被刪掉
 // PurgeCSS：https://ithelp.ithome.com.tw/articles/10269456
 
 .swiper {
@@ -753,9 +758,6 @@ export default {
   position: relative;
   z-index: 1;
   scale: 1;
-  @media screen and (max-width: 580px) {
-    scale: 1;
-  }
 }
 .swiper-slide.swiper-slide-active {
   position: relative;
@@ -831,6 +833,22 @@ export default {
   }
 }
 
+.swiper-scrollbar {
+  border-radius: var(--swiper-scrollbar-border-radius, 10px);
+  position: relative;
+  background: var(--swiper-scrollbar-bg-color, rgba(0, 0, 0, 0.1));
+}
+
+.swiper-scrollbar-drag {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background: var(--swiper-scrollbar-drag-bg-color, rgba(0, 0, 0, 0.5));
+  border-radius: var(--swiper-scrollbar-border-radius, 10px);
+  left: 0;
+  top: 0;
+}
+
 .swiper-horizontal > .swiper-scrollbar,
 .swiper-scrollbar.swiper-scrollbar-horizontal {
   position: absolute;
@@ -840,16 +858,5 @@ export default {
   z-index: 50;
   height: var(--swiper-scrollbar-size, 4px);
   width: calc(100% - 2 * var(--swiper-scrollbar-sides-offset, 1%));
-}
-
-.swiper-vertical > .swiper-scrollbar,
-.swiper-scrollbar.swiper-scrollbar-vertical {
-  position: absolute;
-  left: var(--swiper-scrollbar-left, auto);
-  right: var(--swiper-scrollbar-right, 4px);
-  top: var(--swiper-scrollbar-sides-offset, 1%);
-  z-index: 50;
-  width: var(--swiper-scrollbar-size, 4px);
-  height: calc(100% - 2 * var(--swiper-scrollbar-sides-offset, 1%));
 }
 </style>

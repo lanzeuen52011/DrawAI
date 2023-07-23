@@ -479,7 +479,7 @@ a {
       display: inline-block;
       position: relative;
       scale: 2;
-      top: -4.5vh;
+      top: -2.5vh;
       right: -20vw;
       transition: all 0.15s;
       width: 30px;

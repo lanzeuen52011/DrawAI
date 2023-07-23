@@ -47,17 +47,57 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(to, from, savedPosition) {
-    if (to.hash) {
-      return {
-        el: to.hash,
-        behavior: "smooth",
-      };
-    } else {
-      return { left: 0, top: 0 };
-    }
-  },
 });
+
+// const router = createRouter({
+//   history: createWebHistory(),
+//   routes,
+//   scrollBehavior(to, from, savedPosition) {
+//     if (to.hash) {
+//       return {
+//         el: to.hash,
+//         behavior: "smooth",
+//         offset: { left: 0, top: -100 },
+//       };
+//     } else {
+//       return { left: 0, top: 0 };
+//     }
+//   },
+// });
+
+// 抓到#，就滾動(這裡是處理頁面載入完成後的滾動) @處理頁面跳轉過來的，在style.vue的if (window.location.hash) { 中，在第60行左右
+// 使用 Vue Router 的 afterEach 鉤子來實現， DOM 元素載入完成後(OnMounted)再執行js滾動的動作(來自style.vue的LINE 60)
+router.afterEach((to, from) => {
+  if (to.hash) {
+    const element = document.querySelector(window.location.hash);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop,
+        behavior: "smooth",
+      });
+    }
+  }
+});
+
+// const router = createRouter({
+//   history: createWebHistory(),
+//   routes,
+//   scrollBehavior(to, from, savedPosition) {
+//     if (to.hash) {
+//       return new Promise((resolve) => {
+//         const element = document.querySelector(to.hash);
+//         if (element) {
+//           const topOffset = element.getBoundingClientRect().top - 100;
+//           const behavior = "smooth";
+//           console.log(topOffset);
+//           window.scrollTo({ top: topOffset, behavior });
+//         }
+//       });
+//     } else {
+//       return savedPosition || { left: 0, top: 0 };
+//     }
+//   },
+// });
 
 // const router = createRouter({
 //   history: createWebHistory(process.env.BASE_URL),

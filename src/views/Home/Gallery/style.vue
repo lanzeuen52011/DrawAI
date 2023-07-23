@@ -56,8 +56,9 @@ export default {
       handleResize();
       window.addEventListener("resize", handleResize); // Swipertest
 
+      // 抓到#，就滾動(這裡是處理頁面跳轉過來的滾動) @頁面載入完成後的滾動，在route的index.js中
       if (window.location.hash) {
-        console.log(window.location.hash);
+        // console.log(window.location.hash);
         const element = document.querySelector(window.location.hash);
         window.scrollTo({
           top: element.offsetTop,
@@ -118,7 +119,7 @@ export default {
 <template>
   <section class="container body content" id="app">
     <h1>風格導覽</h1>
-    <section id="realistic">
+    <section id="realistic" class="route__hash">
       <h2 class="style__h2">現實風</h2>
       <div v-if="!isLoad" class="style__loading-container">
         <img class="style__loading-img" src="./Spinner-0.6s-200px.gif" alt="" />
@@ -220,7 +221,7 @@ export default {
         </swiper-slide>
       </swiper>
     </section>
-    <section id="anime">
+    <section id="anime" class="route__hash">
       <h2 class="style__h2">動漫風</h2>
       <div v-if="!isLoad" class="style__loading-container">
         <img class="style__loading-img" src="./Spinner-0.6s-200px.gif" alt="" />
@@ -319,7 +320,7 @@ export default {
         </swiper-slide>
       </swiper>
     </section>
-    <section id="male">
+    <section id="male" class="route__hash">
       <h2 class="style__h2">男性</h2>
       <div v-if="!isLoad" class="style__loading-container">
         <img class="style__loading-img" src="./Spinner-0.6s-200px.gif" alt="" />
@@ -418,7 +419,7 @@ export default {
         </swiper-slide>
       </swiper>
     </section>
-    <section id="female">
+    <section id="female" class="route__hash">
       <h2 class="style__h2">女性</h2>
       <div v-if="!isLoad" class="style__loading-container">
         <img class="style__loading-img" src="./Spinner-0.6s-200px.gif" alt="" />
@@ -520,6 +521,12 @@ export default {
   </section>
 </template>
 <style lang="scss">
+.route__hash {
+  height: 450px;
+  @media screen and (min-width: 1600px) {
+    height: 31.25vw;
+  }
+}
 .style__loading-img {
   width: 75px;
   height: 75px;

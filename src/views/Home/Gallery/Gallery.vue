@@ -362,8 +362,8 @@ export default {
       types.sex.全部 = { Boolean: true };
       types.age.全部 = { Boolean: true };
       types.selects.人氣最高 = { Boolean: true };
-      types.selects.人氣最高 = true;
-      types.selects.依關聯性 = false;
+      types.selects.人氣最高 = true; // 此處需存在是因為，如果此行不在，僅大標題改，資料不會跟著改
+      types.selects.依關聯性 = false; // 此處需存在是因為，如果此行不在，僅大標題改，資料不會跟著改
       Arr.data = storeArr.data;
       Arr.data = Arr.data.sort((a, b) => b.popular - a.popular);
       selected.value = "人氣最高";

@@ -71,8 +71,15 @@ export default {
               }
             }
           });
-          //將Arr.data依照關聯值的大小還續，關聯值越大順位越高，越上面
-          Arr.data = Arr.data.sort((a, b) => b.relative - a.relative);
+          //將ImageArr.data依照關聯值的大小還續，關聯值越大順位越高，越上面
+          ImageArr.data = Arr.data
+            .sort((a, b) => b.relative - a.relative)
+            .filter((e, index) => {
+              // 將資料全數下載下來後，先載入前十個圖片
+              if (index <= 11) {
+                return e;
+              }
+            });
           types.selects.依關聯性 = true;
           selected.value = "依關聯性";
         }
@@ -103,8 +110,15 @@ export default {
             }
           }
         });
-        //將Arr.data依照關聯值的大小還續，關聯值越大順位越高，越上面
-        Arr.data = Arr.data.sort((a, b) => b.relative - a.relative);
+        //將ImageArr.data依照關聯值的大小還續，關聯值越大順位越高，越上面
+        ImageArr.data = Arr.data
+          .sort((a, b) => b.relative - a.relative)
+          .filter((e, index) => {
+            // 將資料全數下載下來後，先載入前十個圖片
+            if (index <= 11) {
+              return e;
+            }
+          });
         types.selects.依關聯性 = true;
         selected.value = "依關聯性";
       }
@@ -329,6 +343,12 @@ export default {
             }
           }
         }
+        ImageArr.data = Arr.data.filter((e, index) => {
+          // 將資料全數下載下來後，先載入前十個圖片
+          if (index <= 11) {
+            return e;
+          }
+        });
       },
       //deep一定要有不然會監聽不到
       { deep: true }
@@ -429,7 +449,6 @@ export default {
     const loadImages = () => {
       const batchSize = 10; // 每次載入的圖片數量
       const remainingImages = Arr.data.slice(ImageArr.data.length); // 從剩餘的圖片中獲取要載入的圖片
-      console.log("切片", remainingImages);
 
       // 檢查是否還有要載入的圖片
       if (remainingImages.length > 0) {
@@ -437,7 +456,6 @@ export default {
 
         // 將要載入的圖片添加到已載入的圖片數組中
         ImageArr.data = ImageArr.data.concat(imagesToLoad);
-        console.log("載入", ImageArr.data);
       }
     };
 

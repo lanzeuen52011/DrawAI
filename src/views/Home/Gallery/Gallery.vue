@@ -401,36 +401,7 @@ export default {
     const resetSearch = () => {
       search.text = "";
     };
-
-    onMounted(() => {
-      window.addEventListener("scroll", handleScroll);
-      const cachedData = localStorage.getItem("Arr");
-      if (cachedData) {
-        //有快取讀快取，沒快取讀fetch
-        // 從 localStorage 中讀取快取資料
-        Arr.data = JSON.parse(cachedData).Arr;
-        storeArr.data = { ...Arr.data };
-      } else {
-        // 使用匿名的自動執行 async 函式
-        (async () => {
-          try {
-            const res = await axios.get(
-              `https://ap9.ragic.com/lanziyun/convert2/1?api&APIKey=${Token}`
-            );
-            Arr.data = res.data;
-            storeArr.data = res.data;
-            Arr.data = Object.keys(Arr.data).map((key) => Arr.data[key]);
-            storeArr.data = Object.keys(storeArr.data).map(
-              (key) => storeArr.data[key]
-            );
-            // 將資料新增到 localStorage 中
-            const ArrToCache = { Arr: Arr.data };
-            localStorage.setItem("Arr", JSON.stringify(ArrToCache));
-          } catch (error) {
-            console.error("Error fetching data:", error);
-          }
-        })();
-      }
+    const handleFetch = () => {
       //人氣由小到大
       Arr.data = Arr.data.sort((a, b) => b.popular - a.popular);
       const cachedloadTimes = sessionStorage.getItem("loadTimes");
@@ -453,6 +424,39 @@ export default {
       }
       quantity.value = Arr.data.length;
       isLoad.value = true;
+    };
+
+    onMounted(() => {
+      window.addEventListener("scroll", handleScroll);
+      const cachedData = localStorage.getItem("Arr");
+      if (cachedData) {
+        //有快取讀快取，沒快取讀fetch
+        // 從 localStorage 中讀取快取資料
+        Arr.data = JSON.parse(cachedData).Arr;
+        storeArr.data = { ...Arr.data };
+        handleFetch();
+      } else {
+        // 使用匿名的自動執行 async 函式
+        (async () => {
+          try {
+            const res = await axios.get(
+              `https://ap9.ragic.com/lanziyun/convert2/1?api&APIKey=${Token}`
+            );
+            Arr.data = res.data;
+            storeArr.data = res.data;
+            Arr.data = Object.keys(Arr.data).map((key) => Arr.data[key]);
+            storeArr.data = Object.keys(storeArr.data).map(
+              (key) => storeArr.data[key]
+            );
+            // 將資料新增到 localStorage 中
+            const ArrToCache = { Arr: Arr.data };
+            localStorage.setItem("Arr", JSON.stringify(ArrToCache));
+            handleFetch();
+          } catch (error) {
+            console.error("Error fetching data:", error);
+          }
+        })();
+      }
     });
 
     onBeforeUnmount(() => {

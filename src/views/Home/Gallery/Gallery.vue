@@ -1,6 +1,6 @@
 <script>
 import axios from "axios";
-import { onBeforeUnmount, onMounted, reactive, ref, watch } from "vue";
+import { onBeforeUnmount, onMounted, reactive, ref, Static, watch } from "vue";
 export default {
   setup() {
     const Arr = reactive({ data: [] });
@@ -403,32 +403,66 @@ export default {
 
     onMounted(() => {
       window.addEventListener("scroll", handleScroll);
-      axios
-        .get(`https://ap9.ragic.com/lanziyun/convert2/1?api&APIKey=${Token}`)
-        .then((res) => {
-          Arr.data = res.data;
-          storeArr.data = res.data;
-          Arr.data = Object.keys(Arr.data).map((key) => Arr.data[key]);
-          storeArr.data = Object.keys(storeArr.data).map(
-            (key) => storeArr.data[key]
-          );
-          //人氣由小到大
-          Arr.data = Arr.data.sort((a, b) => b.popular - a.popular);
-          ImageArr.data = Arr.data.filter((e, index) => {
-            // 將資料全數下載下來後，先載入前十個圖片
-            if (index <= 11) {
-              return e;
-            }
-          });
-          quantity.value = Arr.data.length;
-          isLoad.value = true;
+      const cachedData = localStorage.getItem("Arr");
+      if (cachedData) {
+        //有快取讀快取，沒快取讀fetch
+        // 從 localStorage 中讀取快取資料
+        Arr.data = JSON.parse(cachedData).Arr;
+        storeArr.data = Arr.data;
+        //人氣由小到大
+        Arr.data = Arr.data.sort((a, b) => b.popular - a.popular);
+        ImageArr.data = Arr.data.filter((e, index) => {
+          // 將資料全數下載下來後，先載入前十個圖片
+          if (index <= 11) {
+            return e;
+          }
         });
+        quantity.value = Arr.data.length;
+        isLoad.value = true;
+      } else {
+        // 使用匿名的自動執行 async 函式
+        // (async () => {
+        //   try {
+        //     const response = await axios.get("https://api.example.com/data");
+        //     const data = response.data;
+        //     console.log(data);
+        //   } catch (error) {
+        //     console.error("Error fetching data:", error);
+        //   }
+        // })();
+
+        axios
+          .get(`https://ap9.ragic.com/lanziyun/convert2/1?api&APIKey=${Token}`)
+          .then((res) => {
+            Arr.data = res.data;
+            storeArr.data = res.data;
+            Arr.data = Object.keys(Arr.data).map((key) => Arr.data[key]);
+            storeArr.data = Object.keys(storeArr.data).map(
+              (key) => storeArr.data[key]
+            );
+            //人氣由小到大
+            Arr.data = Arr.data.sort((a, b) => b.popular - a.popular);
+            ImageArr.data = Arr.data.filter((e, index) => {
+              // 將資料全數下載下來後，先載入前十個圖片
+              if (index <= 11) {
+                return e;
+              }
+            });
+            quantity.value = Arr.data.length;
+            isLoad.value = true;
+
+            // 將資料新增到 localStorage 中
+            const ArrToCache = { Arr: Arr.data };
+            localStorage.setItem("Arr", JSON.stringify(ArrToCache));
+          });
+      }
     });
 
     onBeforeUnmount(() => {
       window.removeEventListener("scroll", handleScroll);
     });
 
+    let loadTimes = 0;
     const handleScroll = () => {
       const scrollHeight = document.documentElement.scrollHeight;
       const scrollBottom = window.pageYOffset + window.innerHeight;
@@ -436,7 +470,10 @@ export default {
       // console.log("總長度：", scrollHeight, "現在位置：", scrollBottom);
       if (scrollBottom / scrollHeight >= 0.6) {
         // 螢幕底部超過整個DOM長度的60%時，載入新圖片
-        loadImages();
+        loadTimes = loadImages(loadTimes);
+        const loadTimesToCache = { hasLoad: loadTimes };
+        sessionStorage.setItem("loadTimes", JSON.stringify(loadTimesToCache));
+        console.log(loadTimes);
         //以下註解為測試用
         // console.log(
         //   "觸發後的總長度：",
@@ -446,7 +483,7 @@ export default {
         // );
       }
     };
-    const loadImages = () => {
+    const loadImages = (loadTimes) => {
       const batchSize = 10; // 每次載入的圖片數量
       const remainingImages = Arr.data.slice(ImageArr.data.length); // 從剩餘的圖片中獲取要載入的圖片
 
@@ -456,7 +493,9 @@ export default {
 
         // 將要載入的圖片添加到已載入的圖片數組中
         ImageArr.data = ImageArr.data.concat(imagesToLoad);
+        loadTimes++;
       }
+      return loadTimes;
     };
 
     return {

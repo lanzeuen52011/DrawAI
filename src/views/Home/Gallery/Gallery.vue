@@ -16,6 +16,7 @@ export default {
     const isFocus = ref(false);
     const isKeep = ref(false);
     const isLoad = ref(false);
+    let loadTimes = 0; // 用來記錄圖片載入幾次
     const Token = process.env.VUE_APP_TOKEN;
     const handleFocus = () => {
       isFocus.value = !isFocus.value;
@@ -408,61 +409,56 @@ export default {
         //有快取讀快取，沒快取讀fetch
         // 從 localStorage 中讀取快取資料
         Arr.data = JSON.parse(cachedData).Arr;
-        storeArr.data = Arr.data;
-        //人氣由小到大
-        Arr.data = Arr.data.sort((a, b) => b.popular - a.popular);
-        ImageArr.data = Arr.data.filter((e, index) => {
-          // 將資料全數下載下來後，先載入前十個圖片
-          if (index <= 11) {
-            return e;
-          }
-        });
-        quantity.value = Arr.data.length;
-        isLoad.value = true;
+        storeArr.data = { ...Arr.data };
       } else {
         // 使用匿名的自動執行 async 函式
-        // (async () => {
-        //   try {
-        //     const response = await axios.get("https://api.example.com/data");
-        //     const data = response.data;
-        //     console.log(data);
-        //   } catch (error) {
-        //     console.error("Error fetching data:", error);
-        //   }
-        // })();
-
-        axios
-          .get(`https://ap9.ragic.com/lanziyun/convert2/1?api&APIKey=${Token}`)
-          .then((res) => {
+        (async () => {
+          try {
+            const res = await axios.get(
+              `https://ap9.ragic.com/lanziyun/convert2/1?api&APIKey=${Token}`
+            );
             Arr.data = res.data;
             storeArr.data = res.data;
             Arr.data = Object.keys(Arr.data).map((key) => Arr.data[key]);
             storeArr.data = Object.keys(storeArr.data).map(
               (key) => storeArr.data[key]
             );
-            //人氣由小到大
-            Arr.data = Arr.data.sort((a, b) => b.popular - a.popular);
-            ImageArr.data = Arr.data.filter((e, index) => {
-              // 將資料全數下載下來後，先載入前十個圖片
-              if (index <= 11) {
-                return e;
-              }
-            });
-            quantity.value = Arr.data.length;
-            isLoad.value = true;
-
             // 將資料新增到 localStorage 中
             const ArrToCache = { Arr: Arr.data };
             localStorage.setItem("Arr", JSON.stringify(ArrToCache));
-          });
+          } catch (error) {
+            console.error("Error fetching data:", error);
+          }
+        })();
       }
+      //人氣由小到大
+      Arr.data = Arr.data.sort((a, b) => b.popular - a.popular);
+      const cachedloadTimes = sessionStorage.getItem("loadTimes");
+      if (cachedloadTimes) {
+        loadTimes = JSON.parse(sessionStorage.getItem("loadTimes")).hasLoad;
+        console.log(1 + (1 + loadTimes) * 10);
+        ImageArr.data = Arr.data.filter((e, index) => {
+          // 將資料全數下載下來後，先載入前十個圖片
+          if (index <= 1 + (1 + loadTimes) * 10) {
+            return e;
+          }
+        });
+      } else {
+        ImageArr.data = Arr.data.filter((e, index) => {
+          // 將資料全數下載下來後，先載入前十個圖片
+          if (index <= 11) {
+            return e;
+          }
+        });
+      }
+      quantity.value = Arr.data.length;
+      isLoad.value = true;
     });
 
     onBeforeUnmount(() => {
       window.removeEventListener("scroll", handleScroll);
     });
 
-    let loadTimes = 0;
     const handleScroll = () => {
       const scrollHeight = document.documentElement.scrollHeight;
       const scrollBottom = window.pageYOffset + window.innerHeight;
@@ -473,7 +469,7 @@ export default {
         loadTimes = loadImages(loadTimes);
         const loadTimesToCache = { hasLoad: loadTimes };
         sessionStorage.setItem("loadTimes", JSON.stringify(loadTimesToCache));
-        console.log(loadTimes);
+        // console.log(loadTimes);
         //以下註解為測試用
         // console.log(
         //   "觸發後的總長度：",

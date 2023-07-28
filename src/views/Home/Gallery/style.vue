@@ -53,6 +53,29 @@ export default {
     };
 
     onMounted(() => {
+      const handleFetch = () => {
+        Arr.data.reverse();
+        // console.log(Arr.data["0"]._ragicId); //拿到伺服器的id，準備拿來說router的
+        //篩選出動漫畫風的圖片
+        AniArr.data = Arr.data
+          .filter((item) => item.style === "anime")
+          .sort((a, b) => b.popular - a.popular);
+        // console.log("AniArr", AniArr.data);
+        //篩選出動現實風的圖片
+        RealArr.data = Arr.data
+          .filter((item) => item.style === "realistic")
+          .sort((a, b) => b.popular - a.popular);
+        // console.log("RealArr", RealArr.data);
+        maleArr.data = Arr.data
+          .filter((item) => item.sex === "male")
+          .sort((a, b) => b.popular - a.popular);
+        // console.log("male", maleArr.data);
+        femaleArr.data = Arr.data
+          .filter((item) => item.sex === "female")
+          .sort((a, b) => b.popular - a.popular);
+        // console.log("female", femaleArr.data);
+        isLoad.value = true;
+      };
       handleResize();
       window.addEventListener("resize", handleResize); // Swipertest
 
@@ -65,34 +88,30 @@ export default {
           behavior: "smooth",
         });
       }
-
-      axios
-        .get(`https://ap9.ragic.com/lanziyun/convert2/1?api&APIKey=${Token}`)
-        .then((res) => {
+      const cachedData = localStorage.getItem("Arr");
+      if (cachedData) {
+        //有快取讀快取，沒快取讀fetch
+        // 從 localStorage 中讀取快取資料
+        Arr.data = JSON.parse(cachedData).Arr;
+        handleFetch();
+      }
+      (async () => {
+        try {
+          const res = await axios.get(
+            `https://ap9.ragic.com/lanziyun/convert2/1?api&APIKey=${Token}`
+          );
           Arr.data = res.data;
           Arr.data = Object.keys(Arr.data).map((key) => Arr.data[key]);
-          Arr.data.reverse();
-          // console.log(Arr.data["0"]._ragicId); //拿到伺服器的id，準備拿來說router的
-          //篩選出動漫畫風的圖片
-          AniArr.data = Arr.data
-            .filter((item) => item.style === "anime")
-            .sort((a, b) => b.popular - a.popular);
-          // console.log("AniArr", AniArr.data);
-          //篩選出動現實風的圖片
-          RealArr.data = Arr.data
-            .filter((item) => item.style === "realistic")
-            .sort((a, b) => b.popular - a.popular);
-          // console.log("RealArr", RealArr.data);
-          maleArr.data = Arr.data
-            .filter((item) => item.sex === "male")
-            .sort((a, b) => b.popular - a.popular);
-          // console.log("male", maleArr.data);
-          femaleArr.data = Arr.data
-            .filter((item) => item.sex === "female")
-            .sort((a, b) => b.popular - a.popular);
-          // console.log("female", femaleArr.data);
-          isLoad.value = true;
-        });
+
+          // 將資料新增到 localStorage 中
+          const ArrToCache = { Arr: Arr.data };
+          localStorage.setItem("Arr", JSON.stringify(ArrToCache));
+
+          handleFetch();
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      })();
     });
     onUnmounted(() => {
       window.removeEventListener("resize", handleResize);

@@ -254,8 +254,12 @@ h2 {
 }
 header {
   nav {
+    // 透明背景
+    background-color: rgb(22 22 23 / 80%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px); // For Apple devices
+
     padding: 20px;
-    background: #1a1b1e;
     display: flex;
     justify-content: space-between;
     position: fixed;

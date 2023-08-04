@@ -305,6 +305,7 @@ header {
     .flex.flex-row {
       margin: 0;
       padding: 0;
+      height: inherit;
       @media screen and (max-width: 650px) {
         flex-direction: column;
         height: 0;
@@ -322,7 +323,10 @@ header {
         }
       }
       li {
+        height: inherit;
         a {
+          height: inherit;
+          align-items: center;
           @media screen and (max-width: 650px) {
             border-bottom: 1px solid;
             font-size: 2.5rem;

@@ -433,7 +433,7 @@ export default {
         //有快取讀快取，沒快取讀fetch
         // 從 localStorage 中讀取快取資料
         Arr.data = JSON.parse(cachedData).Arr;
-        storeArr.data = { ...Arr.data };
+        storeArr.data = [...Arr.data];
         handleFetch();
       } else {
         // 使用匿名的自動執行 async 函式

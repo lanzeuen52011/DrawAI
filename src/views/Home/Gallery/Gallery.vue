@@ -407,7 +407,7 @@ export default {
       const cachedloadTimes = sessionStorage.getItem("loadTimes");
       if (cachedloadTimes) {
         loadTimes = JSON.parse(sessionStorage.getItem("loadTimes")).hasLoad;
-        console.log(1 + (1 + loadTimes) * 10);
+        // console.log(1 + (1 + loadTimes) * 10);
         ImageArr.data = Arr.data.filter((e, index) => {
           // 將資料全數下載下來後，先載入前十個圖片
           if (index <= 1 + (1 + loadTimes) * 10) {

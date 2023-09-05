@@ -32,10 +32,6 @@ export default {
 
     const scrollingdown = ref(false);
     let prevScrollPos = window.pageYOffset;
-    window.addEventListener("popstate", function () {
-      console.log(321);
-      // test
-    });
     window.addEventListener("scroll", () => {
       const currentScrollPos = window.pageYOffset;
       if (prevScrollPos < currentScrollPos) {

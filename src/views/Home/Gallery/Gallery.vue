@@ -796,6 +796,7 @@ export default {
   @media screen and (max-width: 650px) {
     right: 40vw;
     left: 3vw;
+    width: 100%;
   }
   @media screen and (max-width: 426px) {
     left: 9vw;

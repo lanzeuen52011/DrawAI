@@ -368,17 +368,8 @@ export default {
       grid-template-columns: 50% 40%;
       justify-content: center;
       @media screen and (max-width: 1300px) {
-        grid-template-rows: 60% 40%;
+        grid-template-rows: auto auto;
         grid-template-columns: 1fr;
-      }
-      @media screen and (max-width: 1100px) {
-        grid-template-rows: 50% 50%;
-      }
-      @media screen and (max-width: 870px) {
-        grid-template-rows: 45% 55%;
-      }
-      @media screen and (max-width: 600px) {
-        grid-template-rows: 40% 60%;
       }
     }
     > img {
@@ -395,6 +386,7 @@ export default {
   background: #25262b;
   display: flex;
   flex-direction: column;
+  margin-top: 3rem;
   @media screen and (min-width: 1500px) {
     display: grid;
     grid-template-columns: auto;
